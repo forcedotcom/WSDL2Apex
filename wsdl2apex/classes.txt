@@ -1,0 +1,167 @@
+Classes:
+
+WsdlFactory: Just uses the various parsers to parse the wsdl file
+
+XmLInputStream: minimal pull parser.  Uses MXParser extensively.
+Has a peek tag but never used.
+
+WsdlParser: uses XMLInputStream extensively.
+
+MXParser: the main parser.  WSDLParser wrapper for XMLInputStream
+XMLInputStream is a wrapper for MXParser
+
+Definitions: represents what's inside the Definitions tag.  
+Has a read method and a parse method.  Read finds the 
+next event to parse.  It figures out what the next tag in the wsdl
+document is and evoke the parse method.  The parse method looks at
+the tag and then creates an object based on the tag (types, 
+messages, porttype...).  Parse will also get the tagretNamesapce, 
+making sure that the target tag doesn't clash with anything else
+in the wsdl
+
+Types: represents what's inside the Types tag.  Has a read method 
+that finds out what to parse next.  If it reads a schema tag, then
+it will create a new schema object and read the schema by invoking
+schema.read().
+
+Schema: represents what's inside the the Schema Tag.  Has a read 
+method that finds out what to parse next.  If the next tag to 
+parse is either an element, a simple type, an annotation, or a 
+complex type, then it will create that object and invoke its read 
+method.  If schema reads another schema tag, then it will just skip
+it.  Returns when it hits its end tag. 
+
+Annotation: (no annotations in my wsdl file)  seems to just wait to
+get the end tag and returns from its read method.  Returns when it
+hits its end tag.
+
+Element: represents what's inside the the Element Tag.  Has a read
+method that finds out what to parse next.  If the next tag to parse
+is either a complex type or a simple type, then it will invoke its 
+read method.  Returns when it hits its end tag.
+
+ComplexType: represents what's inside a complex type tag.  If it 
+hits a sequence, all, choice, or schema_ns tag, then it will create
+a new collection.  If it hits an extension tag, then it will 
+convert it to a qname.  If it hits an attribute tag, then it will 
+create a new attribute.  Returns when it hits its end tag.
+
+Collection (for sequence): keeps track of what its type is (in this
+case a sequence).  It keeps track of all of its elements (elements,
+type, ref, nillable, minOccurs, ...).  Returns when it hits its end 
+tag.
+
+Attribute (no attribute in my wsdl file): represents what's inside
+an attribute.  If it hits a simple type tag, then it will create a 
+new simple type.
+
+SimpleType (no simple type in my wsdl file):  represents what's 
+inside a simple type.  If it hits a restrictuion tag, then it will 
+create a new restriction.
+
+Restriction (no restriction in my wsdl file): represents what's 
+inside a restriction.  If it hits a enumeration tag, then it will 
+create a new enumeration.
+
+Enumeration (no enumeration in my wsdl file): represents what's 
+inside an enumeration.  
+
+Message: represents a message.  It's read method gets what needs to 
+be parsed next.  If there are subparts in the message, then it will
+invoke its own parse method.  If the parts tag is used, then it will
+create a Part object and analyze the part in that object.
+
+Part: represents a part.
+
+ParserUtil: creates a qname
+
+PortType: represents a PortType.  It's read method gets what needs 
+to be parsed next.  If it reads a new tag, then it will invoke its 
+parse method.  If the operations tag is used, then it will create a 
+new operation object and parse its value in the new object.
+
+Operation: represents a PortType Operation.  It's read meathod gets
+what needs to be parsed next.  If it reads a new tag, then it will 
+invoke its parse method.  If an input, output, or fault tag is used, 
+then a MessageRef object will be created.
+
+MessageRef: stores a qname that represents the message
+
+Binding: represents a Binding
+
+BindingOperation: represents a Binding Operation.  If its read method finds
+another tag, it will parse it.  If its an input or output tag, then it will 
+create a new BindingMessage.  If we get a soap operation, then we make sure
+to asssign what the soapAction to the BindingOperation.
+
+BindingMessage: represents either an binding operation input or output.  
+Has a read and a parse method.  If it sees a header or body tag, then it 
+will create either a SoapHeader or a SoapBody object.
+
+SoapNode: invoked by SoapBody to fill initialize use variable. returned 
+literal
+
+SoapHeader (no SoapHeader in my wsdl file): stores the message and its
+attributes
+
+SoapBody: represents the body of the soap:body.  Stores its use.
+
+Service: represents a service in the wsdl.  Has a read and a parse method.
+If a port tag is found, then it will create a new port object.
+
+Port: represetns a port.  Has a read and a parse method.  If a Address 
+tag is found, then it will create a new soapAddress.
+
+SoapAddress: stores the address location
+
+
+
+AWriter: writes the class on the webpage
+
+ABase: seems to be the base class of the 
+
+AClass: represents an apex class
+
+AField: represents an apex field
+
+ApexTypeMapper: seems to converts types to apex types.  This class also checks
+if variable names are ok (if the variable names are keywords).
+
+TypeMapper: binds xml documents to java objects and java objects back to xml
+
+ApexTypeName: get the apex type for the class
+
+CalendarCodec: represents a datetime? format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+
+DateCodec: representsw a date? format: "yyyy-MM-dd"
+
+ComplexTypeClass: generates Apex class that represents complexType
+
+Wsdl2ApexOptions: describes the options to be used with a wsdl2apex execution
+async, sync stuff
+
+GenerateCodePage: it generates the apex code, compiles it, and writes it on a webpage.
+wsdl2apex.install() will write the apex class out
+
+APackage: represents the whole apex class that will be created
+
+Packages: a collection of APackages
+
+SyncBindingClass: generates the apex class the represent soap binding that exposes
+synchronous programming model, has order
+
+BindingClass: abstract classfor SyncBindingClass
+
+OperationMethod:
+    load: builds the method in the binding class
+     This maps the wsdl operation & binding into apex types, and generates each segment of the method,
+     the generated method is broken up in segments
+          loadParameters()         - generate the apex parameters needed to this method, typically based on the input structure to the operation in the WSDL.
+                                     information about parameters found in the message part of the wsdl
+          mapParameters()          - generates the code to map from the apex method parameters into the structure to pass to WebServiceCall.invoke
+          declareReturnVariables() - generates any code need to prepare for a result before the invoke call is made.
+          performInvoke()          - generate the WebServiceCallout.invoke() call that passes all the relevant data back into the runtime
+          mapResult()              - generate the code that does anything needed to get the result from the runtime and to be the method return value.
+
+AMethod: represents an apex method
+

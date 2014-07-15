@@ -1,0 +1,16 @@
+-ByteArray InputStream in: gets the bytes in the wsdl file
+-In XmlInputStream()
+    -parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACE,True);
+     processing of namespace set to true.   
+     parser:MXParser: implements XMLPullParser
+-In wsdlParser
+	-sets the XMLInputStream to be XMLInputStream just created
+	-wsdlParser.setInput(in, "UTF-8"):  in: wsdl byte array
+	-use private variable in, the xmlInputStream that is the pull parser 
+	 goes into the XMParser and creates an InputStreamReqader
+	
+The wsdl's target namespace gets mapped as the package (the overall class created).
+A complex type becomes a class within the package.  
+Each element is a public field in the class.  
+The wsdl port name maps to a class where there will be a method to use for callouts.  
+Operations in the wsdl maps to a public method.
