@@ -1,3 +1,4 @@
+package com.salesforce.ide.wsdl2apex.core;
 //package common.api.callout;
 
 import java.sql.SQLException;

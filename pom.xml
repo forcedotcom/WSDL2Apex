@@ -43,7 +43,7 @@
               <manifest>
                 <addClasspath>true</addClasspath>
                 <classpathPrefix>lib/</classpathPrefix>
-                <mainClass>MainWsdl2ApexOpenSource</mainClass>
+                <mainClass>com/salesforce/ide/wsdl2apex/core/MainWsdl2ApexOpenSource</mainClass>
               </manifest>
             </archive>
           </configuration>
@@ -84,7 +84,7 @@
                         <createDependencyReducedPom>false</createDependencyReducedPom>
                         <transformers>
                             <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                <mainClass>MainWsdl2ApexOpenSource</mainClass>
+                                <mainClass>com/salesforce/ide/wsdl2apex/core/MainWsdl2ApexOpenSource</mainClass>
                             </transformer>
                         </transformers>
                     </configuration>

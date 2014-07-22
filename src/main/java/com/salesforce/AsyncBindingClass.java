@@ -1,3 +1,4 @@
+package com.salesforce.ide.wsdl2apex.core;
 /*
  * Copyright 2013, salesforce.com
  * All Rights Reserved

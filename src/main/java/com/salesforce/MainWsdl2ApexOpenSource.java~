@@ -1,10 +1,12 @@
+package com.salesforce.ide.wsdl2apex.core;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.*;
 
 public class MainWsdl2ApexOpenSource {
 
-	public static void main(String[] args) throws JUnitTestException{
+	public static ArrayList main(String[] args) throws IOException, CalloutException{
 		if(args.length != 3)
 			System.err.println("Must have 3 arguement containing the path to the wsdl file, the path for the new file, and whether you want an asynchronous class");
 		String filePath = args[0];													//wsdl file to parse
@@ -20,7 +22,7 @@ public class MainWsdl2ApexOpenSource {
 		catch(FileNotFoundException e)
 		{
 			System.err.println("Cannot find the file");
-			throw new JUnitTestException("Cannot find the file");
+			throw e;
 		}
 		try
 		{
@@ -33,13 +35,13 @@ public class MainWsdl2ApexOpenSource {
 				{
 					System.out.println(message);
 				}
-				throw new JUnitTestException("Failed to parse wsdl");
+				throw new RuntimeException();
 			}
 		}
 		catch (Exception e)
 		{
 			System.err.println(e.getMessage());
-			throw new JUnitTestException(e.getMessage());
+			throw e;
 		}
 		HashMap<String, String> inputMap = new HashMap<String, String>();
 		inputMap = result.getMapping();												//get the targetnamesapces
@@ -55,11 +57,12 @@ public class MainWsdl2ApexOpenSource {
 		{
 			System.err.println("Failed to generate code");
 			System.out.println(e.getMessage());
-			throw new JUnitTestException("Failed to generate code");
+			throw e;
 		}
 		catch(Exception e)
 		{
 			System.err.println(e.getMessage());
+			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
 		try
@@ -74,7 +77,8 @@ public class MainWsdl2ApexOpenSource {
 		catch(FileNotFoundException | UnsupportedEncodingException e)
 		{
 			System.err.println("Cannot find the file");
-			throw new JUnitTestException("Cannot find the file");
+			throw e;
 		}
 	}
 }
+

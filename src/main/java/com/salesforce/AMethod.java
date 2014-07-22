@@ -1,3 +1,4 @@
+package com.salesforce.ide.wsdl2apex.core;
 
 import java.util.Iterator;
 import java.util.ArrayList;
