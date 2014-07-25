@@ -6,12 +6,38 @@ import java.util.*;
 
 public class MainWsdl2ApexOpenSource {
 
-	public static ArrayList main(String[] args) throws IOException, CalloutException{
-		if(args.length != 3)
-			System.err.println("Must have 3 arguement containing the path to the wsdl file, the path for the new file, and whether you want an asynchronous class");
-		String filePath = args[0];													//wsdl file to parse
-		String resultPath = args[1];												//location of the new class
-		Boolean async = Boolean.parseBoolean(args[2]);								//async or not
+	private static ArrayList<String> allClassNames;
+	private static ArrayList<String> allClasses;
+	
+	public ArrayList getAllClassNames()
+	{
+		return allClassNames;
+	}
+	
+	public ArrayList getAllClasses()
+	{
+		return allClasses;
+	}
+	
+	public static void parseAndGenerate(String[] args) throws RuntimeException, CalloutException, IOException{
+		String filePath = args[0];
+		Boolean async;
+		String resultPath = null;
+		if(args.length == 2)
+		{
+			async = Boolean.parseBoolean(args[1]);
+		}
+		else if(args.length == 3)
+		{
+			resultPath = args[1];
+			async = Boolean.parseBoolean(args[2]);
+		}
+		else
+		{
+			System.err.println("Must either contain the following 2 arguements: path to the wsdl file and whether you want an asynchronous class");
+			System.err.println("or the following 3 arguements: path to the wsdl file, path to where you want to save the file (with a slash at the end), and whether you want an asynchronous class");
+			throw new RuntimeException();
+		}
 		FileString f = new FileString();
 		String wsdlString;
 		Wsdl2Apex.AnalysisResult result = null;
@@ -27,6 +53,7 @@ public class MainWsdl2ApexOpenSource {
 		try
 		{
 			result = new Wsdl2Apex().analyze(wsdlString);							//parse the wsdl
+			String allMessages = new String();
 			if(!result.isSuccess())
 			{
 				ArrayList<String> messages = new ArrayList<String>();
@@ -34,8 +61,9 @@ public class MainWsdl2ApexOpenSource {
 				for(String message : messages)
 				{
 					System.out.println(message);
+					allMessages = allMessages + message + '\n';
 				}
-				throw new RuntimeException();
+				throw new RuntimeException(allMessages);
 			}
 		}
 		catch (Exception e)
@@ -47,12 +75,19 @@ public class MainWsdl2ApexOpenSource {
 		inputMap = result.getMapping();												//get the targetnamesapces
 		Wsdl2Apex wsdl2Apex = new Wsdl2Apex();
 		LinkedHashMap<String, APackage> packageMap;
-		ArrayList<String>resultApexClass;
+		allClassNames = new ArrayList<String>();
+		allClasses = new ArrayList<String>();
 		try
 		{
 			packageMap = wsdl2Apex.generate(wsdlString, Wsdl2ApexOptions.newDefault(async).setPackageNamespaceMap(inputMap)); //generates the class
-			resultApexClass = wsdl2Apex.generateApexClass(packageMap);				//creates the class as a string
+			allClasses = wsdl2Apex.generateApexClass(packageMap);				//creates the class as a string
+			Iterator<String> j = packageMap.keySet().iterator();
+			while(j.hasNext())
+			{
+				allClassNames.add(j.next().toString());
+			}
 		}
+		
 		catch(CalloutException e)
 		{
 			System.err.println("Failed to generate code");
@@ -65,20 +100,82 @@ public class MainWsdl2ApexOpenSource {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
-		try
+		if(args.length == 3)
 		{
-			Iterator i = resultApexClass.iterator();
-			Iterator j = packageMap.keySet().iterator();
-			while(i.hasNext() && j.hasNext())
+			try
 			{
-				f.StringToFile(resultPath, i.next().toString(), j.next().toString());		//writes the class into a file
+				Iterator i = allClasses.iterator();
+				Iterator j = allClassNames.iterator();
+				while(i.hasNext() && j.hasNext())
+				{
+					f.StringToFile(resultPath, i.next().toString(), j.next().toString());		//writes the class into a file
+				}
+			}
+			catch(FileNotFoundException | UnsupportedEncodingException e)
+			{
+				System.err.println("Cannot find the file");
+				throw e;
 			}
 		}
-		catch(FileNotFoundException | UnsupportedEncodingException e)
+	}
+	
+	public static void parse(String[] args) throws IOException, CalloutException{
+		String filePath = args[0];
+		Boolean async;
+		String resultPath = null;
+		if(args.length == 2)
+		{
+			async = Boolean.parseBoolean(args[1]);//async or not
+		}
+		else if(args.length == 3)
+		{
+			resultPath = args[1];
+			async = Boolean.parseBoolean(args[2]);
+		}
+		else
+		{
+			System.err.println("Must either contain the following 2 arguements: path to the wsdl file and whether you want an asynchronous class");
+			System.err.println("or the following 3 arguements: path to the wsdl file, path to where you want to save the file (with a slash at the end), and whether you want an asynchronous class");
+			throw new RuntimeException();
+		}						
+		FileString f = new FileString();
+		String wsdlString;
+		Wsdl2Apex.AnalysisResult result = null;
+		try
+		{
+			wsdlString = f.getStringFromFile(filePath);								//get the wsdl in a stirng
+		}
+		catch(FileNotFoundException e)
 		{
 			System.err.println("Cannot find the file");
 			throw e;
 		}
+		try
+		{
+			result = new Wsdl2Apex().analyze(wsdlString);							//parse the wsdl
+			String allMessages = new String();
+			if(!result.isSuccess())
+			{
+				ArrayList<String> messages = new ArrayList<String>();
+				messages = result.getMessages();
+				for(String message : messages)
+				{
+					System.out.println(message);
+					allMessages = allMessages + message + '\n';
+				}
+				throw new RuntimeException(allMessages);
+			}
+		}
+		catch (Exception e)
+		{
+			System.err.println(e.getMessage());
+			throw e;
+		}
+	}
+	public static void main(String[] args) throws IOException, CalloutException
+	{
+		parseAndGenerate(args);
+		System.out.println(allClasses.toString());
 	}
 }
 
