@@ -19,4 +19,5 @@ generating funtions in the main class, be sure to use the parse method first and
 method.
 
 Parse method takes [path-to-wsdl]
+
 Generate method takes in [names-of-generated-classes] [want asynchronous class] [(optional) path-to-new-file]
