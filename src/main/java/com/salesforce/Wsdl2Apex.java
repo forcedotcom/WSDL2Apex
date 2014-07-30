@@ -136,7 +136,7 @@ public class Wsdl2Apex {
         return Character.toUpperCase(s.charAt(0)) + s.substring(1);
     }
 
-    public ArrayList<String> generateApexClass(HashMap<String, APackage> packages) throws Exception
+    public ArrayList<String> generateApexClass(LinkedHashMap<String, APackage> packages) throws Exception
     {
     	try {
             ArrayList<String> scripts = new ArrayList<String>();
@@ -177,7 +177,7 @@ public class Wsdl2Apex {
     public static class AnalysisResult {
         private ArrayList<String> messages = new ArrayList<String>();
         private boolean success;
-        private HashMap<String, String> mapping = new HashMap<String, String>();
+        private LinkedHashMap<String, String> mapping = new LinkedHashMap<String, String>();
 
         public ArrayList<String> getMessages() {
             return messages;
@@ -187,7 +187,7 @@ public class Wsdl2Apex {
             return success;
         }
 
-        public HashMap<String, String> getMapping() {
+        public LinkedHashMap<String, String> getMapping() {
             return mapping;
         }
 
@@ -241,3 +241,4 @@ public class Wsdl2Apex {
         return packages;
     }
 }
+

@@ -140,8 +140,11 @@ public class Wsdl2Apex {
     {
     	try {
             ArrayList<String> scripts = new ArrayList<String>();
+            if(packages == null)
+            {
+            	System.out.println("packages is null");
+            }
             for (APackage pkg : packages.values()) {
-                System.out.println("1");
                 AWriter writer = new AWriter();
                 pkg.write(writer);
                 scripts.add(writer.toString());
@@ -167,7 +170,7 @@ public class Wsdl2Apex {
             throw e;
         } catch (Throwable th) {
             System.out.println("Failed to generate Apex code from WSDL");
-            return null;
+            throw new RuntimeException(th);
         }
     }
 
