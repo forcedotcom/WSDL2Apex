@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.webserviceX.NET" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://www.webserviceX.NET" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+
+ <wsdl:types>
+
+   <s:schema elementFormDefault="qualified" targetNamespace="http://www.webserviceX.NET">
+
+     <s:element name="getAirportInformationByAirportCode">
+
+       <s:complexType>
+
+         <s:sequence>
+
+           <s:element minOccurs="0" maxOccurs="1" name="airportCode" type="s:string" />
+
+         </s:sequence>
+
+       </s:complexType>
+
+     </s:element>
+
+     <s:element name="getAirportInformationByAirportCodeResponse">
+
+       <s:complexType>
+
+         <s:sequence>
+
+           <s:element minOccurs="0" maxOccurs="1" name="getAirportInformationByAirportCodeResult" type="s:string" />
+
+         </s:sequence>
+
+       </s:complexType>
+
+     </s:element>
+
+     <s:element name="string" nillable="true" type="s:string" />
+
+   </s:schema>
+
+ </wsdl:types>
+
+ <wsdl:message name="getAirportInformationByAirportCodeSoapIn">
+
+   <wsdl:part name="parameters" element="tns:getAirportInformationByAirportCode" />
+
+ </wsdl:message>
+
+ <wsdl:message name="getAirportInformationByAirportCodeSoapOut">
+
+   <wsdl:part name="parameters" element="tns:getAirportInformationByAirportCodeResponse" />
+
+ </wsdl:message>
+
+ <wsdl:portType name="airportSoap">
+
+   <wsdl:operation name="getAirportInformationByAirportCode">
+
+     <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Airport Code, CityOrAirport Name, Country, Country Abbrv, CountryCode,GMT Offset Runway Length in Feet, Runway Elevation in Feet,Latitude in Degree,Latitude in Minute Latitude in Second,Latitude in N/S, Longitude in Degree, Longitude in Minute, Longitude in Seconds and longitude E/W by airport code </wsdl:documentation>
+
+     <wsdl:input message="tns:getAirportInformationByAirportCodeSoapIn" />
+
+     <wsdl:output message="tns:getAirportInformationByAirportCodeSoapOut" />
+
+   </wsdl:operation>
+
+ </wsdl:portType>
+
+ <wsdl:binding name="airportSoap" type="tns:airportSoap">
+
+   <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+
+   <wsdl:operation name="getAirportInformationByAirportCode">
+
+     <soap:operation soapAction="http://www.webserviceX.NET/getAirportInformationByAirportCode" style="document" />
+
+     <wsdl:input>
+
+       <soap:body use="literal" />
+
+     </wsdl:input>
+
+     <wsdl:output>
+
+       <soap:body use="literal" />
+
+     </wsdl:output>
+
+   </wsdl:operation>
+
+ </wsdl:binding>
+
+ <wsdl:service name="airport">
+
+   <wsdl:port name="airportSoap" binding="tns:airportSoap">
+
+     <soap:address location="http://www.webservicex.net/airport.asmx" />
+
+   </wsdl:port>
+
+ </wsdl:service>
+
+</wsdl:definitions>

@@ -14,11 +14,10 @@
     <version>17.0</version>
     <scope>provided</scope>
 </dependency>  
-  
-    <dependency>
+  <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>3.8.1</version>
+      <version>4.11</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -43,13 +42,31 @@
               <manifest>
                 <addClasspath>true</addClasspath>
                 <classpathPrefix>lib/</classpathPrefix>
-                <mainClass>./com/salesforce/ide/wsdl2apex/core/MainWsdl2ApexOpenSource</mainClass>
+                <mainClass>com/salesforce/ide/wsdl2apex/core/MainWsdl2ApexOpenSource</mainClass>
               </manifest>
             </archive>
           </configuration>
         </plugin>
         
-        
+        <plugin>
+            <groupId>com.googlecode.addjars-maven-plugin</groupId>
+            <artifactId>addjars-maven-plugin</artifactId>
+            <version>1.0.5</version>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>add-jars</goal>
+                    </goals>
+                    <configuration>
+                        <resources>
+                            <resource>
+                                <directory>src/main/library</directory>
+                            </resource>
+                        </resources>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>	
         
 	    <plugin>
             <groupId>com.googlecode.addjars-maven-plugin</groupId>
@@ -84,7 +101,7 @@
                         <createDependencyReducedPom>false</createDependencyReducedPom>
                         <transformers>
                             <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                <mainClass>./com/salesforce/ide/wsdl2apex/core/MainWsdl2ApexOpenSource</mainClass>
+                                <mainClass>com/salesforce/ide/wsdl2apex/core/MainWsdl2ApexOpenSource</mainClass>
                             </transformer>
                         </transformers>
                     </configuration>

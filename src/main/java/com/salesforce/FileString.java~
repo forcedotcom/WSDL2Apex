@@ -21,7 +21,7 @@ public class FileString {
 	public void StringToFile(String path, String content, String fileName) throws FileNotFoundException, UnsupportedEncodingException
 	{
 		PrintWriter writer;
-		String totalName = new String(path + "/" + fileName + ".cls");
+		String totalName = new String(path + fileName + ".cls");
 		try {
 			writer = new PrintWriter(totalName, "UTF-8");
 			writer.print(content.trim());
@@ -33,16 +33,4 @@ public class FileString {
 		}
 
 	}
-	
-	public static void recursiveDelete(File file) {
-        if (!file.exists())
-            return;
-        if (file.isDirectory()) {
-            for (File f : file.listFiles()) {
-                recursiveDelete(f);
-            }
-        }
-        file.delete();
-    }
 }
-
