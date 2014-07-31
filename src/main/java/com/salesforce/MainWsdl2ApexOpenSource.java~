@@ -94,8 +94,6 @@ public class MainWsdl2ApexOpenSource {
 			{
 				allClassNames.add(j.next().toString());
 			}
-			System.out.println(allClassNames.toString());
-			System.out.println(allClasses.toString());
 		}
 
 		catch(CalloutException e)
@@ -251,16 +249,16 @@ public class MainWsdl2ApexOpenSource {
 	
 	public static void main(String[] args) throws IOException, CalloutException
 	{
-		//parseAndGenerate(args);
+		parseAndGenerate(args);
 		/*String[] wsdlFile = new String[] {args[0]};
 		parse(wsdlFile);
 		String[] otherArguements = new String[] {"hi", "hello", "true", "/home/kevin.ren/Desktop/wsdl2apex/stockQuoteTest/"};
-		generate(otherArguements);*/
+		generate(otherArguements);
 		
 		String[] wsdlFile = new String[] {args[0]};
 		parse(wsdlFile);
 		String[] otherArguements = new String[] {"hi", "true"};
-		generate(otherArguements);
+		generate(otherArguements);*/
 	}
 }
 

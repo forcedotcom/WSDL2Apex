@@ -21,12 +21,9 @@ public class MainWsdl2ApexOpenSource {
 		return allClasses;
 	}
 	
-	public ArrayList<String> getResultFromParse()
+	public LinkedHashMap<String, String> getResultFromParse()
 	{
-		ArrayList<String> resultClasses = new ArrayList<String>();
-		for(String s : result.getMapping().values())
-			resultClasses.add(s);
-		return resultClasses;
+		return result.getMapping();
 	}
 	
 	public static void parseAndGenerate(String[] args) throws RuntimeException, CalloutException, IOException{
