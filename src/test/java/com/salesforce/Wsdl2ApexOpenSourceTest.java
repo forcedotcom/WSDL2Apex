@@ -235,7 +235,7 @@ public class Wsdl2ApexOpenSourceTest {
 			fail("test1 failed");
 		}
 	}
-	
+/*	
 	@Test
 	public void test9()                             //test parse and generate methods
 	{
@@ -269,6 +269,6 @@ public class Wsdl2ApexOpenSourceTest {
 			e.printStackTrace();
 			fail("test1 failed");
 		}
-	}
+	}*/
 }
 

@@ -237,7 +237,7 @@ public class Wsdl2ApexOpenSourceTest {
 	}
 	
 	@Test
-	public void test9()
+	public void test9()                             //test parse and generate methods
 	{
 		String[] parseArgs = new String[] {directory.getPath() + "/../goodWsdls/airport.wsdl"};
 		String[] generateArgs = new String[3];
