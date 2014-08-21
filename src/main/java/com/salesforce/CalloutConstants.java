@@ -1,11 +1,21 @@
+/*******************************************************************************
+ * Copyright (c) 2014 Salesforce.com, inc..
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *     Salesforce.com, inc. - initial API and implementation
+ ******************************************************************************/
 package com.salesforce.ide.wsdl2apex.core;
 
 /**
  * CalloutConstants
- *
+ * 
  * @author cheenath
  * @version 1.0
- * @since 148  Feb 26, 2007
+ * @since 148 Feb 26, 2007
  */
 public interface CalloutConstants {
     public static final String TYPE_INFO_PREFIX = "_type_info";
@@ -20,7 +30,7 @@ public interface CalloutConstants {
     public static final String INPUT_HTTP_HEADERS = "inputHttpHeaders_x";
     public static final String OUTPUT_HTTP_HEADERS = "outputHttpHeaders_x";
     public static final String TIMEOUT = "timeout_x";
-    
+
     public static final String LENIENT_PARSING = "lenientParsing_x";
     public static final String PARSER_NAMESPACE_LEVEL = "parserNamespaceLevel_x";
 

@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2014 Salesforce.com, inc..
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *     Salesforce.com, inc. - initial API and implementation
+ ******************************************************************************/
 package com.salesforce.ide.wsdl2apex.core;
 
 import java.util.HashMap;
@@ -5,15 +15,11 @@ import java.util.HashSet;
 import java.util.Iterator;
 
 import javax.xml.namespace.QName;
-//import com.sforce.ws.ConnectionException;
-//import com.sforce.ws.bind.*;
-//import com.sforce.ws.wsdl.*;
-//import shared.xml.soap.DateOnlyWrapper;
 import com.google.common.collect.Maps;
 
 public class ApexTypeMapper {
 
-	private static final HashSet<String> reserved = reserved();
+    private static final HashSet<String> reserved = reserved();
     private static final HashSet<String> keywords = keywords();
     private static final HashMap<QName, ApexTypeName> xmlToApexMap = getXmlApexMapping();
 
@@ -29,10 +35,9 @@ public class ApexTypeMapper {
     private static final String LONG = "Long";
 
     private static final ApexTypeName APEX_STRING = new ApexTypeName(null, STRING, false);
-    
-    private static HashSet<String> reserved()
-    {
-    	HashSet<String> s = new HashSet<String>();
+
+    private static HashSet<String> reserved() {
+        HashSet<String> s = new HashSet<String>();
         s.add("array");
         s.add("activate");
         s.add("any");
@@ -88,7 +93,7 @@ public class ApexTypeMapper {
         s.add("sobject");
         return s;
     }
-    
+
     private static HashSet<String> keywords() {
         HashSet<String> keywords = new HashSet<String>();
         keywords.add("currency");
@@ -184,48 +189,27 @@ public class ApexTypeMapper {
 
     private static HashMap<QName, ApexTypeName> getXmlApexMapping() {
 
-        String[][] xmltypeMap = {
+        String[][] xmltypeMap =
+                {
 
-                {"string", STRING},
-                {"boolean", BOOLEAN},
-                {"decimal", DECIMAL},
+                { "string", STRING }, { "boolean", BOOLEAN }, { "decimal", DECIMAL },
 
-                {"float", DOUBLE},
-                {"double", DOUBLE},
+                { "float", DOUBLE }, { "double", DOUBLE },
 
-                {"dateTime", DATE_TIME},
-                {"time", DATE_TIME},
-                {"date", DATE},
+                { "dateTime", DATE_TIME }, { "time", DATE_TIME }, { "date", DATE },
 
-                {"base64Binary", STRING},
-                {"anyURI", STRING},
-                {"QName", STRING},
-                {"NOTATION", STRING},
+                { "base64Binary", STRING }, { "anyURI", STRING }, { "QName", STRING }, { "NOTATION", STRING },
 
-                {"normalizedString", STRING},
-                {"token", STRING},
-                {"language", STRING},
-                {"NMTOKEN", STRING},
-                {"NMTOKENS", STRING},
-                {"Name", STRING},
-                {"NCName", STRING},
+                { "normalizedString", STRING }, { "token", STRING }, { "language", STRING }, { "NMTOKEN", STRING },
+                        { "NMTOKENS", STRING }, { "Name", STRING }, { "NCName", STRING },
 
-                {"integer", INTEGER},
-                {"nonPositiveInteger", INTEGER},
-                {"negativeInteger", INTEGER},
-                {"long", LONG},
-                {"int", INTEGER},
-                {"short", INTEGER},
+                        { "integer", INTEGER }, { "nonPositiveInteger", INTEGER }, { "negativeInteger", INTEGER },
+                        { "long", LONG }, { "int", INTEGER }, { "short", INTEGER },
 
-                {"nonNegativeInteger", INTEGER},
-                {"unsignedLong", LONG},
-                {"unsignedInt", INTEGER},
-                {"unsignedShort", INTEGER},
+                        { "nonNegativeInteger", INTEGER }, { "unsignedLong", LONG }, { "unsignedInt", INTEGER },
+                        { "unsignedShort", INTEGER },
 
-                {"positiveInteger", INTEGER},
-        };
-
-
+                        { "positiveInteger", INTEGER }, };
 
         HashMap<QName, ApexTypeName> map = Maps.newHashMap();
 
@@ -235,11 +219,11 @@ public class ApexTypeMapper {
 
         return map;
     }
-    
+
     public void registerNamespace(String namespace, String packageName) {
         namespaceMap.put(namespace.trim(), packageName.trim());
     }
-    
+
     public String getPackageName(String namespace) throws CalloutException {
         String ns = namespaceMap.get(namespace);
         if (ns == null) {
@@ -263,7 +247,7 @@ public class ApexTypeMapper {
 
         char ch = name.charAt(0);
 
-        if ( !((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z')) ) {
+        if (!((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z'))) {
             //first letter not char
             name = "x" + name;
         }
@@ -272,9 +256,10 @@ public class ApexTypeMapper {
         char lastChar = name.charAt(0);
         sb.append(lastChar);
 
-        for (int i=1; i<name.length(); i++) {
+        for (int i = 1; i < name.length(); i++) {
             char c = name.charAt(i);
-            if ( (c>='0' && c<='9')||(c>='A' && c<='Z')||(c>='a' && c<='z')||(c>='\u0080' && c<='\uFFFE') ) {
+            if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')
+                    || (c >= '\u0080' && c <= '\uFFFE')) {
                 lastChar = c;
             } else {
                 if (lastChar == '_') {
@@ -298,12 +283,12 @@ public class ApexTypeMapper {
         }
         return name;
     }
-    
+
     public ApexTypeName getApexType(QName xmlType, Definitions definitions) throws CalloutException {
         ApexTypeName apexType = xmlToApexMap.get(xmlType);
         if (apexType == null) {
             if (Constants.SCHEMA_NS.equals(xmlType.getNamespaceURI())) {
-               throw new CalloutException("Unsupported schema type: " + xmlType);
+                throw new CalloutException("Unsupported schema type: " + xmlType);
             }
             checkValidType(definitions, xmlType);
 
@@ -312,9 +297,11 @@ public class ApexTypeMapper {
                 if (st != null) {
                     apexType = APEX_STRING;
                 } else {
-                    apexType = new ApexTypeName(getPackageName(xmlType.getNamespaceURI()), getSafeName(xmlType.getLocalPart()), false);
+                    apexType =
+                            new ApexTypeName(getPackageName(xmlType.getNamespaceURI()),
+                                    getSafeName(xmlType.getLocalPart()), false);
                 }
-            } catch(CalloutException e) {
+            } catch (CalloutException e) {
                 throw new CalloutException("Failed to find type for " + xmlType, e);
             }
         }
@@ -330,9 +317,9 @@ public class ApexTypeMapper {
                     throw new CalloutException("Unable to find type definition for schema type " + xmlType);
                 }
             }
-       }catch(ConnectionException e) {
-            throw new CalloutException("Unable to find type definition for schema type: " + xmlType +
-                    " Due to: " + e.getMessage(), e);
+        } catch (ConnectionException e) {
+            throw new CalloutException("Unable to find type definition for schema type: " + xmlType + " Due to: "
+                    + e.getMessage(), e);
         }
     }
 
@@ -340,7 +327,7 @@ public class ApexTypeMapper {
         if (element.getType() == null) {
             throw new CalloutException("No type specified for element " + element.getName());
         }
-        
+
         ApexTypeName apexType = getApexType(element.getType(), definitions);
         if (element.getMaxOccurs() != 1) {
             apexType = ApexTypeName.arrayOf(apexType);

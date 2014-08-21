@@ -1,6 +1,15 @@
+/*******************************************************************************
+ * Copyright (c) 2014 Salesforce.com, inc..
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *     Salesforce.com, inc. - initial API and implementation
+ ******************************************************************************/
 package com.salesforce.ide.wsdl2apex.core;
 /*
- * Copyright (c) 2013, salesforce.com, inc.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided
@@ -100,7 +109,8 @@ public class Operation extends WsdlNode {
                 String m = parser.getAttributeValue(null, MESSAGE);
                 MessageRef fault = new MessageRef(ParserUtil.toQName(m, parser));
                 String fn = parser.getAttributeValue(null, NAME);
-                if (fn == null) throw new WsdlParseException("Found a fault without name");
+                if (fn == null)
+                    throw new WsdlParseException("Found a fault without name");
                 faults.put(fn, fault);
             }
         }

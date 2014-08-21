@@ -1,19 +1,25 @@
+/*******************************************************************************
+ * Copyright (c) 2014 Salesforce.com, inc..
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *     Salesforce.com, inc. - initial API and implementation
+ ******************************************************************************/
 package com.salesforce.ide.wsdl2apex.core;
-/*
- * Copyright, 1999-2013, salesforce.com
- * All Rights Reserved
- * Company Confidential
- */
 
 import java.util.*;
 
 /**
  * Represent a method to be generated in a stub that represents an operation (aka call) from the WSDL.
- *
+ * 
  */
 class OperationMethod extends AMethod {
 
-    OperationMethod(Definitions definitions, ApexTypeMapper typeMapper, Operation operation, Binding binding) throws ConnectionException, CalloutException {
+    OperationMethod(Definitions definitions, ApexTypeMapper typeMapper, Operation operation, Binding binding)
+            throws ConnectionException, CalloutException {
         super(definitions, typeMapper);
         this.operation = operation;
         this.binding = binding;
@@ -24,30 +30,30 @@ class OperationMethod extends AMethod {
     protected final Binding binding;
     private boolean unWrapOutParams = true;
 
-    
     /** @return the name of the apex method for this operation */
     protected String getOperationName() throws CalloutException {
         return typeMapper.getSafeName(operation.getName().getLocalPart());
     }
-    
+
     /** @return the name of the apex type that this operation returns */
     protected ApexTypeName getReturnType() throws CalloutException, ConnectionException {
         return unwrapResponseType();
     }
-    
-    /** This maps the wsdl operation & binding into apex types, and generates each segment of the method,
-     * the generated method is broken up in segments
-     *      loadParameters()         - generate the apex parameters needed to this method, typically based on the input structure to the operation in the WSDL.
-     *      mapParameters()          - generates the code to map from the apex method parameters into the structure to pass to WebServiceCall.invoke
-     *      declareReturnVariables() - generates any code need to prepare for a result before the invoke call is made.
-     *      performInvoke()          - generate the WebServiceCallout.invoke() call that passes all the relevant data back into the runtime
-     *      mapResult()              - generate the code that does anything needed to get the result from the runtime and to be the method return value.
+
+    /**
+     * This maps the wsdl operation & binding into apex types, and generates each segment of the method, the generated
+     * method is broken up in segments loadParameters() - generate the apex parameters needed to this method, typically
+     * based on the input structure to the operation in the WSDL. mapParameters() - generates the code to map from the
+     * apex method parameters into the structure to pass to WebServiceCall.invoke declareReturnVariables() - generates
+     * any code need to prepare for a result before the invoke call is made. performInvoke() - generate the
+     * WebServiceCallout.invoke() call that passes all the relevant data back into the runtime mapResult() - generate
+     * the code that does anything needed to get the result from the runtime and to be the method return value.
      */
     protected void load() throws ConnectionException, CalloutException {
         BindingOperation boperation = binding.getOperation(operation.getName());
         this.name = getOperationName();
         this.returnType = getReturnType();
-        
+
         loadParameters();
         ApexTypeName requestType = getRequestType();
         mapParameters(requestType);
@@ -65,13 +71,16 @@ class OperationMethod extends AMethod {
         getResponseElement(); // ensure that unWrap has been calculated.
         return unWrapOutParams;
     }
-    
-    /** This adds the code to build the request object / types info from the method parameters to what can be passed to WebServiceCallout.invoke*  */
+
+    /**
+     * This adds the code to build the request object / types info from the method parameters to what can be passed to
+     * WebServiceCallout.invoke*
+     */
     protected void mapParameters(ApexTypeName requestType) throws ConnectionException, CalloutException {
         statements.add(requestType.getAsApex() + " request_x = new " + requestType.getAsApex() + "();");
 
         Iterator<Element> elements = argElements(operation);
-        while(elements.hasNext()) {
+        while (elements.hasNext()) {
             Element element = elements.next();
             String argName = typeMapper.getSafeName(element.getName());
             statements.add("request_x." + argName + " = " + argName + ";");
@@ -81,12 +90,12 @@ class OperationMethod extends AMethod {
     /** This should add any statements needed to declare/setup return parameters before the invoke call is made */
     protected void declareReturnVariables() throws ConnectionException, CalloutException {
         statements.add(getResponseType() + " response_x;");
-        statements.add("Map<String, " + getResponseType() + "> response_map_x = " +
-            "new Map<String, " + getResponseType() + ">();");
-        
+        statements.add("Map<String, " + getResponseType() + "> response_map_x = " + "new Map<String, "
+                + getResponseType() + ">();");
+
         statements.add("response_map_x.put('response_x', response_x);");
     }
-    
+
     protected void performInvoke(BindingOperation boperation) throws ConnectionException, CalloutException {
         statements.add("WebServiceCallout.invoke(");
         statements.add("  this,");
@@ -99,7 +108,7 @@ class OperationMethod extends AMethod {
     /** This should add statements to extract the final return value and return it */
     protected void mapResult() throws CalloutException, ConnectionException {
         statements.add("response_x = response_map_x.get('response_x');");
-    
+
         if (!isVoid()) {
             if (unWrapOutParams) {
                 String returnElementName = typeMapper.getSafeName(getResponseElement().getName());
@@ -109,8 +118,9 @@ class OperationMethod extends AMethod {
             }
         }
     }
-    
-    protected void addOperationMetadataInvokeParams(BindingOperation boperation) throws ConnectionException, CalloutException {
+
+    protected void addOperationMetadataInvokeParams(BindingOperation boperation) throws ConnectionException,
+            CalloutException {
         Part request = getSinglePart(operation.getInput());
         Part response = getSinglePart(operation.getOutput());
 
@@ -124,7 +134,7 @@ class OperationMethod extends AMethod {
     }
 
     private static final ApexTypeName VOID = new ApexTypeName(null, "void", false);
-    
+
     protected ApexTypeName unwrapResponseType() throws CalloutException, ConnectionException {
         Element el = getResponseElement();
         return el == null ? VOID : typeMapper.getApexType(el, definitions);
@@ -157,7 +167,6 @@ class OperationMethod extends AMethod {
         return getApexType(ct);
     }
 
-
     ApexTypeName getResponseType() throws ConnectionException, CalloutException {
         ComplexType ct = getType(operation.getOutput());
         return getApexType(ct);
@@ -176,7 +185,7 @@ class OperationMethod extends AMethod {
         Iterator<Part> it = message.getParts();
         if (!it.hasNext()) {
             throw new ConnectionException("Unsupported WSDL. No part found for message: "
-                    + message.getName().getLocalPart()); 
+                    + message.getName().getLocalPart());
         }
         Part part = it.next();
         if (it.hasNext()) {
@@ -191,11 +200,11 @@ class OperationMethod extends AMethod {
         try {
             ct = getType(operation.getInput());
         } catch (ConnectionException e) {
-            throw new CalloutException("Failed to get type for operation '" + operation.getName() +
-                    "' due to " + e.getMessage(), e);
+            throw new CalloutException("Failed to get type for operation '" + operation.getName() + "' due to "
+                    + e.getMessage(), e);
         }
         Collection sequence = ct.getContent();
-        return (sequence == null) ? Collections.<Element>emptyList().iterator() : sequence.getElements();
+        return (sequence == null) ? Collections.<Element> emptyList().iterator() : sequence.getElements();
     }
 
     private void toArgs(Iterator<Element> eit) throws CalloutException, ConnectionException {

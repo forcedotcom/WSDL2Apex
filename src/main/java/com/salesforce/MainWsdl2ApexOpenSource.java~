@@ -21,7 +21,7 @@ public class MainWsdl2ApexOpenSource {
 		return allClasses;
 	}
 	
-	public LinkedHashMap<String, String> getResultFromParse()
+	public HashMap<String, String> getResultFromParse()
 	{
 		return result.getMapping();
 	}
@@ -76,10 +76,10 @@ public class MainWsdl2ApexOpenSource {
 			System.err.println(e.getMessage());
 			throw e;
 		}
-		LinkedHashMap<String, String> inputMap = new LinkedHashMap<String, String>();
+		HashMap<String, String> inputMap = new HashMap<String, String>();
 		inputMap = result.getMapping();												//get the targetnamesapces
 		Wsdl2Apex wsdl2Apex = new Wsdl2Apex();
-		LinkedHashMap<String, APackage> packageMap;
+		HashMap<String, APackage> packageMap;
 		allClassNames = new ArrayList<String>();
 		allClasses = new ArrayList<String>();
 		try
@@ -167,28 +167,14 @@ public class MainWsdl2ApexOpenSource {
 	
 	public static void generate(String[] args) throws CalloutException, IOException
 	{
-		if(result == null)
-		{
-			System.err.println("This method should only be ran after the parse method has ran");
-			throw new RuntimeException();
-		}
-					
-		LinkedHashMap<String, String> inputMap = new LinkedHashMap<String, String>();
-		Iterator<String> i = result.getMapping().keySet().iterator();												//get the targetnamesapces
-		int index = 0;
-		while(i.hasNext())
-		{
-			inputMap.put(i.next(), args[index]);											//getting the new map between targetnamespaces and name of classes
-			index++;
-		}
 		Boolean async;
 		String resultPath = null;
-		if(args.length == index + 1)
-			async = Boolean.parseBoolean(args[index]);
-		else if(args.length == index + 2)
+		if(args.length == 1)
+			async = Boolean.parseBoolean(args[0]);
+		else if(args.length == 2)
 		{
-			async = Boolean.parseBoolean(args[index]);
-			resultPath = args[index + 1];
+			async = Boolean.parseBoolean(args[0]);
+			resultPath = args[1];
 		}
 		else
 		{
@@ -198,12 +184,12 @@ public class MainWsdl2ApexOpenSource {
 		}
 		
 		Wsdl2Apex wsdl2Apex = new Wsdl2Apex();
-		LinkedHashMap<String, APackage> packageMap;
+		HashMap<String, APackage> packageMap;
 		allClassNames = new ArrayList<String>();
 		allClasses = new ArrayList<String>();
 		try
 		{
-			packageMap = wsdl2Apex.generate(wsdlString, Wsdl2ApexOptions.newDefault(async).setPackageNamespaceMap(inputMap)); //generates the class
+			packageMap = wsdl2Apex.generate(wsdlString, Wsdl2ApexOptions.newDefault(async).setPackageNamespaceMap(result.getMapping())); //generates the class
 			allClasses = wsdl2Apex.generateApexClass(packageMap);				//creates the class as a string
 			Iterator<String> j = packageMap.keySet().iterator();
 			while(j.hasNext())
@@ -243,7 +229,6 @@ public class MainWsdl2ApexOpenSource {
 			}
 		}
 	}
-	
 	public static void main(String[] args) throws IOException, CalloutException
 	{
 		parseAndGenerate(args);
