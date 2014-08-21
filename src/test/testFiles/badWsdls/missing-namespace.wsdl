@@ -1,0 +1,858 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="urn:dotnet.callouttest.soap.sforce.com" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="urn:dotnet.callouttest.soap.sforce.com">
+      <s:element name="EchoBoolean">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="input" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EchoBooleanResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="EchoBooleanResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EchoBooleanArray">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="unbounded" name="input" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EchoBooleanArrayResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="unbounded" name="EchoBooleanArrayResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EchoString">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="input" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EchoStringResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EchoStringResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EchoStringArray">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="unbounded" name="input" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EchoStringArrayResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="unbounded" name="EchoStringArrayResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EchoInt">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="input" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EchoIntResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="EchoIntResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EchoIntArray">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="unbounded" name="input" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EchoIntArrayResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="unbounded" name="EchoIntArrayResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EchoDouble">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="input" type="s:double" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EchoDoubleResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="EchoDoubleResult" type="s:double" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EchoDoubleArray">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="unbounded" name="input" type="s:double" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EchoDoubleArrayResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="unbounded" name="EchoDoubleArrayResult" type="s:double" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EchoFloat">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="input" type="s:float" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EchoFloatResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="EchoFloatResult" type="s:float" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EchoFloatArray">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="unbounded" name="input" type="s:float" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EchoFloatArrayResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="unbounded" name="EchoFloatArrayResult" type="s:float" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EchoDate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="input" type="s:date" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EchoDateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="EchoDateResult" type="s:date" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EchoDateArray">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="unbounded" name="input" type="s:date" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EchoDateArrayResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="unbounded" name="EchoDateArrayResult" type="s:date" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EchoDateTime">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="input" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EchoDateTimeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="EchoDateTimeResult" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EchoDateTimeArray">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="unbounded" name="input" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EchoDateTimeArrayResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="unbounded" name="EchoDateTimeArrayResult" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EchoAllTypes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="boolVal" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="str" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="integ" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="doub" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="f" type="s:float" />
+            <s:element minOccurs="1" maxOccurs="1" name="d" type="s:date" />
+            <s:element minOccurs="1" maxOccurs="1" name="dt" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EchoAllTypesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="EchoAllTypesResult" type="tns:EveryType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="EveryType">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="boolVal" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="str" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="integ" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="doub" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="f" type="s:float" />
+          <s:element minOccurs="1" maxOccurs="1" name="d" type="s:date" />
+          <s:element minOccurs="1" maxOccurs="1" name="dt" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="EchoAllTypesArrays">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="unbounded" name="boolVal" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="unbounded" name="str" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="unbounded" name="integ" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="unbounded" name="doub" type="s:double" />
+            <s:element minOccurs="0" maxOccurs="unbounded" name="f" type="s:float" />
+            <s:element minOccurs="0" maxOccurs="unbounded" name="d" type="s:date" />
+            <s:element minOccurs="0" maxOccurs="unbounded" name="dt" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EchoAllTypesArraysResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="unbounded" name="EchoAllTypesArraysResult" type="tns:EveryType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EchoStruct">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="et" type="tns:EveryType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EchoStructResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="EchoStructResult" type="tns:EveryType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EchoStructArray">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="unbounded" name="et" type="tns:EveryType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EchoStructArrayResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="unbounded" name="EchoStructArrayResult" type="tns:EveryType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EchoStructContainer">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="sc" type="tns:StructContainer" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="StructContainer">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="et" type="tns:EveryType" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="EchoStructContainerResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="EchoStructContainerResult" type="tns:StructContainer" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EchoStructContainerArray">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="unbounded" name="sc" type="tns:StructContainer" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EchoStructContainerArrayResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="unbounded" name="EchoStructContainerArrayResult" type="tns:StructContainer" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EchoCurrentTime">
+        <s:complexType />
+      </s:element>
+      <s:element name="EchoCurrentTimeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="EchoCurrentTimeResult" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DoNoop">
+        <s:complexType />
+      </s:element>
+      <s:element name="DoNoopResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="WaitFor">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="secondsToWait" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WaitForResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ThrowException">
+        <s:complexType />
+      </s:element>
+      <s:element name="ThrowExceptionResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="TestSoapHeader">
+        <s:complexType />
+      </s:element>
+      <s:element name="TestSoapHeaderResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="TestSoapHeaderResult" type="tns:EveryType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TestHeader" type="tns:TestHeader" />
+      <s:complexType name="TestHeader">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="boolVal" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="stringVal" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="intVal" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="doubVal" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="floatVal" type="s:float" />
+          <s:element minOccurs="1" maxOccurs="1" name="dateVal" type="s:date" />
+          <s:element minOccurs="1" maxOccurs="1" name="dateTimeVal" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="EchoBooleanSoapIn">
+    <wsdl:part name="parameters" element="tns:EchoBoolean" />
+  </wsdl:message>
+  <wsdl:message name="EchoBooleanSoapOut">
+    <wsdl:part name="parameters" element="tns:EchoBooleanResponse" />
+  </wsdl:message>
+  <wsdl:message name="EchoBooleanArraySoapIn">
+    <wsdl:part name="parameters" element="tns:EchoBooleanArray" />
+  </wsdl:message>
+  <wsdl:message name="EchoBooleanArraySoapOut">
+    <wsdl:part name="parameters" element="tns:EchoBooleanArrayResponse" />
+  </wsdl:message>
+  <wsdl:message name="EchoStringSoapIn">
+    <wsdl:part name="parameters" element="tns:EchoString" />
+  </wsdl:message>
+  <wsdl:message name="EchoStringSoapOut">
+    <wsdl:part name="parameters" element="tns:EchoStringResponse" />
+  </wsdl:message>
+  <wsdl:message name="EchoStringArraySoapIn">
+    <wsdl:part name="parameters" element="tns:EchoStringArray" />
+  </wsdl:message>
+  <wsdl:message name="EchoStringArraySoapOut">
+    <wsdl:part name="parameters" element="tns:EchoStringArrayResponse" />
+  </wsdl:message>
+  <wsdl:message name="EchoIntSoapIn">
+    <wsdl:part name="parameters" element="tns:EchoInt" />
+  </wsdl:message>
+  <wsdl:message name="EchoIntSoapOut">
+    <wsdl:part name="parameters" element="tns:EchoIntResponse" />
+  </wsdl:message>
+  <wsdl:message name="EchoIntArraySoapIn">
+    <wsdl:part name="parameters" element="tns:EchoIntArray" />
+  </wsdl:message>
+  <wsdl:message name="EchoIntArraySoapOut">
+    <wsdl:part name="parameters" element="tns:EchoIntArrayResponse" />
+  </wsdl:message>
+  <wsdl:message name="EchoDoubleSoapIn">
+    <wsdl:part name="parameters" element="tns:EchoDouble" />
+  </wsdl:message>
+  <wsdl:message name="EchoDoubleSoapOut">
+    <wsdl:part name="parameters" element="tns:EchoDoubleResponse" />
+  </wsdl:message>
+  <wsdl:message name="EchoDoubleArraySoapIn">
+    <wsdl:part name="parameters" element="tns:EchoDoubleArray" />
+  </wsdl:message>
+  <wsdl:message name="EchoDoubleArraySoapOut">
+    <wsdl:part name="parameters" element="tns:EchoDoubleArrayResponse" />
+  </wsdl:message>
+  <wsdl:message name="EchoFloatSoapIn">
+    <wsdl:part name="parameters" element="tns:EchoFloat" />
+  </wsdl:message>
+  <wsdl:message name="EchoFloatSoapOut">
+    <wsdl:part name="parameters" element="tns:EchoFloatResponse" />
+  </wsdl:message>
+  <wsdl:message name="EchoFloatArraySoapIn">
+    <wsdl:part name="parameters" element="tns:EchoFloatArray" />
+  </wsdl:message>
+  <wsdl:message name="EchoFloatArraySoapOut">
+    <wsdl:part name="parameters" element="tns:EchoFloatArrayResponse" />
+  </wsdl:message>
+  <wsdl:message name="EchoDateSoapIn">
+    <wsdl:part name="parameters" element="tns:EchoDate" />
+  </wsdl:message>
+  <wsdl:message name="EchoDateSoapOut">
+    <wsdl:part name="parameters" element="tns:EchoDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="EchoDateArraySoapIn">
+    <wsdl:part name="parameters" element="tns:EchoDateArray" />
+  </wsdl:message>
+  <wsdl:message name="EchoDateArraySoapOut">
+    <wsdl:part name="parameters" element="tns:EchoDateArrayResponse" />
+  </wsdl:message>
+  <wsdl:message name="EchoDateTimeSoapIn">
+    <wsdl:part name="parameters" element="tns:EchoDateTime" />
+  </wsdl:message>
+  <wsdl:message name="EchoDateTimeSoapOut">
+    <wsdl:part name="parameters" element="tns:EchoDateTimeResponse" />
+  </wsdl:message>
+  <wsdl:message name="EchoDateTimeArraySoapIn">
+    <wsdl:part name="parameters" element="tns:EchoDateTimeArray" />
+  </wsdl:message>
+  <wsdl:message name="EchoDateTimeArraySoapOut">
+    <wsdl:part name="parameters" element="tns:EchoDateTimeArrayResponse" />
+  </wsdl:message>
+  <wsdl:message name="EchoAllTypesSoapIn">
+    <wsdl:part name="parameters" element="tns:EchoAllTypes" />
+  </wsdl:message>
+  <wsdl:message name="EchoAllTypesSoapOut">
+    <wsdl:part name="parameters" element="tns:EchoAllTypesResponse" />
+  </wsdl:message>
+  <wsdl:message name="EchoAllTypesArraysSoapIn">
+    <wsdl:part name="parameters" element="tns:EchoAllTypesArrays" />
+  </wsdl:message>
+  <wsdl:message name="EchoAllTypesArraysSoapOut">
+    <wsdl:part name="parameters" element="tns:EchoAllTypesArraysResponse" />
+  </wsdl:message>
+  <wsdl:message name="EchoStructSoapIn">
+    <wsdl:part name="parameters" element="tns:EchoStruct" />
+  </wsdl:message>
+  <wsdl:message name="EchoStructSoapOut">
+    <wsdl:part name="parameters" element="tns:EchoStructResponse" />
+  </wsdl:message>
+  <wsdl:message name="EchoStructArraySoapIn">
+    <wsdl:part name="parameters" element="tns:EchoStructArray" />
+  </wsdl:message>
+  <wsdl:message name="EchoStructArraySoapOut">
+    <wsdl:part name="parameters" element="tns:EchoStructArrayResponse" />
+  </wsdl:message>
+  <wsdl:message name="EchoStructContainerSoapIn">
+    <wsdl:part name="parameters" element="tns:EchoStructContainer" />
+  </wsdl:message>
+  <wsdl:message name="EchoStructContainerSoapOut">
+    <wsdl:part name="parameters" element="tns:EchoStructContainerResponse" />
+  </wsdl:message>
+  <wsdl:message name="EchoStructContainerArraySoapIn">
+    <wsdl:part name="parameters" element="tns:EchoStructContainerArray" />
+  </wsdl:message>
+  <wsdl:message name="EchoStructContainerArraySoapOut">
+    <wsdl:part name="parameters" element="tns:EchoStructContainerArrayResponse" />
+  </wsdl:message>
+  <wsdl:message name="EchoCurrentTimeSoapIn">
+    <wsdl:part name="parameters" element="tns:EchoCurrentTime" />
+  </wsdl:message>
+  <wsdl:message name="EchoCurrentTimeSoapOut">
+    <wsdl:part name="parameters" element="tns:EchoCurrentTimeResponse" />
+  </wsdl:message>
+  <wsdl:message name="DoNoopSoapIn">
+    <wsdl:part name="parameters" element="tns:DoNoop" />
+  </wsdl:message>
+  <wsdl:message name="DoNoopSoapOut">
+    <wsdl:part name="parameters" element="tns:DoNoopResponse" />
+  </wsdl:message>
+  <wsdl:message name="WaitForSoapIn">
+    <wsdl:part name="parameters" element="tns:WaitFor" />
+  </wsdl:message>
+  <wsdl:message name="WaitForSoapOut">
+    <wsdl:part name="parameters" element="tns:WaitForResponse" />
+  </wsdl:message>
+  <wsdl:message name="ThrowExceptionSoapIn">
+    <wsdl:part name="parameters" element="tns:ThrowException" />
+  </wsdl:message>
+  <wsdl:message name="ThrowExceptionSoapOut">
+    <wsdl:part name="parameters" element="tns:ThrowExceptionResponse" />
+  </wsdl:message>
+  <wsdl:message name="TestSoapHeaderSoapIn">
+    <wsdl:part name="parameters" element="tns:TestSoapHeader" />
+  </wsdl:message>
+  <wsdl:message name="TestSoapHeaderSoapOut">
+    <wsdl:part name="parameters" element="tns:TestSoapHeaderResponse" />
+  </wsdl:message>
+  <wsdl:message name="TestSoapHeaderTestHeader">
+    <wsdl:part name="TestHeader" element="tns:TestHeader" />
+  </wsdl:message>
+  <wsdl:portType name="DotNetInteropTestServiceSoap">
+    <wsdl:operation name="EchoBoolean">
+      <wsdl:input message="tns:EchoBooleanSoapIn" />
+      <wsdl:output message="tns:EchoBooleanSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EchoBooleanArray">
+      <wsdl:input message="tns:EchoBooleanArraySoapIn" />
+      <wsdl:output message="tns:EchoBooleanArraySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EchoString">
+      <wsdl:input message="tns:EchoStringSoapIn" />
+      <wsdl:output message="tns:EchoStringSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EchoStringArray">
+      <wsdl:input message="tns:EchoStringArraySoapIn" />
+      <wsdl:output message="tns:EchoStringArraySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EchoInt">
+      <wsdl:input message="tns:EchoIntSoapIn" />
+      <wsdl:output message="tns:EchoIntSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EchoIntArray">
+      <wsdl:input message="tns:EchoIntArraySoapIn" />
+      <wsdl:output message="tns:EchoIntArraySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EchoDouble">
+      <wsdl:input message="tns:EchoDoubleSoapIn" />
+      <wsdl:output message="tns:EchoDoubleSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EchoDoubleArray">
+      <wsdl:input message="tns:EchoDoubleArraySoapIn" />
+      <wsdl:output message="tns:EchoDoubleArraySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EchoFloat">
+      <wsdl:input message="tns:EchoFloatSoapIn" />
+      <wsdl:output message="tns:EchoFloatSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EchoFloatArray">
+      <wsdl:input message="tns:EchoFloatArraySoapIn" />
+      <wsdl:output message="tns:EchoFloatArraySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EchoDate">
+      <wsdl:input message="tns:EchoDateSoapIn" />
+      <wsdl:output message="tns:EchoDateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EchoDateArray">
+      <wsdl:input message="tns:EchoDateArraySoapIn" />
+      <wsdl:output message="tns:EchoDateArraySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EchoDateTime">
+      <wsdl:input message="tns:EchoDateTimeSoapIn" />
+      <wsdl:output message="tns:EchoDateTimeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EchoDateTimeArray">
+      <wsdl:input message="tns:EchoDateTimeArraySoapIn" />
+      <wsdl:output message="tns:EchoDateTimeArraySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EchoAllTypes">
+      <wsdl:input message="tns:EchoAllTypesSoapIn" />
+      <wsdl:output message="tns:EchoAllTypesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EchoAllTypesArrays">
+      <wsdl:input message="tns:EchoAllTypesArraysSoapIn" />
+      <wsdl:output message="tns:EchoAllTypesArraysSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EchoStruct">
+      <wsdl:input message="tns:EchoStructSoapIn" />
+      <wsdl:output message="tns:EchoStructSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EchoStructArray">
+      <wsdl:input message="tns:EchoStructArraySoapIn" />
+      <wsdl:output message="tns:EchoStructArraySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EchoStructContainer">
+      <wsdl:input message="tns:EchoStructContainerSoapIn" />
+      <wsdl:output message="tns:EchoStructContainerSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EchoStructContainerArray">
+      <wsdl:input message="tns:EchoStructContainerArraySoapIn" />
+      <wsdl:output message="tns:EchoStructContainerArraySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EchoCurrentTime">
+      <wsdl:input message="tns:EchoCurrentTimeSoapIn" />
+      <wsdl:output message="tns:EchoCurrentTimeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DoNoop">
+      <wsdl:input message="tns:DoNoopSoapIn" />
+      <wsdl:output message="tns:DoNoopSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WaitFor">
+      <wsdl:input message="tns:WaitForSoapIn" />
+      <wsdl:output message="tns:WaitForSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ThrowException">
+      <wsdl:input message="tns:ThrowExceptionSoapIn" />
+      <wsdl:output message="tns:ThrowExceptionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TestSoapHeader">
+      <wsdl:input message="tns:TestSoapHeaderSoapIn" />
+      <wsdl:output message="tns:TestSoapHeaderSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="DotNetInteropTestServiceSoap" type="tns:DotNetInteropTestServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+    <wsdl:operation name="EchoBoolean">
+      <soap:operation soapAction="urn:dotnet.callouttest.soap.sforce.com/EchoBoolean" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EchoBooleanArray">
+      <soap:operation soapAction="urn:dotnet.callouttest.soap.sforce.com/EchoBooleanArray" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EchoString">
+      <soap:operation soapAction="urn:dotnet.callouttest.soap.sforce.com/EchoString" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EchoStringArray">
+      <soap:operation soapAction="urn:dotnet.callouttest.soap.sforce.com/EchoStringArray" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EchoInt">
+      <soap:operation soapAction="urn:dotnet.callouttest.soap.sforce.com/EchoInt" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EchoIntArray">
+      <soap:operation soapAction="urn:dotnet.callouttest.soap.sforce.com/EchoIntArray" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EchoDouble">
+      <soap:operation soapAction="urn:dotnet.callouttest.soap.sforce.com/EchoDouble" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EchoDoubleArray">
+      <soap:operation soapAction="urn:dotnet.callouttest.soap.sforce.com/EchoDoubleArray" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EchoFloat">
+      <soap:operation soapAction="urn:dotnet.callouttest.soap.sforce.com/EchoFloat" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EchoFloatArray">
+      <soap:operation soapAction="urn:dotnet.callouttest.soap.sforce.com/EchoFloatArray" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EchoDate">
+      <soap:operation soapAction="urn:dotnet.callouttest.soap.sforce.com/EchoDate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EchoDateArray">
+      <soap:operation soapAction="urn:dotnet.callouttest.soap.sforce.com/EchoDateArray" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EchoDateTime">
+      <soap:operation soapAction="urn:dotnet.callouttest.soap.sforce.com/EchoDateTime" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EchoDateTimeArray">
+      <soap:operation soapAction="urn:dotnet.callouttest.soap.sforce.com/EchoDateTimeArray" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EchoAllTypes">
+      <soap:operation soapAction="urn:dotnet.callouttest.soap.sforce.com/EchoAllTypes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EchoAllTypesArrays">
+      <soap:operation soapAction="urn:dotnet.callouttest.soap.sforce.com/EchoAllTypesArrays" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EchoStruct">
+      <soap:operation soapAction="urn:dotnet.callouttest.soap.sforce.com/EchoStruct" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EchoStructArray">
+      <soap:operation soapAction="urn:dotnet.callouttest.soap.sforce.com/EchoStructArray" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EchoStructContainer">
+      <soap:operation soapAction="urn:dotnet.callouttest.soap.sforce.com/EchoStructContainer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EchoStructContainerArray">
+      <soap:operation soapAction="urn:dotnet.callouttest.soap.sforce.com/EchoStructContainerArray" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EchoCurrentTime">
+      <soap:operation soapAction="urn:dotnet.callouttest.soap.sforce.com/EchoCurrentTime" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DoNoop">
+      <soap:operation soapAction="urn:dotnet.callouttest.soap.sforce.com/DoNoop" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WaitFor">
+      <soap:operation soapAction="urn:dotnet.callouttest.soap.sforce.com/WaitFor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ThrowException">
+      <soap:operation soapAction="urn:dotnet.callouttest.soap.sforce.com/ThrowException" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TestSoapHeader">
+      <soap:operation soapAction="urn:dotnet.callouttest.soap.sforce.com/TestSoapHeader" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:TestSoapHeaderTestHeader" part="TestHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DotNetInteropTestService">
+    <wsdl:port name="DotNetInteropTestServiceSoap" binding="tns:DotNetInteropTestServiceSoap">
+      <soap:address location="http://www.qaresponder.info/WebServices/DotNetInteropTestService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

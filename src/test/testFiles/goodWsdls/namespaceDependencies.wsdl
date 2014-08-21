@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Salesforce.com Partner Web Services API Version 10.0
+Generated on (Used notimestamp option).
+
+Copyright 1999-2007 salesforce.com, inc.
+All Rights Reserved
+-->
+
+<definitions targetNamespace="urn:partner.soap.sforce.com"
+             xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:fns="urn:fault.partner.soap.sforce.com"
+             xmlns:tns="urn:partner.soap.sforce.com"
+             xmlns:ens="urn:sobject.partner.soap.sforce.com">
+    <types>
+
+        <schema elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:sobject.partner.soap.sforce.com">
+
+            <import namespace="urn:partner.soap.sforce.com"/>
+
+
+            <!-- Dynamic sObject -->
+            <complexType name="sObject">
+                <sequence>
+                    <element name="type"               type="xsd:string"/>
+                    <element name="fieldsToNull"       type="xsd:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+                    <element name="Id"                 type="tns:ID" nillable="true" />
+                    <any namespace="##targetNamespace" minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+                </sequence>
+            </complexType>
+
+        </schema>
+
+        <schema elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:partner.soap.sforce.com">
+
+            <import namespace="urn:sobject.partner.soap.sforce.com"/>
+
+            <!-- Our simple ID Type -->
+            <simpleType name="ID">
+                <restriction base="xsd:string">
+                    <length value="18"/>
+                    <pattern value='[a-zA-Z0-9]{18}'/>
+                </restriction>
+            </simpleType>
+
+            <element name="describeSObject">
+                <complexType>
+                    <sequence>
+                        <element name="sObjectType" type="xsd:string"/>
+                    </sequence>
+                </complexType>
+            </element>
+
+            <complexType name="DescribeSObjectResult">
+                <sequence>
+                    <element name="activateable"        type="xsd:boolean"/>
+                    <element name="createable"          type="xsd:boolean"/>
+                    <element name="custom"              type="xsd:boolean"/>
+                    <element name="deletable"           type="xsd:boolean"/>
+                    <element name="keyPrefix"           type="xsd:string" nillable="true"/>
+                    <element name="label"               type="xsd:string"/>
+                    <element name="labelPlural"         type="xsd:string"/>
+                    <element name="layoutable"          type="xsd:boolean"/>
+                    <element name="listviewable" type="xsd:boolean" minOccurs="0"/>
+                    <element name="lookupLayoutable"    type="xsd:boolean" minOccurs="0"/>
+                    <element name="mergeable"           type="xsd:boolean"/>
+                    <element name="name"                type="xsd:string"/>
+                    <element name="queryable"           type="xsd:boolean"/>
+                    <element name="replicateable"       type="xsd:boolean"/>
+                    <element name="retrieveable"        type="xsd:boolean"/>
+                    <element name="searchLayoutable" type="xsd:boolean" minOccurs="0"/>
+                    <element name="searchable"          type="xsd:boolean" />
+                    <element name="triggerable"         type="xsd:boolean" minOccurs="0"/>
+                    <element name="undeletable"         type="xsd:boolean"/>
+                    <element name="updateable"          type="xsd:boolean"/>
+                    <element name="urlDetail"           type="xsd:string" nillable="true"/>
+                    <element name="urlEdit"             type="xsd:string" nillable="true"/>
+                    <element name="urlNew"              type="xsd:string" nillable="true"/>
+                </sequence>
+            </complexType>
+
+            <element name="describeSObjectResponse">
+                <complexType>
+                    <sequence>
+                        <element name="result" type="tns:DescribeSObjectResult" nillable="true"/>
+                    </sequence>
+                </complexType>
+            </element>
+        </schema>
+
+    </types>
+    
+    <message name="describeSObjectRequest">
+        <part element="tns:describeSObject" name="parameters"/>
+    </message>
+    <message name="describeSObjectResponse">
+        <part element="tns:describeSObjectResponse" name="parameters"/>
+    </message>
+
+    <!-- Soap PortType -->
+    <portType name="Soap">
+        <operation name="describeSObject">
+            <documentation>Describe an sObject</documentation>
+            <input  message="tns:describeSObjectRequest"/>
+            <output message="tns:describeSObjectResponse"/>
+        </operation>
+    </portType>
+
+    <!-- Soap Binding -->    
+    <binding name="SoapBinding" type="tns:Soap">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="describeSObject">
+            <soap:operation soapAction=""/>
+            <input>
+                <soap:body parts="parameters" use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+
+    <!-- Soap Service Endpoint -->
+    <service name="SforceService">
+        <documentation>Sforce SOAP API</documentation>
+        <port binding="tns:SoapBinding" name="Soap">
+            <soap:address location="https://login.salesforce.com/services/Soap/u/10.0"/>
+        </port>
+    </service>
+
+</definitions>
+

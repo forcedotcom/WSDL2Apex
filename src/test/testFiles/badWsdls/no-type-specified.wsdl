@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/"
+                  xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+                  xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.icmconv.com/p5/sf"
+                  xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+                  xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://www.icmconv.com/p5/sf"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    <wsdl:types>
+        <s:schema elementFormDefault="qualified" targetNamespace="http://www.icmconv.com/p5/sf">
+            <s:element name="SF_Authenticate">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="SF_AuthenticateResponse">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="1" maxOccurs="1" name="SF_AuthenticateResult" type="s:boolean"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="SF_CheckForCustomerExistence">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="0" maxOccurs="1" name="CustomerID" type="s:string"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="SF_CheckForCustomerExistenceResponse">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="1" maxOccurs="1" name="SF_CheckForCustomerExistenceResult"
+                                   type="s:boolean"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="SF_CheckForOpportunityExistence">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="0" maxOccurs="1" name="OpportunityID" type="s:string"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="SF_CheckForOpportunityExistenceResponse">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="1" maxOccurs="1" name="SF_CheckForOpportunityExistenceResult"
+                                   type="s:boolean"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="SF_PassCollectionToP5">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="0" maxOccurs="1" name="TheCollection" type="tns:ArrayOfAnyType"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:complexType name="ArrayOfAnyType">
+                <s:sequence>
+                    <s:element minOccurs="0" maxOccurs="unbounded" name="anyType" nillable="true"/>
+                </s:sequence>
+            </s:complexType>
+            <s:element name="SF_PassCollectionToP5Response">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="1" maxOccurs="1" name="SF_PassCollectionToP5Result" type="s:boolean"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+        </s:schema>
+    </wsdl:types>
+    <wsdl:message name="SF_AuthenticateSoapIn">
+        <wsdl:part name="parameters" element="tns:SF_Authenticate"/>
+    </wsdl:message>
+    <wsdl:message name="SF_AuthenticateSoapOut">
+        <wsdl:part name="parameters" element="tns:SF_AuthenticateResponse"/>
+    </wsdl:message>
+    <wsdl:message name="SF_CheckForCustomerExistenceSoapIn">
+        <wsdl:part name="parameters" element="tns:SF_CheckForCustomerExistence"/>
+    </wsdl:message>
+    <wsdl:message name="SF_CheckForCustomerExistenceSoapOut">
+        <wsdl:part name="parameters" element="tns:SF_CheckForCustomerExistenceResponse"/>
+    </wsdl:message>
+    <wsdl:message name="SF_CheckForOpportunityExistenceSoapIn">
+        <wsdl:part name="parameters" element="tns:SF_CheckForOpportunityExistence"/>
+    </wsdl:message>
+    <wsdl:message name="SF_CheckForOpportunityExistenceSoapOut">
+        <wsdl:part name="parameters" element="tns:SF_CheckForOpportunityExistenceResponse"/>
+    </wsdl:message>
+    <wsdl:message name="SF_PassCollectionToP5SoapIn">
+        <wsdl:part name="parameters" element="tns:SF_PassCollectionToP5"/>
+    </wsdl:message>
+    <wsdl:message name="SF_PassCollectionToP5SoapOut">
+        <wsdl:part name="parameters" element="tns:SF_PassCollectionToP5Response"/>
+    </wsdl:message>
+    <wsdl:portType name="SFP5ServiceSoap">
+        <wsdl:operation name="SF_Authenticate">
+            <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Authentication method for explicit use by
+                the Sales Force Integration Process.
+            </wsdl:documentation>
+            <wsdl:input message="tns:SF_AuthenticateSoapIn"/>
+            <wsdl:output message="tns:SF_AuthenticateSoapOut"/>
+        </wsdl:operation>
+        <wsdl:operation name="SF_CheckForCustomerExistence">
+            <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Checks for the existence of a customer in
+                the P5 database.
+            </wsdl:documentation>
+            <wsdl:input message="tns:SF_CheckForCustomerExistenceSoapIn"/>
+            <wsdl:output message="tns:SF_CheckForCustomerExistenceSoapOut"/>
+        </wsdl:operation>
+        <wsdl:operation name="SF_CheckForOpportunityExistence">
+            <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Checks for the existence of an opportunity
+                (project) in the P5 database.
+            </wsdl:documentation>
+            <wsdl:input message="tns:SF_CheckForOpportunityExistenceSoapIn"/>
+            <wsdl:output message="tns:SF_CheckForOpportunityExistenceSoapOut"/>
+        </wsdl:operation>
+        <wsdl:operation name="SF_PassCollectionToP5">
+            <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Checks for the existence of an opportunity
+                (project) in the P5 database.
+            </wsdl:documentation>
+            <wsdl:input message="tns:SF_PassCollectionToP5SoapIn"/>
+            <wsdl:output message="tns:SF_PassCollectionToP5SoapOut"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="SFP5ServiceSoap" type="tns:SFP5ServiceSoap">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="SF_Authenticate">
+            <soap:operation soapAction="http://www.icmconv.com/p5/sf/SF_Authenticate" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="SF_CheckForCustomerExistence">
+            <soap:operation soapAction="http://www.icmconv.com/p5/sf/SF_CheckForCustomerExistence" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="SF_CheckForOpportunityExistence">
+            <soap:operation soapAction="http://www.icmconv.com/p5/sf/SF_CheckForOpportunityExistence" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="SF_PassCollectionToP5">
+            <soap:operation soapAction="http://www.icmconv.com/p5/sf/SF_PassCollectionToP5" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="SFP5Service">
+        <wsdl:port name="SFP5ServiceSoap" binding="tns:SFP5ServiceSoap">
+            <soap:address location="http://p5.icmconv.com/p5service/sfp5service.asmx"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
