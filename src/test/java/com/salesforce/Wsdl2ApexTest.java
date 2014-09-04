@@ -1,13 +1,3 @@
-/*******************************************************************************
- * Copyright (c) 2014 Salesforce.com, inc..
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- * 
- * Contributors:
- *     Salesforce.com, inc. - initial API and implementation
- ******************************************************************************/
 package com.salesforce.ide.wsdl2apex.core;
 
 import static org.junit.Assert.*;
@@ -284,7 +274,7 @@ public class Wsdl2ApexTest {
 
         Wsdl2Apex m = new Wsdl2Apex();
         try {
-            Wsdl2Apex.parse(parseArgs);
+            m.parse(parseArgs);
 
             HashMap<String, String> a = m.getResultFromParse();
             a.keySet().iterator();
@@ -302,7 +292,7 @@ public class Wsdl2ApexTest {
                 }
             }
 
-            Wsdl2Apex.generate(generateArgs);
+            m.generate(generateArgs);
             FileString f = new FileString();
 
             String result1 = f.getStringFromFile(directory.getPath() + "/" + "s1.cls");
@@ -349,9 +339,10 @@ public class Wsdl2ApexTest {
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
 
+        Wsdl2Apex m = new Wsdl2Apex();
         try {
-            Wsdl2Apex.parse(parseArgs);
-            Wsdl2Apex.generate(generateArgs);
+            m.parse(parseArgs);
+            m.generate(generateArgs);
         } catch (Exception e) {
             assertThat(e.getMessage(), containsString("Found schema import from location AlexaWebSearch.xsd. "
                     + "External schema import not supported"));
@@ -365,9 +356,10 @@ public class Wsdl2ApexTest {
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
 
+        Wsdl2Apex m = new Wsdl2Apex();
         try {
-            Wsdl2Apex.parse(parseArgs);
-            Wsdl2Apex.generate(generateArgs);
+            m.parse(parseArgs);
+            m.generate(generateArgs);
         } catch (Exception e) {
             assertThat(e.getMessage(),
                 containsString("Unsupported Schema element found http://www.w3.org/2001/XMLSchema:include"));
@@ -381,9 +373,10 @@ public class Wsdl2ApexTest {
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
 
+        Wsdl2Apex m = new Wsdl2Apex();
         try {
-            Wsdl2Apex.parse(parseArgs);
-            Wsdl2Apex.generate(generateArgs);
+            m.parse(parseArgs);
+            m.generate(generateArgs);
         } catch (Exception e) {
             assertThat(e.getMessage(), containsString("Failed to parse wsdl"));
         }
@@ -396,9 +389,10 @@ public class Wsdl2ApexTest {
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
 
+        Wsdl2Apex m = new Wsdl2Apex();
         try {
-            Wsdl2Apex.parse(parseArgs);
-            Wsdl2Apex.generate(generateArgs);
+            m.parse(parseArgs);
+            m.generate(generateArgs);
         } catch (Exception e) {
             assertThat(e.getMessage(), containsString("WSDL with multiple binding not supported"));
         }
@@ -411,9 +405,10 @@ public class Wsdl2ApexTest {
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
 
+        Wsdl2Apex m = new Wsdl2Apex();
         try {
-            Wsdl2Apex.parse(parseArgs);
-            Wsdl2Apex.generate(generateArgs);
+            m.parse(parseArgs);
+            m.generate(generateArgs);
         } catch (Exception e) {
             assertThat(
                 e.getMessage(),
@@ -428,9 +423,10 @@ public class Wsdl2ApexTest {
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
 
+        Wsdl2Apex m = new Wsdl2Apex();
         try {
-            Wsdl2Apex.parse(parseArgs);
-            Wsdl2Apex.generate(generateArgs);
+            m.parse(parseArgs);
+            m.generate(generateArgs);
         } catch (Exception e) {
             assertThat(e.getMessage(),
                 containsString("No message found for:{urn:dotnet.callouttest.soap.sforce.com}MeNeither"));
@@ -444,9 +440,10 @@ public class Wsdl2ApexTest {
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
 
+        Wsdl2Apex m = new Wsdl2Apex();
         try {
-            Wsdl2Apex.parse(parseArgs);
-            Wsdl2Apex.generate(generateArgs);
+            m.parse(parseArgs);
+            m.generate(generateArgs);
         } catch (Exception e) {
             assertThat(e.getMessage(),
                 containsString("Unsupported schema type: {http://www.w3.org/2001/XMLSchema}IDontExist"));
@@ -460,9 +457,10 @@ public class Wsdl2ApexTest {
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
 
+        Wsdl2Apex m = new Wsdl2Apex();
         try {
-            Wsdl2Apex.parse(parseArgs);
-            Wsdl2Apex.generate(generateArgs);
+            m.parse(parseArgs);
+            m.generate(generateArgs);
         } catch (Exception e) {
             assertThat(e.getMessage(), containsString("WSDL with multiple portType not supported"));
         }
@@ -475,9 +473,10 @@ public class Wsdl2ApexTest {
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
 
+        Wsdl2Apex m = new Wsdl2Apex();
         try {
-            Wsdl2Apex.parse(parseArgs);
-            Wsdl2Apex.generate(generateArgs);
+            m.parse(parseArgs);
+            m.generate(generateArgs);
         } catch (Exception e) {
             ;
             assertThat(e.getMessage(), containsString("Class name 'Metadata' already in use. "
@@ -492,9 +491,10 @@ public class Wsdl2ApexTest {
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
 
+        Wsdl2Apex m = new Wsdl2Apex();
         try {
-            Wsdl2Apex.parse(parseArgs);
-            Wsdl2Apex.generate(generateArgs);
+            m.parse(parseArgs);
+            m.generate(generateArgs);
         } catch (Exception e) {
             assertThat(e.getMessage(),
                 containsString("Failed to parse wsdl: Unable to find wsdl:binding in the specified wsdl"));
@@ -508,9 +508,10 @@ public class Wsdl2ApexTest {
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
 
+        Wsdl2Apex m = new Wsdl2Apex();
         try {
-            Wsdl2Apex.parse(parseArgs);
-            Wsdl2Apex.generate(generateArgs);
+            m.parse(parseArgs);
+            m.generate(generateArgs);
         } catch (Exception e) {
             assertThat(e.getMessage(),
                 containsString("Failed to parse wsdl: targetNamespace not specified in wsdl:definitions"));
@@ -524,9 +525,10 @@ public class Wsdl2ApexTest {
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
 
+        Wsdl2Apex m = new Wsdl2Apex();
         try {
-            Wsdl2Apex.parse(parseArgs);
-            Wsdl2Apex.generate(generateArgs);
+            m.parse(parseArgs);
+            m.generate(generateArgs);
         } catch (Exception e) {
             assertThat(e.getMessage(), containsString("Unable to find port in wsdl:service"));
         }
@@ -539,9 +541,10 @@ public class Wsdl2ApexTest {
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
 
+        Wsdl2Apex m = new Wsdl2Apex();
         try {
-            Wsdl2Apex.parse(parseArgs);
-            Wsdl2Apex.generate(generateArgs);
+            m.parse(parseArgs);
+            m.generate(generateArgs);
         } catch (Exception e) {
             assertThat(e.getMessage(), containsString("Unable to find wsdl:portType in the specified wsdl"));
         }
@@ -554,9 +557,10 @@ public class Wsdl2ApexTest {
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
 
+        Wsdl2Apex m = new Wsdl2Apex();
         try {
-            Wsdl2Apex.parse(parseArgs);
-            Wsdl2Apex.generate(generateArgs);
+            m.parse(parseArgs);
+            m.generate(generateArgs);
         } catch (Exception e) {
             assertThat(e.getMessage(), containsString("Unable to find schema type for element ElementWithNoSchemaType"));
         }
@@ -569,9 +573,10 @@ public class Wsdl2ApexTest {
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
 
+        Wsdl2Apex m = new Wsdl2Apex();
         try {
-            Wsdl2Apex.parse(parseArgs);
-            Wsdl2Apex.generate(generateArgs);
+            m.parse(parseArgs);
+            m.generate(generateArgs);
         } catch (Exception e) {
             assertThat(e.getMessage(),
                 containsString("Failed to parse wsdl: Unable to find wsdl:service in the specified wsdl"));
@@ -585,9 +590,10 @@ public class Wsdl2ApexTest {
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
 
+        Wsdl2Apex m = new Wsdl2Apex();
         try {
-            Wsdl2Apex.parse(parseArgs);
-            Wsdl2Apex.generate(generateArgs);
+            m.parse(parseArgs);
+            m.generate(generateArgs);
         } catch (Exception e) {
             assertThat(e.getMessage(), containsString("Unable to find Schema type for TestHeader"));
         }
@@ -600,9 +606,10 @@ public class Wsdl2ApexTest {
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
 
+        Wsdl2Apex m = new Wsdl2Apex();
         try {
-            Wsdl2Apex.parse(parseArgs);
-            Wsdl2Apex.generate(generateArgs);
+            m.parse(parseArgs);
+            m.generate(generateArgs);
         } catch (Exception e) {
             assertThat(e.getMessage(),
                 containsString("Unsupported WSDL. Found more than one part for message EchoStringSoapOut"));
@@ -616,9 +623,10 @@ public class Wsdl2ApexTest {
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
 
+        Wsdl2Apex m = new Wsdl2Apex();
         try {
-            Wsdl2Apex.parse(parseArgs);
-            Wsdl2Apex.generate(generateArgs);
+            m.parse(parseArgs);
+            m.generate(generateArgs);
         } catch (Exception e) {
             assertThat(e.getMessage(),
                 containsString("Unsupported WSDL. Found more than one part for message EchoStringSoapIn"));
@@ -632,9 +640,10 @@ public class Wsdl2ApexTest {
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
 
+        Wsdl2Apex m = new Wsdl2Apex();
         try {
-            Wsdl2Apex.parse(parseArgs);
-            Wsdl2Apex.generate(generateArgs);
+            m.parse(parseArgs);
+            m.generate(generateArgs);
         } catch (Exception e) {
             assertThat(e.getMessage(), containsString("Unsupported WSDL. No part found for message: EchoStringSoapOut"));
         }
@@ -647,9 +656,10 @@ public class Wsdl2ApexTest {
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
 
+        Wsdl2Apex m = new Wsdl2Apex();
         try {
-            Wsdl2Apex.parse(parseArgs);
-            Wsdl2Apex.generate(generateArgs);
+            m.parse(parseArgs);
+            m.generate(generateArgs);
         } catch (Exception e) {
             assertThat(e.getMessage(), containsString("Unsupported WSDL. No part found for message: EchoStringSoapIn"));
         }
@@ -662,9 +672,10 @@ public class Wsdl2ApexTest {
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
 
+        Wsdl2Apex m = new Wsdl2Apex();
         try {
-            Wsdl2Apex.parse(parseArgs);
-            Wsdl2Apex.generate(generateArgs);
+            m.parse(parseArgs);
+            m.generate(generateArgs);
         } catch (Exception e) {
             assertThat(e.getMessage(), containsString("Unexpected element 'complexType'"));
         }
@@ -677,9 +688,10 @@ public class Wsdl2ApexTest {
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
 
+        Wsdl2Apex m = new Wsdl2Apex();
         try {
-            Wsdl2Apex.parse(parseArgs);
-            Wsdl2Apex.generate(generateArgs);
+            m.parse(parseArgs);
+            m.generate(generateArgs);
         } catch (Exception e) {
             assertThat(e.getMessage(), containsString("Unable to find binding in port DotNetInteropTestServiceSoap"));
         }
@@ -692,9 +704,10 @@ public class Wsdl2ApexTest {
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
 
+        Wsdl2Apex m = new Wsdl2Apex();
         try {
-            Wsdl2Apex.parse(parseArgs);
-            Wsdl2Apex.generate(generateArgs);
+            m.parse(parseArgs);
+            m.generate(generateArgs);
         } catch (Exception e) {
             assertThat(e.getMessage(), containsString("Element not defined for part"));
         }
@@ -707,9 +720,10 @@ public class Wsdl2ApexTest {
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
 
+        Wsdl2Apex m = new Wsdl2Apex();
         try {
-            Wsdl2Apex.parse(parseArgs);
-            Wsdl2Apex.generate(generateArgs);
+            m.parse(parseArgs);
+            m.generate(generateArgs);
         } catch (Exception e) {
             assertThat(e.getMessage(), containsString("No type specified for element anyType"));
         }
@@ -722,9 +736,10 @@ public class Wsdl2ApexTest {
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
 
+        Wsdl2Apex m = new Wsdl2Apex();
         try {
-            Wsdl2Apex.parse(parseArgs);
-            Wsdl2Apex.generate(generateArgs);
+            m.parse(parseArgs);
+            m.generate(generateArgs);
         } catch (Exception e) {
             assertThat(
                 e.getMessage(),
@@ -739,9 +754,10 @@ public class Wsdl2ApexTest {
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
 
+        Wsdl2Apex m = new Wsdl2Apex();
         try {
-            Wsdl2Apex.parse(parseArgs);
-            Wsdl2Apex.generate(generateArgs);
+            m.parse(parseArgs);
+            m.generate(generateArgs);
         } catch (Exception e) {
             assertThat(e.getMessage(), containsString("Unsupported WSDL style"));
         }
@@ -754,9 +770,10 @@ public class Wsdl2ApexTest {
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
 
+        Wsdl2Apex m = new Wsdl2Apex();
         try {
-            Wsdl2Apex.parse(parseArgs);
-            Wsdl2Apex.generate(generateArgs);
+            m.parse(parseArgs);
+            m.generate(generateArgs);
         } catch (Exception e) {
             assertThat(e.getMessage(),
                 containsString("Unable to find element for {urn:dotnet.callouttest.soap.sforce.com}EchoStringResponse"));
@@ -770,9 +787,10 @@ public class Wsdl2ApexTest {
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
 
+        Wsdl2Apex m = new Wsdl2Apex();
         try {
-            Wsdl2Apex.parse(parseArgs);
-            Wsdl2Apex.generate(generateArgs);
+            m.parse(parseArgs);
+            m.generate(generateArgs);
         } catch (Exception e) {
 
             assertThat(e.getMessage(),
@@ -787,9 +805,10 @@ public class Wsdl2ApexTest {
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
 
+        Wsdl2Apex m = new Wsdl2Apex();
         try {
-            Wsdl2Apex.parse(parseArgs);
-            Wsdl2Apex.generate(generateArgs);
+            m.parse(parseArgs);
+            m.generate(generateArgs);
         } catch (Exception e) {
             assertThat(e.getMessage(),
                 containsString("Unsupported schema type: {http://www.w3.org/2001/XMLSchema}gDay"));
@@ -805,7 +824,7 @@ public class Wsdl2ApexTest {
 
         Wsdl2Apex m = new Wsdl2Apex();
         try {
-            Wsdl2Apex.parse(parseArgs);
+            m.parse(parseArgs);
 
             HashMap<String, String> a = m.getResultFromParse();
             a.keySet().iterator();
@@ -815,7 +834,7 @@ public class Wsdl2ApexTest {
                 }
             }
 
-            Wsdl2Apex.generate(generateArgs);
+            m.generate(generateArgs);
             FileString f = new FileString();
 
             String result1 = f.getStringFromFile(directory.getPath() + "/" + "s3Amazon.cls");
@@ -840,7 +859,7 @@ public class Wsdl2ApexTest {
 
         Wsdl2Apex m = new Wsdl2Apex();
         try {
-            Wsdl2Apex.parse(parseArgs);
+            m.parse(parseArgs);
 
             HashMap<String, String> a = m.getResultFromParse();
             a.keySet().iterator();
@@ -850,7 +869,7 @@ public class Wsdl2ApexTest {
                 }
             }
 
-            Wsdl2Apex.generate(generateArgs);
+            m.generate(generateArgs);
             FileString f = new FileString();
 
             String result1 = f.getStringFromFile(directory.getPath() + "/" + "docSample.cls");
@@ -875,7 +894,7 @@ public class Wsdl2ApexTest {
 
         Wsdl2Apex m = new Wsdl2Apex();
         try {
-            Wsdl2Apex.parse(parseArgs);
+            m.parse(parseArgs);
 
             HashMap<String, String> a = m.getResultFromParse();
             a.keySet().iterator();
@@ -888,7 +907,7 @@ public class Wsdl2ApexTest {
                 }
             }
 
-            Wsdl2Apex.generate(generateArgs);
+            m.generate(generateArgs);
             FileString f = new FileString();
 
             String result1 = f.getStringFromFile(directory.getPath() + "/" + "strikeiron2.cls");
@@ -913,7 +932,7 @@ public class Wsdl2ApexTest {
 
         Wsdl2Apex m = new Wsdl2Apex();
         try {
-            Wsdl2Apex.parse(parseArgs);
+            m.parse(parseArgs);
 
             HashMap<String, String> a = m.getResultFromParse();
             a.keySet().iterator();
@@ -923,7 +942,7 @@ public class Wsdl2ApexTest {
                 }
             }
 
-            Wsdl2Apex.generate(generateArgs);
+            m.generate(generateArgs);
             FileString f = new FileString();
 
             String result1 = f.getStringFromFile(directory.getPath() + "/" + "bigFile.cls");
@@ -948,7 +967,7 @@ public class Wsdl2ApexTest {
 
         Wsdl2Apex m = new Wsdl2Apex();
         try {
-            Wsdl2Apex.parse(parseArgs);
+            m.parse(parseArgs);
 
             HashMap<String, String> a = m.getResultFromParse();
             a.keySet().iterator();
@@ -960,7 +979,7 @@ public class Wsdl2ApexTest {
                 }
             }
 
-            Wsdl2Apex.generate(generateArgs);
+            m.generate(generateArgs);
             FileString f = new FileString();
 
             String result1 = f.getStringFromFile(directory.getPath() + "/" + "first.cls");
@@ -988,7 +1007,7 @@ public class Wsdl2ApexTest {
 
         Wsdl2Apex m = new Wsdl2Apex();
         try {
-            Wsdl2Apex.parse(parseArgs);
+            m.parse(parseArgs);
 
             HashMap<String, String> a = m.getResultFromParse();
             a.keySet().iterator();
@@ -998,7 +1017,7 @@ public class Wsdl2ApexTest {
                 }
             }
 
-            Wsdl2Apex.generate(generateArgs);
+            m.generate(generateArgs);
             FileString f = new FileString();
 
             String result1 = f.getStringFromFile(directory.getPath() + "/" + "dSample.cls");
@@ -1023,7 +1042,7 @@ public class Wsdl2ApexTest {
 
         Wsdl2Apex m = new Wsdl2Apex();
         try {
-            Wsdl2Apex.parse(parseArgs);
+            m.parse(parseArgs);
 
             HashMap<String, String> a = m.getResultFromParse();
             a.keySet().iterator();
@@ -1035,7 +1054,7 @@ public class Wsdl2ApexTest {
                 }
             }
 
-            Wsdl2Apex.generate(generateArgs);
+            m.generate(generateArgs);
             FileString f = new FileString();
 
             String result1 = f.getStringFromFile(directory.getPath() + "/" + "sParnterSoap.cls");
@@ -1063,7 +1082,7 @@ public class Wsdl2ApexTest {
 
         Wsdl2Apex m = new Wsdl2Apex();
         try {
-            Wsdl2Apex.parse(parseArgs);
+            m.parse(parseArgs);
 
             HashMap<String, String> a = m.getResultFromParse();
             a.keySet().iterator();
@@ -1073,7 +1092,7 @@ public class Wsdl2ApexTest {
                 }
             }
 
-            Wsdl2Apex.generate(generateArgs);
+            m.generate(generateArgs);
             FileString f = new FileString();
 
             String result1 = f.getStringFromFile(directory.getPath() + "/" + "calloutSoap.cls");
@@ -1098,7 +1117,7 @@ public class Wsdl2ApexTest {
 
         Wsdl2Apex m = new Wsdl2Apex();
         try {
-            Wsdl2Apex.parse(parseArgs);
+            m.parse(parseArgs);
 
             HashMap<String, String> a = m.getResultFromParse();
             a.keySet().iterator();
@@ -1108,7 +1127,7 @@ public class Wsdl2ApexTest {
                 }
             }
 
-            Wsdl2Apex.generate(generateArgs);
+            m.generate(generateArgs);
             FileString f = new FileString();
 
             String result1 = f.getStringFromFile(directory.getPath() + "/" + "sqlMutations.cls");
@@ -1133,7 +1152,7 @@ public class Wsdl2ApexTest {
 
         Wsdl2Apex m = new Wsdl2Apex();
         try {
-            Wsdl2Apex.parse(parseArgs);
+            m.parse(parseArgs);
 
             HashMap<String, String> a = m.getResultFromParse();
             a.keySet().iterator();
@@ -1143,7 +1162,7 @@ public class Wsdl2ApexTest {
                 }
             }
 
-            Wsdl2Apex.generate(generateArgs);
+            m.generate(generateArgs);
             FileString f = new FileString();
 
             String result1 = f.getStringFromFile(directory.getPath() + "/" + "testNameMangle.cls");
