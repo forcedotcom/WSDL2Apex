@@ -41,7 +41,7 @@ public class Wsdl2Apex {
      */
     static {
         try {
-            f = new FileHandler("./target/error.log", false);
+            f = new FileHandler("error.log", false);
         } catch (SecurityException | IOException e) {
             e.printStackTrace();
         }
@@ -389,16 +389,13 @@ public class Wsdl2Apex {
         String filePath = args[0];
         Boolean async;
         String resultPath = null;
-        if (args.length == 2) {
-            async = Boolean.parseBoolean(args[1]);
-        } else if (args.length == 3) {
+        if (args.length == 3) {
             resultPath = args[1];
             async = Boolean.parseBoolean(args[2]);
         } else {
             LOGGER.log(
                 Level.SEVERE,
-                "Must either contain the following 2 arguements: path to the wsdl file and whether you want an asynchronous class "
-                        + "or the following 3 arguements: path to the wsdl file, path to where you want to save the file (with a slash at the end), and whether you want an asynchronous class");
+                "Must contain the following 3 arguements: path to the wsdl file, path to where you want to save the file (with a slash at the end), and whether you want an asynchronous class");
             throw new RuntimeException();
         }
 
@@ -411,9 +408,7 @@ public class Wsdl2Apex {
         }
         doParse();
         doGenerate(async);
-        if (args.length == 3) {
-            generateFiles(resultPath);
-        }
+        generateFiles(resultPath);
     }
 
     /**
