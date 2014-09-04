@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="0.728" errors="0" skipped="0" tests="48" name="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest">
+<testsuite failures="0" time="0.609" errors="0" skipped="0" tests="48" name="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-7-oracle/jre/lib/amd64"/>
@@ -26,7 +26,7 @@
     <property name="os.name" value="Linux"/>
     <property name="classworlds.conf" value="/usr/share/maven/bin/m2.conf"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
-    <property name="java.library.path" value="/usr/lib/nx/X11/Xinerama:/usr/lib/nx/X11:/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib"/>
+    <property name="java.library.path" value="/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.class.version" value="51.0"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
@@ -59,52 +59,52 @@
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase time="0.151" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testSimpleType"/>
-  <testcase time="0.031" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testAsyncFalse"/>
-  <testcase time="0.007" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testMissingSchemaForElement"/>
-  <testcase time="0.022" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testIncorrectBinding"/>
+  <testcase time="0.155" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testSimpleType"/>
+  <testcase time="0.028" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testAsyncFalse"/>
+  <testcase time="0.004" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testMissingSchemaForElement"/>
+  <testcase time="0.016" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testIncorrectBinding"/>
   <testcase time="0.026" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testNewClassNames"/>
-  <testcase time="0.004" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testNumberOfMessagePartsInput"/>
-  <testcase time="0.007" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testMissingService"/>
+  <testcase time="0.002" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testNumberOfMessagePartsInput"/>
+  <testcase time="0.005" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testMissingService"/>
   <testcase time="0.012" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testNoOperation"/>
-  <testcase time="0.024" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testExchange"/>
+  <testcase time="0.019" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testExchange"/>
   <testcase time="0.003" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testRPC"/>
-  <testcase time="0.005" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testUnsupportedSchemaType"/>
-  <testcase time="0.007" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testNoBindingInPort"/>
-  <testcase time="0.029" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testAmazonGood"/>
-  <testcase time="0.083" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testBigFile"/>
-  <testcase time="0.024" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testSomeTypesMissing"/>
-  <testcase time="0.009" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testNamespaceDependencies"/>
-  <testcase time="0.006" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testNoTypeForElement"/>
-  <testcase time="0.007" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testMissingTypes"/>
+  <testcase time="0.003" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testUnsupportedSchemaType"/>
+  <testcase time="0.005" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testNoBindingInPort"/>
+  <testcase time="0.026" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testAmazonGood"/>
+  <testcase time="0.065" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testBigFile"/>
+  <testcase time="0.018" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testSomeTypesMissing"/>
+  <testcase time="0.006" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testNamespaceDependencies"/>
+  <testcase time="0.004" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testNoTypeForElement"/>
+  <testcase time="0.005" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testMissingTypes"/>
   <testcase time="0.001" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testTextFileAsWsdl"/>
   <testcase time="0.002" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testNoMessagePartsInput"/>
   <testcase time="0.008" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testPortAndTypeWithSameName"/>
   <testcase time="0.004" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testUndefinedSchemaType"/>
-  <testcase time="0.003" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testNoMessagePartsOutput"/>
+  <testcase time="0.002" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testNoMessagePartsOutput"/>
   <testcase time="0.006" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testMissingBinding"/>
-  <testcase time="0.02" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testIncorrectXsdType"/>
-  <testcase time="0.004" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testDocSample"/>
-  <testcase time="0.005" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testTwoNamespaces"/>
-  <testcase time="0.011" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testMissingPort"/>
-  <testcase time="0.002" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testIncldues"/>
-  <testcase time="0.006" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testSqlMutations"/>
-  <testcase time="0.003" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testRpcWsdl"/>
-  <testcase time="0.02" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testMultiplePortType"/>
+  <testcase time="0.014" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testIncorrectXsdType"/>
+  <testcase time="0.003" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testDocSample"/>
+  <testcase time="0.003" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testTwoNamespaces"/>
+  <testcase time="0.007" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testMissingPort"/>
+  <testcase time="0.001" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testIncldues"/>
+  <testcase time="0.004" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testSqlMutations"/>
+  <testcase time="0.002" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testRpcWsdl"/>
+  <testcase time="0.013" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testMultiplePortType"/>
   <testcase time="0.003" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testNumberOfMessagePartsOutput"/>
-  <testcase time="0.018" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testMultipleNamespace"/>
-  <testcase time="0.004" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testTestNameMangle"/>
-  <testcase time="0.017" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testLargeFile"/>
-  <testcase time="0.002" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testImport"/>
-  <testcase time="0.009" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testMissingPortType"/>
-  <testcase time="0.002" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testMultipleBinding"/>
+  <testcase time="0.012" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testMultipleNamespace"/>
+  <testcase time="0.003" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testTestNameMangle"/>
+  <testcase time="0.012" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testLargeFile"/>
+  <testcase time="0.001" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testImport"/>
+  <testcase time="0.006" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testMissingPortType"/>
+  <testcase time="0.001" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testMultipleBinding"/>
   <testcase time="0.003" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testSimple"/>
-  <testcase time="0.004" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testSoapAddress"/>
-  <testcase time="0.018" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testNoElementInPort"/>
-  <testcase time="0.003" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testInvalidXml"/>
-  <testcase time="0.003" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testNestedComplexType"/>
-  <testcase time="0.009" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testMissingNamespace"/>
+  <testcase time="0.003" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testSoapAddress"/>
+  <testcase time="0.013" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testNoElementInPort"/>
+  <testcase time="0.002" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testInvalidXml"/>
+  <testcase time="0.002" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testNestedComplexType"/>
+  <testcase time="0.006" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testMissingNamespace"/>
   <testcase time="0.002" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testNoNameFault"/>
-  <testcase time="0.018" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testIncorrectMessageName"/>
-  <testcase time="0.004" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testNameElement"/>
+  <testcase time="0.012" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testIncorrectMessageName"/>
+  <testcase time="0.003" classname="com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest" name="testNameElement"/>
 </testsuite>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://in2test.lsi.uniovi.es/sqlmutationws" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" targetNamespace="http://in2test.lsi.uniovi.es/sqlmutationws" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://in2test.lsi.uniovi.es/sqlmutationws">
+      <s:element name="getMutants">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sql" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="schema" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="options" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getMutantsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getMutantsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getMutantsCompressed">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sql" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="schema" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="options" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getMutantsCompressedResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getMutantsCompressedResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="getMutantsSoapIn">
+    <wsdl:part name="parameters" element="tns:getMutants" />
+  </wsdl:message>
+  <wsdl:message name="getMutantsSoapOut">
+    <wsdl:part name="parameters" element="tns:getMutantsResponse" />
+  </wsdl:message>
+  <wsdl:message name="getMutantsCompressedSoapIn">
+    <wsdl:part name="parameters" element="tns:getMutantsCompressed" />
+  </wsdl:message>
+  <wsdl:message name="getMutantsCompressedSoapOut">
+    <wsdl:part name="parameters" element="tns:getMutantsCompressedResponse" />
+  </wsdl:message>
+  <wsdl:portType name="SQLMutationWSSoap">
+    <wsdl:operation name="getMutants">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Returns an XML string with the mutants of a given SQL query</documentation>
+      <wsdl:input message="tns:getMutantsSoapIn" />
+      <wsdl:output message="tns:getMutantsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getMutantsCompressed">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Returns an array of bytes with the ZIP compressed XML string with the mutants of a given SQL query</documentation>
+      <wsdl:input message="tns:getMutantsCompressedSoapIn" />
+      <wsdl:output message="tns:getMutantsCompressedSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SQLMutationWSSoap" type="tns:SQLMutationWSSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+    <wsdl:operation name="getMutants">
+      <soap:operation soapAction="http://in2test.lsi.uniovi.es/sqlmutationws/getMutants" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getMutantsCompressed">
+      <soap:operation soapAction="http://in2test.lsi.uniovi.es/sqlmutationws/getMutantsCompressed" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SQLMutationWS">
+    <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Generation of mutants for SQL database queries</documentation>
+    <wsdl:port name="SQLMutationWSSoap" binding="tns:SQLMutationWSSoap">
+      <soap:address location="http://in2test.lsi.uniovi.es/sqlmutationws/SQLMutationWS.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

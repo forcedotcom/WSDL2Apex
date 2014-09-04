@@ -1,0 +1,1225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:pln1="http://www.jetplan.com/jetplan/services/Plan" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://www.jetplan.com/jetplan/services/Plan" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+	<wsdl:types>
+		<s:schema elementFormDefault="qualified" targetNamespace="http://www.jetplan.com/jetplan/services/Plan">
+		<s:element name="computePlan">
+		<s:complexType>
+			<s:sequence>
+				<s:element name="request" type="pln1:PlanReq"/>
+			</s:sequence>
+		</s:complexType>
+
+	</s:element>
+	<s:element name="computePlanResponse">
+		<s:complexType>
+			<s:sequence>
+				<s:element name="plan" type="pln1:PlanResp" minOccurs="0"/>
+			</s:sequence>
+		</s:complexType>
+	</s:element>
+	<s:element name="reformatPlan">
+
+		<s:complexType>
+			<s:sequence>
+				<s:element name="request" type="pln1:ReformatReq"/>
+			</s:sequence>
+		</s:complexType>
+	</s:element>
+	<s:element name="reformatPlanResponse">
+		<s:complexType>
+			<s:sequence>
+
+				<s:element name="plan" type="pln1:ReformatResp"/>
+			</s:sequence>
+		</s:complexType>
+	</s:element>
+<s:complexType name="PlanReq">
+		<s:all>
+			<s:element name="jepp.use" type="s:string" nillable="true" minOccurs="0"/>
+			<s:element name="login" type="pln1:Login"/>
+			<s:element name="dep-time" type="s:int" default="-32767"/>
+
+			<s:element name="arv-time" type="pln1:ArvTimeList" nillable="true" minOccurs="0"/>
+			<s:element name="pod" type="pln1:Airport"/>
+			<s:element name="poa" type="pln1:Airport"/>
+			<s:element name="etps" type="pln1:ETPList" nillable="true" minOccurs="0"/>
+			<s:element name="etops" type="pln1:ETOPS" minOccurs="0"/>
+			<s:element name="wx" type="pln1:Wx" minOccurs="0"/>
+			<s:element name="reclear" type="pln1:Reclear" minOccurs="0"/>
+			<s:element name="scenario" type="pln1:Scenario" minOccurs="0"/>
+			<s:element name="airway-structure" type="pln1:AirwayStrType" default="HGH-ALT" minOccurs="0"/>
+
+			<s:element name="aircraft-override" type="pln1:AircraftOverride" minOccurs="0"/>
+			<s:element name="alternates" type="pln1:AlternateList" nillable="true" minOccurs="0"/>
+			<s:element name="rte-inp" type="s:string" nillable="true" minOccurs="0"/>
+			<s:element name="avoid" type="s:string" nillable="true" minOccurs="0"/>
+			<s:element name="aircraft" type="pln1:Aircraft"/>
+			<s:element name="hold-data" type="pln1:Hold" minOccurs="0"/>
+			<s:element name="profile" type="pln1:ProfileList" nillable="true" minOccurs="0"/>
+			<s:element name="cruise-modes" type="pln1:CruiseModes" minOccurs="0"/>
+			<s:element name="clb-sch" type="s:string" nillable="true" minOccurs="0"/>
+
+			<s:element name="dsc-sch" type="s:string" nillable="true" minOccurs="0"/>
+			<s:element name="bias" type="pln1:BiasList" nillable="true" minOccurs="0"/>
+			<s:element name="perf-index" type="pln1:PfIndex" minOccurs="0"/>
+			<s:element name="case-data" type="pln1:Case"/>
+			<s:element name="reserve-policy" type="pln1:Policy" minOccurs="0"/>
+			<s:element name="fuel-data" type="pln1:Fuels" minOccurs="0"/>
+			<s:element name="options" type="pln1:OptionRequests" nillable="true" minOccurs="0"/>
+			<s:element name="display-data" type="pln1:Display" minOccurs="0"/>
+			<s:element name="hld-ovd" type="s:int" default="-32767" minOccurs="0"/>
+
+			<s:element name="ci-override" type="pln1:CiOverride" minOccurs="0"/>
+			<s:element name="icao-rmks" type="s:string" nillable="true" minOccurs="0"/>
+			<s:element name="hold-temp-ai-bias" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="nwa-fuel-params" type="pln1:NWAFuelParams" minOccurs="0"/>
+			<s:element name="takeoff-alternate" type="pln1:Alternate" minOccurs="0"/>
+			<s:element name="driftdown-data" type="pln1:Driftdown" minOccurs="0"/>
+			<s:element name="etd-date" type="s:string" nillable="true" minOccurs="0"/>
+			<s:element name="flt-num" type="s:string" nillable="true" minOccurs="0"/>
+			<s:element name="call-sign" type="s:string" nillable="true" minOccurs="0"/>
+
+			<s:element name="followon-data" type="pln1:Followon" minOccurs="0"/>
+			<s:element name="mtn-wave" type="pln1:MtnWavType" default="NO-MTN-WAVE" minOccurs="0"/>
+			<s:element name="mel-data" type="pln1:MELData" minOccurs="0"/>
+			<s:element name="avd-chkpnt" type="pln1:AvdChkpntList" nillable="true" minOccurs="0"/>
+			<s:element name="avd-airway" type="pln1:AvdAirwayList" nillable="true" minOccurs="0"/>
+			<s:element name="partial-reserves" type="pln1:ResCkpt" minOccurs="0"/>
+			<s:element name="ra-overrides" type="pln1:raOverrides" minOccurs="0"/>
+			<s:element name="param-file-name" type="s:string" nillable="true" minOccurs="0"/>
+			<s:element name="requesters-use" type="s:string" nillable="true" minOccurs="0"/>
+
+		</s:all>
+	</s:complexType>
+	<s:simpleType name="YesNoType">
+		<s:restriction base="s:string">
+			<s:enumeration value="YES"/>
+			<s:enumeration value="NO"/>
+			<s:enumeration value="UNSET-YN"/>
+		</s:restriction>
+	</s:simpleType>
+
+	<s:simpleType name="SpeedType">
+		<s:restriction base="s:string">
+			<s:enumeration value="TAS"/>
+			<s:enumeration value="CAS"/>
+			<s:enumeration value="MACH"/>
+			<s:enumeration value="UNSET-SPEED"/>
+		</s:restriction>
+	</s:simpleType>
+	<s:simpleType name="MELCDLType">
+
+		<s:restriction base="s:string">
+			<s:enumeration value="MEL-MELCDL-TYPE"/>
+			<s:enumeration value="CDL-MELCDL-TYPE"/>
+			<s:enumeration value="DMI-MELCDL-TYPE"/>
+			<s:enumeration value="PDL-MELCDL-TYPE"/>
+			<s:enumeration value="SEL-MELCDL-TYPE"/>
+			<s:enumeration value="UNSET-MELCDL-TYPE"/>
+		</s:restriction>
+	</s:simpleType>
+
+	<s:simpleType name="MELOperationType">
+		<s:restriction base="s:string">
+			<s:enumeration value="ADD-OPERATION"/>
+			<s:enumeration value="OVERRIDE-OPERATION"/>
+			<s:enumeration value="UNSET-OPERATION"/>
+		</s:restriction>
+	</s:simpleType>
+	<s:simpleType name="MtnWavType">
+		<s:restriction base="s:string">
+
+			<s:enumeration value="NO-MTN-WAVE"/>
+			<s:enumeration value="NO-ALT-RESTRICTION-MTN-WAVE"/>
+			<s:enumeration value="FULL-MTN-WAVE"/>
+		</s:restriction>
+	</s:simpleType>
+	<s:simpleType name="AirwayStrType">
+		<s:restriction base="s:string">
+			<s:enumeration value="HGH-ALT"/>
+			<s:enumeration value="MID-ALT"/>
+
+			<s:enumeration value="LOW-ALT"/>
+		</s:restriction>
+	</s:simpleType>
+	<s:simpleType name="DDRuleType">
+		<s:restriction base="s:string">
+			<s:enumeration value="AI-ON-DD-RULE"/>
+			<s:enumeration value="AI-OFF-DD-RULE"/>
+			<s:enumeration value="TC-AI-ON-DD-RULE"/>
+			<s:enumeration value="TC-AI-OFF-DD-RULE"/>
+
+			<s:enumeration value="UNSET-DD-RULE"/>
+		</s:restriction>
+	</s:simpleType>
+	<s:simpleType name="FuelAmountType">
+		<s:restriction base="s:string">
+			<s:enumeration value="TOTAL-LBS-FUEL"/>
+			<s:enumeration value="INCREMENT-FUEL"/>
+			<s:enumeration value="TOTAL-MINUTES-FUEL"/>
+			<s:enumeration value="INCREMENT-MINUTES-FUEL"/>
+
+			<s:enumeration value="PERCENT-FUEL"/>
+			<s:enumeration value="LOAD-PERMIT-FUEL"/>
+			<s:enumeration value="NON-LOAD-PERMIT-FUEL"/>
+			<s:enumeration value="UNSET-FUEL"/>
+		</s:restriction>
+	</s:simpleType>
+	<s:simpleType name="FuelFlagType">
+		<s:restriction base="s:string">
+			<s:enumeration value="DISCRETIONARY"/>
+
+			<s:enumeration value="MANDATORY"/>
+			<s:enumeration value="UNSET-FUEL-FLAG"/>
+		</s:restriction>
+	</s:simpleType>
+	<s:simpleType name="TankTempEnumType">
+		<s:restriction base="s:string">
+			<s:enumeration value="ALERT-TANK"/>
+			<s:enumeration value="AVOID-TANK"/>
+			<s:enumeration value="UNSET-TANK"/>
+
+		</s:restriction>
+	</s:simpleType>
+	<s:simpleType name="FuelUnitType">
+		<s:restriction base="s:string">
+			<s:enumeration value="GALLONS-FUEL"/>
+			<s:enumeration value="LITER-FUEL"/>
+			<s:enumeration value="UNSET-FUEL-UNIT"/>
+		</s:restriction>
+	</s:simpleType>
+
+	<s:simpleType name="AirportType">
+		<s:restriction base="s:string">
+			<s:enumeration value="PUBLISHED"/>
+			<s:enumeration value="UNPUBLISHED"/>
+			<s:enumeration value="ICAO"/>
+		</s:restriction>
+	</s:simpleType>
+	<s:simpleType name="FuelPriceIndType">
+		<s:restriction base="s:string">
+
+			<s:enumeration value="BONDED-FUEL-PRICE"/>
+			<s:enumeration value="NONBONDED-FUEL-PRICE"/>
+			<s:enumeration value="UNSET-FP-INDICATOR"/>
+		</s:restriction>
+	</s:simpleType>
+	<s:simpleType name="AltAirportType">
+		<s:restriction base="s:string">
+			<s:enumeration value="DEFAULT"/>
+			<s:enumeration value="SPECIFIED-DISTANCE"/>
+
+			<s:enumeration value="GREAT-CIRCLE"/>
+			<s:enumeration value="CRDB"/>
+			<s:enumeration value="JAROPS-ENROUTE"/>
+			<s:enumeration value="EXEMPTION"/>
+			<s:enumeration value="UNSET-ALTAP"/>
+		</s:restriction>
+	</s:simpleType>
+	<s:simpleType name="ReqArrTimeType">
+		<s:restriction base="s:string">
+
+			<s:enumeration value="RAT-CI"/>
+			<s:enumeration value="RAT-DEPTIM"/>
+			<s:enumeration value="RAT-UNSET"/>
+		</s:restriction>
+	</s:simpleType>
+	<s:simpleType name="BiasType">
+		<s:restriction base="s:string">
+			<s:enumeration value="DEP-DIS"/>
+			<s:enumeration value="DEP-FUEL"/>
+
+			<s:enumeration value="DEP-TIME"/>
+			<s:enumeration value="ARV-DIS"/>
+			<s:enumeration value="ARV-FUEL"/>
+			<s:enumeration value="ARV-TIME"/>
+			<s:enumeration value="CLB-DIS"/>
+			<s:enumeration value="CLB-FUEL"/>
+			<s:enumeration value="CLB-TIME"/>
+			<s:enumeration value="DSC-DIS"/>
+			<s:enumeration value="DSC-FUEL"/>
+
+			<s:enumeration value="DSC-TIME"/>
+			<s:enumeration value="CRZ-FUEL"/>
+			<s:enumeration value="CRZ-TAS"/>
+			<s:enumeration value="CRZ-TIME"/>
+			<s:enumeration value="MEL"/>
+			<s:enumeration value="MEL-ADHOC-FUEL"/>
+			<s:enumeration value="MEL-FUEL-FLOW"/>
+			<s:enumeration value="ALT-DIS"/>
+			<s:enumeration value="ALT-FUEL"/>
+
+			<s:enumeration value="ALT-TIME"/>
+			<s:enumeration value="UNSET-BIAS"/>
+		</s:restriction>
+	</s:simpleType>
+	<s:simpleType name="AntiiceType">
+		<s:restriction base="s:string">
+			<s:enumeration value="ANTIICE-ON"/>
+			<s:enumeration value="ANTIICE-OFF"/>
+			<s:enumeration value="ANTIICE-ONE-THIRD-PENALTY"/>
+
+			<s:enumeration value="ANTIICE-TWO-THIRD-PENALTY"/>
+			<s:enumeration value="ANTIICE-UNSET"/>
+		</s:restriction>
+	</s:simpleType>
+	<s:simpleType name="etopAddDAType">
+		<s:restriction base="s:string">
+			<s:enumeration value="YES-ADD"/>
+			<s:enumeration value="NO-ADD"/>
+			<s:enumeration value="OKAY-ADD"/>
+
+			<s:enumeration value="UNSET-YNO"/>
+		</s:restriction>
+	</s:simpleType>
+	<s:simpleType name="ReclearType">
+		<s:restriction base="s:string">
+			<s:enumeration value="RECLEAR-STANDARD"/>
+			<s:enumeration value="RECLEAR-COMPRESSION"/>
+			<s:enumeration value="RECLEAR-UNSET"/>
+		</s:restriction>
+
+	</s:simpleType>
+	<s:simpleType name="RclReserveType">
+		<s:restriction base="s:string">
+			<s:enumeration value="ISLAND-RCL-RESERVE"/>
+			<s:enumeration value="DOMESTIC-RCL-RESERVE"/>
+			<s:enumeration value="UNSET-RCL-RESERVE"/>
+		</s:restriction>
+	</s:simpleType>
+	<s:simpleType name="PolReserveType">
+
+		<s:restriction base="s:string">
+			<s:enumeration value="NO-RESERVES"/>
+			<s:enumeration value="DOMESTIC-RESERVES"/>
+			<s:enumeration value="ISLAND-RESERVES"/>
+			<s:enumeration value="INTERNATIONAL-RESERVES"/>
+			<s:enumeration value="B43-INTERNATIONAL-RESERVES"/>
+			<s:enumeration value="UNSET-RESERVES"/>
+		</s:restriction>
+	</s:simpleType>
+
+	<s:simpleType name="ProfileChangeType">
+		<s:restriction base="s:string">
+			<s:enumeration value="CHANGE-AFTER-CKPT"/>
+			<s:enumeration value="CHANGE-BEFORE-CKPT"/>
+			<s:enumeration value="OPTIMIZE-TO-CKPT"/>
+			<s:enumeration value="TRANSITION-CKPT"/>
+			<s:enumeration value="PROFILE-CHANGE-UNSET"/>
+		</s:restriction>
+	</s:simpleType>
+
+	<s:simpleType name="ProfileTransitionType">
+		<s:restriction base="s:string">
+			<s:enumeration value="CHANGE-TO-VFR"/>
+			<s:enumeration value="CHANGE-TO-IFR"/>
+			<s:enumeration value="NO-IFR-VFR-CHANGE"/>
+		</s:restriction>
+	</s:simpleType>
+	<s:simpleType name="ScenarioType">
+		<s:restriction base="s:string">
+
+			<s:enumeration value="SCN-DEFAULT-ANALYSIS"/>
+			<s:enumeration value="SCN-CONSIDER-ENROUTE-CHARGES"/>
+			<s:enumeration value="SCN-OUTPUT-ENROUTE-CHARGES"/>
+			<s:enumeration value="SCN-UNSET"/>
+		</s:restriction>
+	</s:simpleType>
+	<s:simpleType name="RankingType">
+		<s:restriction base="s:string">
+			<s:enumeration value="FUEL-RANKING"/>
+
+			<s:enumeration value="TIME-RANKING"/>
+			<s:enumeration value="COST-RANKING"/>
+			<s:enumeration value="UNSET-RANKING"/>
+		</s:restriction>
+	</s:simpleType>
+	<s:simpleType name="SummaryType">
+		<s:restriction base="s:string">
+			<s:enumeration value="COST-INDEX-SUMMARY"/>
+			<s:enumeration value="ROUTE-SUMMARY"/>
+
+			<s:enumeration value="DONT-USE-SCN-ISD"/>
+			<s:enumeration value="UNSET-SUMMARY"/>
+		</s:restriction>
+	</s:simpleType>
+	<s:simpleType name="WxType">
+		<s:restriction base="s:string">
+			<s:enumeration value="ADF-WX"/>
+			<s:enumeration value="HISTORICAL-WX"/>
+			<s:enumeration value="GRIB-NWS-WX"/>
+
+			<s:enumeration value="GRIB-UKO-WX"/>
+			<s:enumeration value="STATIC-WX"/>
+			<s:enumeration value="WIND-STATISTICS"/>
+			<s:enumeration value="DEFAULT-WX"/>
+			<s:enumeration value="RUC-NWS-WX"/>
+		</s:restriction>
+	</s:simpleType>
+	<s:simpleType name="WeightUnitsType">
+		<s:restriction base="s:string">
+
+			<s:enumeration value="WEIGHT-IN-KGS"/>
+			<s:enumeration value="WEIGHT-IN-LBS"/>
+			<s:enumeration value="WEIGHT-UNITS-UNSET"/>
+		</s:restriction>
+	</s:simpleType>
+	<s:simpleType name="DistUnitsType">
+		<s:restriction base="s:string">
+			<s:enumeration value="DISTANCE-IN-KM"/>
+			<s:enumeration value="DISTANCE-IN-NM"/>
+
+			<s:enumeration value="DISTANCE-UNITS-UNSET"/>
+		</s:restriction>
+	</s:simpleType>
+	<s:simpleType name="OptimizeType">
+		<s:restriction base="s:string">
+			<s:enumeration value="FUEL-OPTIMIZE"/>
+			<s:enumeration value="TIME-OPTIMIZE"/>
+			<s:enumeration value="COST-OPTIMIZE"/>
+			<s:enumeration value="UNSET-OPTIMIZE"/>
+
+		</s:restriction>
+	</s:simpleType>
+	<s:simpleType name="CaseType">
+		<s:restriction base="s:string">
+			<s:enumeration value="ARRIVAL-FUEL-CASE"/>
+			<s:enumeration value="ARRIVAL-WEIGHT-CASE"/>
+			<s:enumeration value="DEPARTURE-FUEL-CASE"/>
+			<s:enumeration value="DEPARTURE-WEIGHT-CASE"/>
+			<s:enumeration value="UNSET-CASE"/>
+
+		</s:restriction>
+	</s:simpleType>
+	<s:simpleType name="UnknownPayloadOptionType">
+		<s:restriction base="s:string">
+			<s:enumeration value="MAX-ZFW"/>
+			<s:enumeration value="MAX-PLD"/>
+			<s:enumeration value="MAX-PLD-ZFW-WT-CASE"/>
+			<s:enumeration value="UNSET-UNKNOWN-PAYLOAD-OPTION"/>
+		</s:restriction>
+
+	</s:simpleType>
+	<s:simpleType name="DDMethodType">
+		<s:restriction base="s:string">
+			<s:enumeration value="NO-DD"/>
+			<s:enumeration value="OVERWATER-DD"/>
+			<s:enumeration value="TERRAIN-DD"/>
+			<s:enumeration value="BOTH-DD"/>
+			<s:enumeration value="UNSET-DD-METHOD"/>
+		</s:restriction>
+
+	</s:simpleType>
+	<s:simpleType name="AvoidLevelType">
+		<s:restriction base="s:string">
+			<s:enumeration value="AL-AVOID"/>
+			<s:enumeration value="AL-NOTIFY"/>
+			<s:enumeration value="AL-IGNORE"/>
+			<s:enumeration value="AL-UNSET"/>
+		</s:restriction>
+	</s:simpleType>
+
+	<s:simpleType name="PlanOutputType">
+		<s:restriction base="s:string">
+			<s:enumeration value="UNKNOWN-PLAN-TYPE"/>
+			<s:enumeration value="STANDARD"/>
+			<s:enumeration value="PLAN-TO-RECLEAR-APT"/>
+			<s:enumeration value="RECLEAR-REDUCED-RESERVES"/>
+			<s:enumeration value="RECLEAR-COMPRESSION-OUTPUT"/>
+		</s:restriction>
+	</s:simpleType>
+
+	<s:simpleType name="PlanResultsType">
+		<s:restriction base="s:string">
+			<s:enumeration value="PLAN-SUCCESS"/>
+			<s:enumeration value="PLAN-ERROR"/>
+		</s:restriction>
+	</s:simpleType>
+	<s:complexType name="MELSpeedTypeValue">
+		<s:all>
+			<s:element name="speed" type="s:float" default="-32767.000000"/>
+
+			<s:element name="type" type="pln1:SpeedType" default="UNSET-SPEED"/>
+		</s:all>
+	</s:complexType>
+	<s:complexType name="MELAltSpeedLimit">
+		<s:all>
+			<s:element name="altitude" type="s:int" default="-32767"/>
+			<s:element name="value" type="pln1:MELSpeedTypeValue"/>
+		</s:all>
+	</s:complexType>
+
+	<s:complexType name="MELAltSpeedList">
+		<s:sequence>
+			<s:element name="item" type="pln1:MELAltSpeedLimit" nillable="true" minOccurs="0" maxOccurs="10"/>
+		</s:sequence>
+	</s:complexType>
+	<s:complexType name="MEL">
+		<s:all>
+			<s:element name="fuel-flow-bias" type="s:float" default="-32767.000000" minOccurs="0"/>
+			<s:element name="tas-bias" type="s:float" default="-32767.000000" minOccurs="0"/>
+
+			<s:element name="max-fltlvl" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="max-speed-type-value" type="pln1:MELSpeedTypeValue" minOccurs="0"/>
+			<s:element name="max-tow" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="max-land-wt" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="max-fuel" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="max-zfw" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="ballast" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="max-etops-time" type="s:short" default="-32767" minOccurs="0"/>
+			<s:element name="ow-restriction" type="pln1:YesNoType" default="UNSET-YN" minOccurs="0"/>
+
+			<s:element name="rvsm-restriction" type="pln1:YesNoType" default="UNSET-YN" minOccurs="0"/>
+			<s:element name="mnps-restriction" type="pln1:YesNoType" default="UNSET-YN" minOccurs="0"/>
+			<s:element name="rnp-restriction" type="pln1:YesNoType" default="UNSET-YN" minOccurs="0"/>
+			<s:element name="max-flight-time" type="s:short" default="-32767" minOccurs="0"/>
+			<s:element name="fuel-dump-restriction" type="pln1:YesNoType" default="UNSET-YN" minOccurs="0"/>
+			<s:element name="climb-penalty-weight" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="climb-penalty-percent" type="s:float" default="-32767.000000" minOccurs="0"/>
+			<s:element name="alt-speed-limit" type="pln1:MELAltSpeedList" nillable="true" minOccurs="0"/>
+			<s:element name="description" type="s:string" nillable="true" minOccurs="0"/>
+
+			<s:element name="degradation-description" type="s:string" nillable="true" minOccurs="0"/>
+		</s:all>
+	</s:complexType>
+	<s:complexType name="MEL-Overrides">
+		<s:all>
+			<s:element name="ataCode" type="s:string" nillable="true"/>
+			<s:element name="melCDLtype" type="pln1:MELCDLType" default="MEL-MELCDL-TYPE"/>
+			<s:element name="operation" type="pln1:MELOperationType" default="UNSET-OPERATION"/>
+			<s:element name="tracking-id" type="s:string" nillable="true" minOccurs="0"/>
+
+			<s:element name="location-code" type="s:string" nillable="true" minOccurs="0"/>
+			<s:element name="mel-multiplier" type="s:int" default="1" minOccurs="0"/>
+		</s:all>
+	</s:complexType>
+	<s:complexType name="MELOverrideList">
+		<s:sequence>
+			<s:element name="item" type="pln1:MEL-Overrides" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+		</s:sequence>
+	</s:complexType>
+
+	<s:complexType name="FollowonLeg">
+		<s:all>
+			<s:element name="nl-dep-time" type="s:string" nillable="true"/>
+			<s:element name="nl-arr-st" type="s:string" nillable="true"/>
+			<s:element name="nl-arr-time" type="s:string" nillable="true"/>
+		</s:all>
+	</s:complexType>
+	<s:complexType name="AirportList">
+		<s:sequence>
+
+			<s:element name="item" type="s:string" nillable="true" minOccurs="0" maxOccurs="25"/>
+		</s:sequence>
+	</s:complexType>
+	<s:complexType name="TerrainDd">
+		<s:all>
+			<s:element name="rule1" type="pln1:DDRuleType" default="UNSET-DD-RULE" minOccurs="0"/>
+			<s:element name="rule2" type="pln1:DDRuleType" default="UNSET-DD-RULE" minOccurs="0"/>
+			<s:element name="rule3" type="pln1:DDRuleType" default="UNSET-DD-RULE" minOccurs="0"/>
+			<s:element name="rule4" type="pln1:DDRuleType" default="UNSET-DD-RULE" minOccurs="0"/>
+
+			<s:element name="max-divert-bases" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="max-search-dist" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="isa-pad" type="s:int" default="0" minOccurs="0"/>
+			<s:element name="wind-pad" type="s:int" default="0" minOccurs="0"/>
+			<s:element name="short-search" type="s:boolean" default="0" minOccurs="0"/>
+			<s:element name="wx-time-window" type="s:int" default="0" minOccurs="0"/>
+			<s:element name="abbrv-report" type="s:boolean" default="0" minOccurs="0"/>
+			<s:element name="qualify-climb" type="s:boolean" default="0" minOccurs="0"/>
+			<s:element name="landings-limiting" type="s:boolean" default="0" minOccurs="0"/>
+
+			<s:element name="fuel-rsrv-time" type="s:int" default="0" minOccurs="0"/>
+			<s:element name="fuel-rsrv-lbs" type="s:int" default="0" minOccurs="0"/>
+			<s:element name="all-alts-valid" type="s:boolean" default="0" minOccurs="0"/>
+			<s:element name="three-fl-on" type="s:boolean" default="0" minOccurs="0"/>
+			<s:element name="delete-summary" type="s:boolean" default="1" minOccurs="0"/>
+			<s:element name="disqualified-alts" type="pln1:AirportList" nillable="true" minOccurs="0"/>
+			<s:element name="fuel-check-flag" type="s:int" default="0" minOccurs="0"/>
+			<s:element name="dd-fuel-check" type="s:int" default="0" minOccurs="0"/>
+		</s:all>
+
+	</s:complexType>
+	<s:complexType name="Fuel">
+		<s:all>
+			<s:element name="type" type="pln1:FuelAmountType" default="UNSET-FUEL"/>
+			<s:element name="amount" type="s:int" default="-32767"/>
+		</s:all>
+	</s:complexType>
+	<s:complexType name="FuelMsg">
+		<s:all>
+
+			<s:element name="fuel" type="pln1:Fuel"/>
+			<s:element name="description" type="s:string" nillable="true" minOccurs="0"/>
+		</s:all>
+	</s:complexType>
+	<s:complexType name="FuelFlg">
+		<s:all>
+			<s:element name="fuel" type="pln1:Fuel" minOccurs="0"/>
+			<s:element name="description" type="s:string" default="TANKER" nillable="true" minOccurs="0"/>
+			<s:element name="flag" type="pln1:FuelFlagType" default="UNSET-FUEL-FLAG"/>
+
+		</s:all>
+	</s:complexType>
+	<s:complexType name="TankTemp">
+		<s:all>
+			<s:element name="time-limit" type="s:int" default="-32767"/>
+			<s:element name="flag" type="pln1:TankTempEnumType" default="UNSET-TANK"/>
+		</s:all>
+	</s:complexType>
+	<s:complexType name="FuelCost">
+
+		<s:all>
+			<s:element name="price" type="s:string" nillable="true"/>
+			<s:element name="units" type="pln1:FuelUnitType" default="UNSET-FUEL-UNIT"/>
+			<s:element name="currency" type="s:string" nillable="true"/>
+		</s:all>
+	</s:complexType>
+	<s:complexType name="Airport">
+		<s:all>
+			<s:element name="airport-type" type="pln1:AirportType" default="PUBLISHED" minOccurs="0"/>
+
+			<s:element name="arptid" type="s:string" nillable="true"/>
+			<s:element name="lat" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="lon" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="elev" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="taxi-time" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="out-in" type="s:string" nillable="true" minOccurs="0"/>
+			<s:element name="off-on" type="s:string" nillable="true" minOccurs="0"/>
+			<s:element name="taxi-fuel" type="pln1:Fuel" minOccurs="0"/>
+			<s:element name="fuel-cost" type="pln1:FuelCost" minOccurs="0"/>
+
+			<s:element name="fuel-indicator" type="pln1:FuelPriceIndType" default="UNSET-FP-INDICATOR" minOccurs="0"/>
+			<s:element name="pod-country" type="s:string" nillable="true" minOccurs="0"/>
+			<s:element name="pod-waypoint" type="s:string" nillable="true" minOccurs="0"/>
+			<s:element name="scheduled-time" type="s:int" default="-32767" minOccurs="0"/>
+		</s:all>
+	</s:complexType>
+	<s:complexType name="Alternate">
+		<s:all>
+			<s:element name="type" type="pln1:AltAirportType" default="UNSET-ALTAP"/>
+
+			<s:element name="arptid" type="s:string" nillable="true"/>
+			<s:element name="dist" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="crdb-name" type="s:string" nillable="true" minOccurs="0"/>
+			<s:element name="alt-fuel" type="s:short" default="-32767" minOccurs="0"/>
+			<s:element name="burn" type="pln1:Fuel" minOccurs="0"/>
+			<s:element name="altitude-override" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="min-flv" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="max-flv" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="to-alt-plan-num" type="s:int" default="-32767" minOccurs="0"/>
+
+		</s:all>
+	</s:complexType>
+	<s:complexType name="AlternateList">
+		<s:sequence>
+			<s:element name="item" type="pln1:Alternate" nillable="true" minOccurs="0" maxOccurs="6"/>
+		</s:sequence>
+	</s:complexType>
+	<s:complexType name="ArvTime">
+		<s:all>
+
+			<s:element name="req-arr-time-type" type="pln1:ReqArrTimeType" default="RAT-UNSET"/>
+			<s:element name="point" type="s:string" nillable="true"/>
+			<s:element name="time" type="s:int" default="-32767"/>
+		</s:all>
+	</s:complexType>
+	<s:complexType name="ArvTimeList">
+		<s:sequence>
+			<s:element name="item" type="pln1:ArvTime" nillable="true" minOccurs="0" maxOccurs="5"/>
+		</s:sequence>
+
+	</s:complexType>
+	<s:complexType name="Bias">
+		<s:all>
+			<s:element name="type" type="pln1:BiasType" default="UNSET-BIAS"/>
+			<s:element name="crznam" type="s:string" nillable="true" minOccurs="0"/>
+			<s:element name="value" type="s:string" nillable="true"/>
+		</s:all>
+	</s:complexType>
+	<s:complexType name="BiasList">
+
+		<s:sequence>
+			<s:element name="item" type="pln1:Bias" nillable="true" minOccurs="0" maxOccurs="12"/>
+		</s:sequence>
+	</s:complexType>
+	<s:complexType name="ETP">
+		<s:all>
+			<s:element name="apt-bak" type="s:string" nillable="true"/>
+			<s:element name="apt-fwd" type="s:string" nillable="true"/>
+			<s:element name="anti-ice-enroute-bak" type="pln1:AntiiceType" default="ANTIICE-UNSET" minOccurs="0"/>
+
+			<s:element name="anti-ice-terminal-bak" type="pln1:AntiiceType" default="ANTIICE-UNSET" minOccurs="0"/>
+			<s:element name="minalt-bak" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="anti-ice-enroute-fwd" type="pln1:AntiiceType" default="ANTIICE-UNSET" minOccurs="0"/>
+			<s:element name="anti-ice-terminal-fwd" type="pln1:AntiiceType" default="ANTIICE-UNSET" minOccurs="0"/>
+			<s:element name="minalt-fwd" type="s:int" default="-32767" minOccurs="0"/>
+		</s:all>
+	</s:complexType>
+	<s:complexType name="ETPList">
+		<s:sequence>
+
+			<s:element name="item" type="pln1:ETP" nillable="true" minOccurs="0" maxOccurs="12"/>
+		</s:sequence>
+	</s:complexType>
+	<s:complexType name="icingPct">
+		<s:all>
+			<s:element name="pct-bak" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="pct-fwd" type="s:int" default="-32767" minOccurs="0"/>
+		</s:all>
+	</s:complexType>
+
+	<s:complexType name="icingPctList">
+		<s:sequence>
+			<s:element name="item" type="pln1:icingPct" nillable="true" minOccurs="0" maxOccurs="12"/>
+		</s:sequence>
+	</s:complexType>
+	<s:complexType name="adhocCoverList">
+		<s:sequence>
+			<s:element name="item" type="s:string" nillable="true" minOccurs="0" maxOccurs="20"/>
+		</s:sequence>
+
+	</s:complexType>
+	<s:complexType name="exclusionsList">
+		<s:sequence>
+			<s:element name="item" type="s:string" nillable="true" minOccurs="0" maxOccurs="20"/>
+		</s:sequence>
+	</s:complexType>
+	<s:complexType name="ETOPS">
+		<s:all>
+			<s:element name="apprv-time" type="s:int" default="-32767" minOccurs="0"/>
+
+			<s:element name="cfs-fuel-pad" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="etop-uplift-fuel-flag" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="ice-drag-prop" type="s:string" nillable="true" minOccurs="0"/>
+			<s:element name="scm-setName" type="s:string" nillable="true" minOccurs="0"/>
+			<s:element name="scm-dvrTime" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="etop-add-pod-poa" type="pln1:etopAddDAType" default="UNSET-YNO" minOccurs="0"/>
+			<s:element name="adhoc-cover" type="pln1:adhocCoverList" nillable="true" minOccurs="0"/>
+			<s:element name="exclusions" type="pln1:exclusionsList" nillable="true" minOccurs="0"/>
+			<s:element name="etp-icing-pct" type="pln1:icingPctList" nillable="true" minOccurs="0"/>
+
+		</s:all>
+	</s:complexType>
+	<s:complexType name="Cruise">
+		<s:all>
+			<s:element name="crznam" type="s:string" nillable="true"/>
+			<s:element name="chkpnt" type="s:string" nillable="true"/>
+		</s:all>
+	</s:complexType>
+	<s:complexType name="CruiseList">
+
+		<s:sequence>
+			<s:element name="item" type="pln1:Cruise" nillable="true" maxOccurs="3"/>
+		</s:sequence>
+	</s:complexType>
+	<s:complexType name="CruiseModes">
+		<s:all>
+			<s:element name="cruise-to-poa" type="s:string" nillable="true" minOccurs="0"/>
+			<s:element name="cruise" type="pln1:CruiseList" nillable="true" minOccurs="0"/>
+			<s:element name="aux-crz" type="s:string" nillable="true" minOccurs="0"/>
+
+		</s:all>
+	</s:complexType>
+	<s:complexType name="Orbit">
+		<s:all>
+			<s:element name="chkpnt" type="s:string" nillable="true"/>
+			<s:element name="fltlvl" type="s:int" default="-32767"/>
+			<s:element name="crznam" type="s:string" nillable="true"/>
+			<s:element name="time" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="fuel-amount" type="s:int" default="-32767" minOccurs="0"/>
+
+		</s:all>
+	</s:complexType>
+	<s:complexType name="Refuel">
+		<s:all>
+			<s:element name="chkpnt" type="s:string" nillable="true"/>
+			<s:element name="fuel" type="s:int" default="-32767"/>
+			<s:element name="hold-time" type="s:int" default="-32767" minOccurs="0"/>
+		</s:all>
+	</s:complexType>
+
+	<s:complexType name="Reclear">
+		<s:all>
+			<s:element name="type" type="pln1:ReclearType" default="RECLEAR-UNSET"/>
+			<s:element name="point" type="s:string" nillable="true"/>
+			<s:element name="poa" type="s:string" nillable="true"/>
+			<s:element name="alternate" type="pln1:Alternate" minOccurs="0"/>
+			<s:element name="hold" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="reserve-type" type="pln1:RclReserveType" default="UNSET-RCL-RESERVE" minOccurs="0"/>
+			<s:element name="reserve" type="s:int" default="-32767" minOccurs="0"/>
+
+			<s:element name="route" type="s:string" nillable="true" minOccurs="0"/>
+			<s:element name="min-alt" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="max-alt" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="max-land-wt" type="s:int" default="-32767" minOccurs="0"/>
+		</s:all>
+	</s:complexType>
+	<s:complexType name="Policy">
+		<s:all>
+			<s:element name="type" type="pln1:PolReserveType" default="NO-RESERVES"/>
+
+			<s:element name="time" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="policy" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="mcht" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="mcct" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="percent" type="s:int" default="-32767" minOccurs="0"/>
+		</s:all>
+	</s:complexType>
+	<s:complexType name="Profile">
+		<s:all>
+
+			<s:element name="chkpnt" type="s:string" nillable="true" minOccurs="0"/>
+			<s:element name="min-flv" type="s:short" default="-32767" minOccurs="0"/>
+			<s:element name="max-flv" type="s:short" default="-32767" minOccurs="0"/>
+			<s:element name="change" type="pln1:ProfileChangeType" default="CHANGE-AFTER-CKPT"/>
+			<s:element name="flight-rule-change" type="pln1:ProfileTransitionType" default="NO-IFR-VFR-CHANGE" minOccurs="0"/>
+		</s:all>
+	</s:complexType>
+	<s:complexType name="ProfileList">
+		<s:sequence>
+
+			<s:element name="item" type="pln1:Profile" nillable="true" minOccurs="0" maxOccurs="30"/>
+		</s:sequence>
+	</s:complexType>
+	<s:complexType name="MbarAltList">
+		<s:sequence>
+			<s:element name="item" type="s:int" nillable="true" minOccurs="0" maxOccurs="9"/>
+		</s:sequence>
+	</s:complexType>
+	<s:complexType name="Scenario">
+
+		<s:all>
+			<s:element name="type" type="pln1:ScenarioType" default="SCN-UNSET"/>
+			<s:element name="ranking" type="pln1:RankingType"/>
+			<s:element name="mbar-alt" type="pln1:MbarAltList" nillable="true" minOccurs="0"/>
+			<s:element name="scn-flg" type="pln1:SummaryType" default="UNSET-SUMMARY" minOccurs="0"/>
+			<s:element name="scn-fmt" type="s:string" nillable="true" minOccurs="0"/>
+			<s:element name="low-ci" type="s:short" default="-32767" minOccurs="0"/>
+			<s:element name="high-ci" type="s:short" default="-32767" minOccurs="0"/>
+			<s:element name="ci-increment" type="s:short" default="-32767" minOccurs="0"/>
+
+			<s:element name="max-plan-display" type="s:short" default="-32767" minOccurs="0"/>
+		</s:all>
+	</s:complexType>
+	<s:complexType name="Wx">
+		<s:all>
+			<s:element name="type" type="pln1:WxType" default="ADF-WX"/>
+			<s:element name="temp" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="wind" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="month" type="s:int" default="-32767" minOccurs="0"/>
+
+			<s:element name="month-end" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="reliability-percentile" type="s:int" default="-32767" minOccurs="0"/>
+		</s:all>
+	</s:complexType>
+	<s:complexType name="AvdAirway">
+		<s:all>
+			<s:element name="chkpnt1" type="s:string" nillable="true"/>
+			<s:element name="chkpnt2" type="s:string" nillable="true"/>
+			<s:element name="airway" type="s:string" nillable="true"/>
+
+			<s:element name="lower-altitude" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="upper-altitude" type="s:int" default="-32767" minOccurs="0"/>
+		</s:all>
+	</s:complexType>
+	<s:complexType name="AvdAirwayList">
+		<s:sequence>
+			<s:element name="item" type="pln1:AvdAirway" nillable="true" minOccurs="0" maxOccurs="10"/>
+		</s:sequence>
+	</s:complexType>
+
+	<s:complexType name="AvdChkpntList">
+		<s:sequence>
+			<s:element name="item" type="s:string" nillable="true" minOccurs="0" maxOccurs="20"/>
+		</s:sequence>
+	</s:complexType>
+	<s:complexType name="ResCkpt">
+		<s:all>
+			<s:element name="res-begin" type="s:string" nillable="true"/>
+			<s:element name="res-end" type="s:string" nillable="true"/>
+
+		</s:all>
+	</s:complexType>
+	<s:complexType name="holdPOA">
+		<s:all>
+			<s:element name="time" type="s:int" default="-32767"/>
+			<s:element name="level" type="s:int" default="-32767" minOccurs="0"/>
+		</s:all>
+	</s:complexType>
+	<s:complexType name="Login">
+
+		<s:all>
+			<s:element name="userid" type="s:string" nillable="true"/>
+			<s:element name="passwd" type="s:string" nillable="true"/>
+		</s:all>
+	</s:complexType>
+	<s:complexType name="Aircraft">
+		<s:all>
+			<s:element name="generic-aircraft" type="s:string" nillable="true" minOccurs="0"/>
+			<s:element name="cust-aircraft" type="s:string" nillable="true" minOccurs="0"/>
+
+			<s:element name="op-weight" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="max-fuel" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="max-tow" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="max-land-wt" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="zfw-override" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="rvsm-override" type="pln1:YesNoType" default="UNSET-YN" minOccurs="0"/>
+		</s:all>
+	</s:complexType>
+	<s:complexType name="UnitsOverride">
+
+		<s:all>
+			<s:element name="weight" type="pln1:WeightUnitsType" default="WEIGHT-UNITS-UNSET" minOccurs="0"/>
+			<s:element name="distance" type="pln1:DistUnitsType" default="DISTANCE-UNITS-UNSET" minOccurs="0"/>
+		</s:all>
+	</s:complexType>
+	<s:complexType name="ReformatRequest">
+		<s:all>
+			<s:element name="format" type="s:string" nillable="true"/>
+			<s:element name="all-plans" type="s:boolean" default="1" minOccurs="0"/>
+
+		</s:all>
+	</s:complexType>
+	<s:complexType name="Display">
+		<s:all>
+			<s:element name="format" type="s:string" nillable="true" minOccurs="0"/>
+			<s:element name="fmt-hdr" type="s:string" nillable="true" minOccurs="0"/>
+			<s:element name="flt-info" type="s:string" nillable="true" minOccurs="0"/>
+			<s:element name="captain" type="s:string" nillable="true" minOccurs="0"/>
+			<s:element name="first-officer" type="s:string" nillable="true" minOccurs="0"/>
+
+			<s:element name="flt-eng" type="s:string" nillable="true" minOccurs="0"/>
+			<s:element name="dispatcher" type="s:string" nillable="true" minOccurs="0"/>
+			<s:element name="dispatcher2" type="s:string" nillable="true" minOccurs="0"/>
+			<s:element name="message" type="s:string" nillable="true" minOccurs="0"/>
+			<s:element name="units-overrides" type="pln1:UnitsOverride" minOccurs="0"/>
+			<s:element name="reformat" type="pln1:ReformatRequest" minOccurs="0"/>
+		</s:all>
+	</s:complexType>
+	<s:complexType name="OrbitList">
+
+		<s:sequence>
+			<s:element name="item" type="pln1:Orbit" nillable="true" minOccurs="0" maxOccurs="12"/>
+		</s:sequence>
+	</s:complexType>
+	<s:complexType name="Hold">
+		<s:all>
+			<s:element name="time" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="fuel" type="pln1:Fuel" minOccurs="0"/>
+			<s:element name="orbit" type="pln1:OrbitList" nillable="true" minOccurs="0"/>
+
+			<s:element name="holdoverpoa" type="pln1:holdPOA" minOccurs="0"/>
+		</s:all>
+	</s:complexType>
+	<s:complexType name="PfIndex">
+		<s:all>
+			<s:element name="pfm-index" type="pln1:OptimizeType" default="UNSET-OPTIMIZE"/>
+			<s:element name="fuel-cost" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="time-cost" type="s:int" default="-32767" minOccurs="0"/>
+		</s:all>
+
+	</s:complexType>
+	<s:complexType name="Case">
+		<s:all>
+			<s:element name="weight-payload-case" type="pln1:CaseType" default="UNSET-CASE"/>
+			<s:element name="unknown-payload-case" type="pln1:UnknownPayloadOptionType" default="UNSET-UNKNOWN-PAYLOAD-OPTION" minOccurs="0"/>
+			<s:element name="fuel" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="weight" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="payload" type="s:int" default="-32767" minOccurs="0"/>
+		</s:all>
+
+	</s:complexType>
+	<s:complexType name="RefuelList">
+		<s:sequence>
+			<s:element name="item" type="pln1:Refuel" nillable="true" minOccurs="0" maxOccurs="12"/>
+		</s:sequence>
+	</s:complexType>
+	<s:complexType name="Fuels">
+		<s:all>
+			<s:element name="fod" type="s:int" default="-32767" minOccurs="0"/>
+
+			<s:element name="mfod" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="ballast" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="pad-fuel" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="extra" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="ex-fl-st" type="pln1:Fuel" minOccurs="0"/>
+			<s:element name="refuel" type="pln1:RefuelList" nillable="true" minOccurs="0"/>
+			<s:element name="min-ramp" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="adjustment" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="tkr-fuel" type="s:int" default="-32767" minOccurs="0"/>
+
+			<s:element name="max-tank" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="density" type="s:string" nillable="true" minOccurs="0"/>
+			<s:element name="pcf" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="pct" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="flat-fuel" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="previous-plan-number" type="s:int" default="-32767" minOccurs="0"/>
+		</s:all>
+	</s:complexType>
+	<s:complexType name="DcsnFuel">
+
+		<s:all>
+			<s:element name="flag" type="s:int" default="-32767"/>
+			<s:element name="fuel" type="pln1:Fuel"/>
+		</s:all>
+	</s:complexType>
+	<s:complexType name="NWAFuelParams">
+		<s:all>
+			<s:element name="dcsn-fuel-data" type="pln1:DcsnFuel" minOccurs="0"/>
+			<s:element name="load-permitting-fuel" type="pln1:FuelMsg" minOccurs="0"/>
+
+			<s:element name="additional-unusable" type="pln1:FuelMsg" minOccurs="0"/>
+			<s:element name="additional-usable" type="pln1:FuelFlg" minOccurs="0"/>
+			<s:element name="min-company-hold-override" type="pln1:Fuel" minOccurs="0"/>
+			<s:element name="FAR-reserve-override" type="pln1:Fuel" minOccurs="0"/>
+			<s:element name="release" type="pln1:Fuel" minOccurs="0"/>
+			<s:element name="tnk-tmp" type="pln1:TankTemp" minOccurs="0"/>
+		</s:all>
+	</s:complexType>
+	<s:complexType name="OptionRequests">
+
+		<s:sequence>
+			<s:element name="item" type="s:string" nillable="true" minOccurs="0" maxOccurs="35"/>
+		</s:sequence>
+	</s:complexType>
+	<s:complexType name="Followon">
+		<s:all>
+			<s:element name="terminus" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="follow" type="pln1:FollowonLeg" minOccurs="0"/>
+		</s:all>
+
+	</s:complexType>
+	<s:complexType name="AircraftOverride">
+		<s:all>
+			<s:element name="pod-txi" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="poa-txi" type="s:int" default="-32767" minOccurs="0"/>
+		</s:all>
+	</s:complexType>
+	<s:complexType name="CiOverride">
+		<s:all>
+
+			<s:element name="ci-min" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="ci-max" type="s:int" default="-32767" minOccurs="0"/>
+		</s:all>
+	</s:complexType>
+	<s:complexType name="Driftdown">
+		<s:all>
+			<s:element name="dd-mthd" type="pln1:DDMethodType" default="UNSET-DD-METHOD"/>
+			<s:element name="terr-dd" type="pln1:TerrainDd" minOccurs="0"/>
+		</s:all>
+
+	</s:complexType>
+	<s:complexType name="MELData">
+		<s:all>
+			<s:element name="mel-text" type="s:string" nillable="true" minOccurs="0"/>
+			<s:element name="mels" type="pln1:MEL" minOccurs="0"/>
+			<s:element name="mel-dd-wtpenalty" type="s:int" default="-32767" minOccurs="0"/>
+			<s:element name="mel-db-overrides" type="pln1:MELOverrideList" nillable="true" minOccurs="0"/>
+		</s:all>
+	</s:complexType>
+
+	<s:complexType name="raOverrideType">
+		<s:all>
+			<s:element name="name" type="s:string" nillable="true"/>
+			<s:element name="avoidLevel" type="pln1:AvoidLevelType" default="AL-UNSET"/>
+		</s:all>
+	</s:complexType>
+	<s:complexType name="raOverrideType2">
+		<s:all>
+			<s:element name="name1" type="s:string" nillable="true"/>
+
+			<s:element name="name2" type="s:string" nillable="true"/>
+			<s:element name="avoidLevel" type="pln1:AvoidLevelType" default="AL-UNSET"/>
+		</s:all>
+	</s:complexType>
+	<s:complexType name="raOverrideList">
+		<s:sequence>
+			<s:element name="item" type="pln1:raOverrideType" nillable="true" minOccurs="0" maxOccurs="15"/>
+		</s:sequence>
+	</s:complexType>
+
+	<s:complexType name="raOverrideList2">
+		<s:sequence>
+			<s:element name="item" type="pln1:raOverrideType2" nillable="true" minOccurs="0" maxOccurs="15"/>
+		</s:sequence>
+	</s:complexType>
+	<s:complexType name="raOverrides">
+		<s:all>
+			<s:element name="restDesig" type="pln1:raOverrideList" nillable="true" minOccurs="0"/>
+			<s:element name="scaType" type="pln1:raOverrideList" nillable="true" minOccurs="0"/>
+
+			<s:element name="icaoCode" type="pln1:raOverrideList" nillable="true" minOccurs="0"/>
+			<s:element name="icao-scat" type="pln1:raOverrideList2" nillable="true" minOccurs="0"/>
+		</s:all>
+	</s:complexType>
+	<s:complexType name="Alert">
+		<s:all>
+			<s:element name="tag" type="s:string" nillable="true"/>
+			<s:element name="msg" type="s:string" nillable="true"/>
+		</s:all>
+
+	</s:complexType>
+	<s:complexType name="AlertList">
+		<s:sequence>
+			<s:element name="item" type="pln1:Alert" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+		</s:sequence>
+	</s:complexType>
+	<s:complexType name="PlanFuel">
+		<s:all>
+			<s:element name="dep-fuel" type="s:int"/>
+
+			<s:element name="hold" type="s:int"/>
+			<s:element name="alternate" type="s:int"/>
+			<s:element name="reserve" type="s:int"/>
+			<s:element name="burn" type="s:int"/>
+			<s:element name="poa-burn" type="s:int"/>
+		</s:all>
+	</s:complexType>
+	<s:complexType name="PlanTime">
+		<s:all>
+
+			<s:element name="hold" type="s:int"/>
+			<s:element name="alternate" type="s:int"/>
+			<s:element name="reserve" type="s:int"/>
+			<s:element name="time" type="s:int"/>
+		</s:all>
+	</s:complexType>
+	<s:complexType name="PlanWeight">
+		<s:all>
+			<s:element name="payload" type="s:int"/>
+
+			<s:element name="op-weight" type="s:int"/>
+			<s:element name="dep-weight" type="s:int"/>
+			<s:element name="arr-weight" type="s:int"/>
+		</s:all>
+	</s:complexType>
+	<s:complexType name="PlanDistance">
+		<s:all>
+			<s:element name="alt-dis" type="s:int"/>
+			<s:element name="dist" type="s:int"/>
+
+		</s:all>
+	</s:complexType>
+	<s:complexType name="PlanCost">
+		<s:all>
+			<s:element name="cost" type="s:int"/>
+		</s:all>
+	</s:complexType>
+	<s:complexType name="Plan">
+		<s:all>
+
+			<s:element name="status" type="pln1:PlanResultsType"/>
+			<s:element name="type" type="pln1:PlanOutputType"/>
+			<s:element name="err-code" type="s:string" nillable="true"/>
+			<s:element name="err-text" type="s:string" nillable="true"/>
+			<s:element name="alert-msgs" type="pln1:AlertList" nillable="true" minOccurs="0"/>
+			<s:element name="plan-number" type="s:int"/>
+			<s:element name="fuels" type="pln1:PlanFuel"/>
+			<s:element name="times" type="pln1:PlanTime"/>
+			<s:element name="weights" type="pln1:PlanWeight"/>
+
+			<s:element name="distances" type="pln1:PlanDistance"/>
+			<s:element name="costs" type="pln1:PlanCost"/>
+			<s:element name="data-size" type="s:int"/>
+			<s:element name="data" type="s:string" nillable="true" minOccurs="0"/>
+		</s:all>
+	</s:complexType>
+	<s:complexType name="PlanList">
+		<s:sequence>
+			<s:element name="item" type="pln1:Plan" nillable="true" maxOccurs="4"/>
+
+		</s:sequence>
+	</s:complexType>
+	<s:complexType name="PlanResp">
+		<s:all>
+			<s:element name="plans" type="pln1:PlanList" nillable="true"/>
+			<s:element name="format-found" type="s:boolean" minOccurs="0"/>
+			<s:element name="reformatted-plans" type="pln1:PlanList" nillable="true" minOccurs="0"/>
+			<s:element name="requesters-use" type="s:string" nillable="true" minOccurs="0"/>
+		</s:all>
+
+	</s:complexType>
+	<s:complexType name="ReformatReq">
+		<s:all>
+			<s:element name="login" type="pln1:Login"/>
+			<s:element name="plan-number" type="s:int"/>
+			<s:element name="format" type="s:string" nillable="true"/>
+			<s:element name="param-file-name" type="s:string" nillable="true" minOccurs="0"/>
+			<s:element name="requesters-use" type="s:string" nillable="true" minOccurs="0"/>
+		</s:all>
+
+	</s:complexType>
+	<s:complexType name="ReformatResp">
+		<s:all>
+			<s:element name="format-found" type="s:boolean"/>
+			<s:element name="plan" type="pln1:Plan" nillable="true"/>
+			<s:element name="requesters-use" type="s:string" nillable="true" minOccurs="0"/>
+		</s:all>
+	</s:complexType>
+	<s:complexType name="PlanNumList">
+
+		<s:sequence>
+			<s:element name="item" type="s:int" nillable="true" maxOccurs="25"/>
+		</s:sequence>
+	</s:complexType>
+</s:schema>
+	</wsdl:types>
+	<wsdl:message name="computePlanSoapIn">
+		<wsdl:part name="parameters" element="pln1:computePlan"/>
+	</wsdl:message>
+	<wsdl:message name="computePlanSoapOut">
+
+		<wsdl:part name="parameters" element="pln1:computePlanResponse"/>
+	</wsdl:message>
+	<wsdl:message name="reformatPlanSoapIn">
+		<wsdl:part name="parameters" element="pln1:reformatPlan"/>
+	</wsdl:message>
+	<wsdl:message name="reformatPlanSoapOut">
+		<wsdl:part name="parameters" element="pln1:reformatPlanResponse"/>
+	</wsdl:message>
+
+	<wsdl:portType name="PlanSoap">
+		<wsdl:operation name="computePlan">
+			<wsdl:input message="pln1:computePlanSoapIn"/>
+			<wsdl:output message="pln1:computePlanSoapOut"/>
+		</wsdl:operation>
+		<wsdl:operation name="reformatPlan">
+			<wsdl:input message="pln1:reformatPlanSoapIn"/>
+			<wsdl:output message="pln1:reformatPlanSoapOut"/>
+		</wsdl:operation>
+
+	</wsdl:portType>
+
+	<wsdl:binding name="PlanSoap" type="pln1:PlanSoap">
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="computePlan">
+			<soap:operation soapAction="http://www.jetplan.com/jetplan/services/Plan/computePlan" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="reformatPlan">
+			<soap:operation soapAction="http://www.jetplan.com/jetplan/services/Plan/reformatPlan" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+
+
+	</wsdl:binding>
+	<wsdl:service name="Plan">
+		<wsdl:port name="PlanSoap" binding="pln1:PlanSoap">
+			<soap:address location="http://localhost:8080/jetplan/services/Plan"/>
+		</wsdl:port>
+	</wsdl:service>
+
+</wsdl:definitions>

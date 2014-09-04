@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="getJDEQ" targetNamespace="http://www.approuter.com/connectors/wsdl"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.approuter.com/connectors/wsdl"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+    <wsdl:types>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified"
+                   targetNamespace="http://www.approuter.com/connectors/wsdl"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <xs:element name="ElementWithNoSchemaType"/>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="getJDEQResponse">
+        <wsdl:part name="response" element="tns:ElementWithNoSchemaType"/>
+    </wsdl:message>
+    <wsdl:message name="getJDEQRequest">
+        <wsdl:part name="request" element="xsd:string"/>
+    </wsdl:message>
+    <wsdl:portType name="getJDEQPort">
+        <wsdl:operation name="getJDEQ">
+            <wsdl:input message="tns:getJDEQRequest"/>
+            <wsdl:output message="tns:getJDEQResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="getJDEQBinding" type="tns:getJDEQPort">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="getJDEQ">
+            <soap:operation soapAction=""/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="getJDEQService">
+        <wsdl:port name="getJDEQPort" binding="tns:getJDEQBinding">
+            <soap:address location="http://localhost:80/JDEQ"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

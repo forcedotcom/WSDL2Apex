@@ -1,24 +1,23 @@
 /*******************************************************************************
- * Copyright (c) 2014 Salesforce.com, inc..
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
+ * Copyright (c) 2014 Salesforce.com, inc.. All rights reserved. This program and the accompanying materials are made
+ * available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors:
- *     Salesforce.com, inc. - initial API and implementation
+ * Contributors: Salesforce.com, inc. - initial API and implementation
  ******************************************************************************/
 package com.salesforce.ide.wsdl2apex.core;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.sql.SQLException;
 import java.util.*;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
+
+import com.sforce.ws.ConnectionException;
+import com.sforce.ws.wsdl.*;
 
 /**
  * Wsdl2Apex
@@ -30,10 +29,10 @@ import java.util.logging.SimpleFormatter;
 public class Wsdl2Apex {
     private static final String CLIENT_NAME = "Wsdl2Apex";
     private static final double CLIENT_VERSION = 1.0;
-    private  ArrayList<String> allClassNames;
-    private  ArrayList<String> allClasses;
-    private  AnalysisResult result;
-    private  String wsdlString;
+    private ArrayList<String> allClassNames;
+    private ArrayList<String> allClasses;
+    private AnalysisResult result;
+    private String wsdlString;
     private final static Logger LOGGER = Logger.getLogger(Wsdl2Apex.class.getName());
     private static FileHandler f;
 
@@ -42,7 +41,7 @@ public class Wsdl2Apex {
      */
     static {
         try {
-            f = new FileHandler("error.log", false);
+            f = new FileHandler("./target/error.log", false);
         } catch (SecurityException | IOException e) {
             e.printStackTrace();
         }
@@ -236,7 +235,6 @@ public class Wsdl2Apex {
             } else {
                 sb.append("ERROR:");
             }
-            http: //localhost:6109/
             for (String message : messages) {
                 sb.append(message);
             }
@@ -303,7 +301,7 @@ public class Wsdl2Apex {
     /**
      * Parses the wsdl file and stores the result
      */
-    private  void doParse() {
+    private void doParse() {
         try {
             //parse the wsdl
             result = new Wsdl2Apex().analyze(wsdlString);
@@ -329,7 +327,7 @@ public class Wsdl2Apex {
      * @param async
      * @throws CalloutException
      */
-    private  void doGenerate(Boolean async) throws CalloutException {
+    private void doGenerate(Boolean async) throws CalloutException {
         HashMap<String, String> inputMap = new HashMap<String, String>();
         //get the targetnamesapces
         inputMap = result.getMapping();
@@ -363,7 +361,7 @@ public class Wsdl2Apex {
      * @param resultPath
      * @throws IOException
      */
-    private  void generateFiles(String resultPath) throws IOException {
+    private void generateFiles(String resultPath) throws IOException {
         try {
             Iterator<String> i = allClasses.iterator();
             Iterator<String> j = allClassNames.iterator();
@@ -387,7 +385,7 @@ public class Wsdl2Apex {
      * @throws CalloutException
      * @throws IOException
      */
-    public  void parseAndGenerate(String[] args) throws RuntimeException, CalloutException, IOException {
+    public void parseAndGenerate(String[] args) throws RuntimeException, CalloutException, IOException {
         String filePath = args[0];
         Boolean async;
         String resultPath = null;
@@ -426,7 +424,7 @@ public class Wsdl2Apex {
      * @throws IOException
      * @throws CalloutException
      */
-    public  void parse(String[] args) throws IOException, CalloutException {
+    public void parse(String[] args) throws IOException, CalloutException {
         String filePath = args[0];
 
         if (args.length != 1) {
@@ -451,7 +449,7 @@ public class Wsdl2Apex {
      * @throws CalloutException
      * @throws IOException
      */
-    public  void generate(String[] args) throws CalloutException, IOException {
+    public void generate(String[] args) throws CalloutException, IOException {
         Boolean async;
         String resultPath = null;
         if (args.length == 1)

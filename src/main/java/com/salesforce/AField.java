@@ -10,6 +10,13 @@
  ******************************************************************************/
 package com.salesforce.ide.wsdl2apex.core;
 
+/**
+ * AField
+ *
+ * @author cheenath
+ * @version 1.0
+ * @since 148  Feb 7, 2007
+ */
 class AField {
 
     private final String type;

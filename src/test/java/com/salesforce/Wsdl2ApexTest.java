@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2014 Salesforce.com, inc.. All rights reserved. This program and the accompanying materials are made
+ * available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors: Salesforce.com, inc. - initial API and implementation
+ ******************************************************************************/
 package com.salesforce.ide.wsdl2apex.core;
 
 import static org.junit.Assert.*;
@@ -15,7 +22,8 @@ public class Wsdl2ApexTest {
 
     @Before
     public void setUp() {
-        directory = new File("../../src/test/testFiles/tempTest");
+        directory = new File("src/test/testFiles/tempTest");
+        System.out.println("THIS IS THE CURRENT DIRECTORY" + System.getProperty("user.dir"));
         directory.mkdir();
     }
 
@@ -33,24 +41,27 @@ public class Wsdl2ApexTest {
     @Test
     public void testSimple() throws IOException, CalloutException {
         String[] args = new String[3];
-        args[0] = directory.getPath() + "/../goodWsdls/airport.wsdl";
+        args[0] = directory.getPath() + "/../parsableWsdls/airport.wsdl";
         args[1] = directory.getPath();
         args[2] = "true";
         Wsdl2Apex m = new Wsdl2Apex();
         try {
             m.parseAndGenerate(args);
-            FileString f = new FileString();
 
-            String result1 = f.getStringFromFile(directory.getPath() + "/" + "wwwWebservicexNet.cls");
-            String answer1 = f.getStringFromFile(directory.getPath() + "/../answers/wwwWebservicexNet_answer.cls");
-            String result2 = f.getStringFromFile(directory.getPath() + "/" + "AsyncWwwWebservicexNet.cls");
-            String answer2 = f.getStringFromFile(directory.getPath() + "/../answers/AsyncWwwWebservicexNet_answer.cls");
+            String result1 = FileString.getStringFromFile(directory.getPath() + "/" + "wwwWebservicexNet.cls");
+            String answer1 =
+                    FileString.getStringFromFile(directory.getPath()
+                            + "/../parsableWsdlAnswers/wwwWebservicexNet_answer.cls");
+            String result2 = FileString.getStringFromFile(directory.getPath() + "/" + "AsyncWwwWebservicexNet.cls");
+            String answer2 =
+                    FileString.getStringFromFile(directory.getPath()
+                            + "/../parsableWsdlAnswers/AsyncWwwWebservicexNet_answer.cls");
             assertEquals("testSimple doesn't match", result1, answer1);
             assertEquals("testSimple async doesn't match", result2, answer2);
         } catch (FileNotFoundException e) {
             System.err.println("Unable to generate the file");
             e.printStackTrace();
-            fail("testSimple unable to generate the file");
+            fail(e.getMessage());
         }
     }
 
@@ -60,7 +71,7 @@ public class Wsdl2ApexTest {
     @Test
     public void testInvalidXml() {
         String[] args = new String[3];
-        args[0] = directory.getPath() + "/../badWsdls/airport_Raw.wsdl";
+        args[0] = directory.getPath() + "/../unparsableWsdls/airport_Raw.wsdl";
         args[1] = directory.getPath();
         args[2] = "false";
         Wsdl2Apex m = new Wsdl2Apex();
@@ -82,27 +93,32 @@ public class Wsdl2ApexTest {
     @Test
     public void testTwoNamespaces() throws IOException, CalloutException {
         String[] args = new String[3];
-        args[0] = directory.getPath() + "/../goodWsdls/stockQuote.wsdl";
+        args[0] = directory.getPath() + "/../parsableWsdls/stockQuote.wsdl";
         args[1] = directory.getPath();
         args[2] = "true";
         Wsdl2Apex m = new Wsdl2Apex();
         try {
             m.parseAndGenerate(args);
-            FileString f = new FileString();
 
-            String result1 = f.getStringFromFile(directory.getPath() + "/" + "AsyncExampleComStockquoteWsdl.cls");
-            String result2 = f.getStringFromFile(directory.getPath() + "/" + "AsyncExampleComStockquoteXsd.cls");
-            String result3 = f.getStringFromFile(directory.getPath() + "/" + "exampleComStockquoteWsdl.cls");
-            String result4 = f.getStringFromFile(directory.getPath() + "/" + "exampleComStockquoteXsd.cls");
+            String result1 =
+                    FileString.getStringFromFile(directory.getPath() + "/" + "AsyncExampleComStockquoteWsdl.cls");
+            String result2 =
+                    FileString.getStringFromFile(directory.getPath() + "/" + "AsyncExampleComStockquoteXsd.cls");
+            String result3 = FileString.getStringFromFile(directory.getPath() + "/" + "exampleComStockquoteWsdl.cls");
+            String result4 = FileString.getStringFromFile(directory.getPath() + "/" + "exampleComStockquoteXsd.cls");
 
             String answer1 =
-                    f.getStringFromFile(directory.getPath() + "/../answers/AsyncExampleComStockquoteWsdl_answer.cls");
+                    FileString.getStringFromFile(directory.getPath()
+                            + "/../parsableWsdlAnswers/AsyncExampleComStockquoteWsdl_answer.cls");
             String answer2 =
-                    f.getStringFromFile(directory.getPath() + "/../answers/AsyncExampleComStockquoteXsd_answer.cls");
+                    FileString.getStringFromFile(directory.getPath()
+                            + "/../parsableWsdlAnswers/AsyncExampleComStockquoteXsd_answer.cls");
             String answer3 =
-                    f.getStringFromFile(directory.getPath() + "/../answers/exampleComStockquoteWsdl_answer.cls");
+                    FileString.getStringFromFile(directory.getPath()
+                            + "/../parsableWsdlAnswers/exampleComStockquoteWsdl_answer.cls");
             String answer4 =
-                    f.getStringFromFile(directory.getPath() + "/../answers/exampleComStockquoteXsd_answer.cls");
+                    FileString.getStringFromFile(directory.getPath()
+                            + "/../parsableWsdlAnswers/exampleComStockquoteXsd_answer.cls");
             assertEquals("testTwoNamespaces a doesn't match, Async class", result1, answer1);
             assertEquals("testTwoNamespaces b doesn't match, Async class", result2, answer2);
             assertEquals("testTwoNamespaces c doesn't match", result3, answer3);
@@ -110,7 +126,7 @@ public class Wsdl2ApexTest {
         } catch (FileNotFoundException e) {
             System.err.println("Unable to find the file");
             e.printStackTrace();
-            fail("testTwoNamespaces unable to find the file");
+            fail(e.getMessage());
         }
     }
 
@@ -124,38 +140,47 @@ public class Wsdl2ApexTest {
     public void testLargeFile() throws IOException, CalloutException //large file
     {
         String[] args = new String[3];
-        args[0] = directory.getPath() + "/../goodWsdls/EOLS_PSAPLookupUS.wsdl";
+        args[0] = directory.getPath() + "/../parsableWsdls/EOLS_PSAPLookupUS.wsdl";
         args[1] = directory.getPath();
         args[2] = "true";
         Wsdl2Apex m = new Wsdl2Apex();
         try {
             m.parseAndGenerate(args);
-            FileString f = new FileString();
 
-            String result1 = f.getStringFromFile(directory.getPath() + "/" + "spectrumPbCom.cls");
-            String result2 = f.getStringFromFile(directory.getPath() + "/" + "wwwMapinfoComMidevServiceGeometries.cls");
-            String result3 = f.getStringFromFile(directory.getPath() + "/" + "wwwMapinfoComMidevServiceUnitsV1.cls");
-            String result4 = f.getStringFromFile(directory.getPath() + "/" + "wwwPbComSpectrumServices.cls");
-            String result5 = f.getStringFromFile(directory.getPath() + "/" + "wwwPbComSpectrumServicesEolsPsaplo.cls");
-            String result6 = f.getStringFromFile(directory.getPath() + "/" + "AsyncSpectrumPbCom.cls");
+            String result1 = FileString.getStringFromFile(directory.getPath() + "/" + "spectrumPbCom.cls");
+            String result2 =
+                    FileString.getStringFromFile(directory.getPath() + "/" + "wwwMapinfoComMidevServiceGeometries.cls");
+            String result3 =
+                    FileString.getStringFromFile(directory.getPath() + "/" + "wwwMapinfoComMidevServiceUnitsV1.cls");
+            String result4 = FileString.getStringFromFile(directory.getPath() + "/" + "wwwPbComSpectrumServices.cls");
+            String result5 =
+                    FileString.getStringFromFile(directory.getPath() + "/" + "wwwPbComSpectrumServicesEolsPsaplo.cls");
+            String result6 = FileString.getStringFromFile(directory.getPath() + "/" + "AsyncSpectrumPbCom.cls");
             String result7 =
-                    f.getStringFromFile(directory.getPath() + "/" + "AsyncWwwPbComSpectrumServicesEolsPsaplo.cls");
+                    FileString.getStringFromFile(directory.getPath() + "/"
+                            + "AsyncWwwPbComSpectrumServicesEolsPsaplo.cls");
 
-            String answer1 = f.getStringFromFile(directory.getPath() + "/../answers/spectrumPbCom_answer.cls");
+            String answer1 =
+                    FileString.getStringFromFile(directory.getPath()
+                            + "/../parsableWsdlAnswers/spectrumPbCom_answer.cls");
             String answer2 =
-                    f.getStringFromFile(directory.getPath()
-                            + "/../answers/wwwMapinfoComMidevServiceGeometries_answer.cls");
+                    FileString.getStringFromFile(directory.getPath()
+                            + "/../parsableWsdlAnswers/wwwMapinfoComMidevServiceGeometries_answer.cls");
             String answer3 =
-                    f.getStringFromFile(directory.getPath() + "/../answers/wwwMapinfoComMidevServiceUnitsV1_answer.cls");
+                    FileString.getStringFromFile(directory.getPath()
+                            + "/../parsableWsdlAnswers/wwwMapinfoComMidevServiceUnitsV1_answer.cls");
             String answer4 =
-                    f.getStringFromFile(directory.getPath() + "/../answers/wwwPbComSpectrumServices_answer.cls");
+                    FileString.getStringFromFile(directory.getPath()
+                            + "/../parsableWsdlAnswers/wwwPbComSpectrumServices_answer.cls");
             String answer5 =
-                    f.getStringFromFile(directory.getPath()
-                            + "/../answers/wwwPbComSpectrumServicesEolsPsaplo_answer.cls");
-            String answer6 = f.getStringFromFile(directory.getPath() + "/../answers/AsyncSpectrumPbCom_answer.cls");
+                    FileString.getStringFromFile(directory.getPath()
+                            + "/../parsableWsdlAnswers/wwwPbComSpectrumServicesEolsPsaplo_answer.cls");
+            String answer6 =
+                    FileString.getStringFromFile(directory.getPath()
+                            + "/../parsableWsdlAnswers/AsyncSpectrumPbCom_answer.cls");
             String answer7 =
-                    f.getStringFromFile(directory.getPath()
-                            + "/../answers/AsyncWwwPbComSpectrumServicesEolsPsaplo_answer.cls");
+                    FileString.getStringFromFile(directory.getPath()
+                            + "/../parsableWsdlAnswers/AsyncWwwPbComSpectrumServicesEolsPsaplo_answer.cls");
             assertEquals("testLargeFile a doesn't match", result1, answer1);
             assertEquals("testLargeFile b doesn't match", result2, answer2);
             assertEquals("testLargeFile c doesn't match", result3, answer3);
@@ -166,7 +191,7 @@ public class Wsdl2ApexTest {
         } catch (FileNotFoundException e) {
             System.err.println("Unable to find the file");
             e.printStackTrace();
-            fail("testLargeFile unable to generate the file");
+            fail(e.getMessage());
         }
     }
 
@@ -176,7 +201,7 @@ public class Wsdl2ApexTest {
     @Test
     public void testNoNameFault() {
         String[] args = new String[3];
-        args[0] = directory.getPath() + "/../badWsdls/endorsementSearch.wsdl";
+        args[0] = directory.getPath() + "/../unparsableWsdls/endorsementSearch.wsdl";
         args[1] = directory.getPath();
         args[2] = "false";
         Wsdl2Apex m = new Wsdl2Apex();
@@ -185,7 +210,7 @@ public class Wsdl2ApexTest {
             fail("testNoNameFault shouldn't have been able to create the files");
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            assertTrue("testNoNameFault shouldn't have been able to create the files", true);
+            assertTrue(e.getMessage(), true);
         }
     }
 
@@ -195,7 +220,7 @@ public class Wsdl2ApexTest {
     @Test
     public void testRPC() {
         String[] args = new String[3];
-        args[0] = directory.getPath() + "/../badWsdls/helloService.wsdl";
+        args[0] = directory.getPath() + "/../unparsableWsdls/helloService.wsdl";
         args[1] = directory.getPath();
         args[2] = "false";
         Wsdl2Apex m = new Wsdl2Apex();
@@ -204,7 +229,7 @@ public class Wsdl2ApexTest {
             fail("testRPC shouldn't have been able to create the files");
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            assertTrue("testRPC shouldn't have been able to creat the files", true);
+            assertTrue(e.getMessage(), true);
         }
     }
 
@@ -214,7 +239,7 @@ public class Wsdl2ApexTest {
     @Test
     public void testSoapAddress() {
         String[] args = new String[3];
-        args[0] = directory.getPath() + "/../badWsdls/ADC_BibCode.wsdl";
+        args[0] = directory.getPath() + "/../unparsableWsdls/ADC_BibCode.wsdl";
         args[1] = directory.getPath();
         args[2] = "false";
         Wsdl2Apex m = new Wsdl2Apex();
@@ -224,7 +249,7 @@ public class Wsdl2ApexTest {
             fail("testSoapAddress shouldn't have been able to create the files");
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            assertTrue("testSoapAddress shouldn't have been able to create the files", true);
+            assertTrue(e.getMessage(), true);
         }
     }
 
@@ -234,31 +259,29 @@ public class Wsdl2ApexTest {
     @Test
     public void testAsyncFalse() {
         String[] args = new String[3];
-        args[0] = directory.getPath() + "/../goodWsdls/airport.wsdl";
+        args[0] = directory.getPath() + "/../parsableWsdls/airport.wsdl";
         args[1] = directory.getPath();
         args[2] = "false";
         Wsdl2Apex m = new Wsdl2Apex();
         try {
             m.parseAndGenerate(args);
-            FileString f = new FileString();
 
-            String result1 = f.getStringFromFile(directory.getPath() + "/" + "wwwWebservicexNet.cls");
-            String answer1 = f.getStringFromFile(directory.getPath() + "/../answers/wwwWebservicexNet_answer.cls");
+            String result1 = FileString.getStringFromFile(directory.getPath() + "/" + "wwwWebservicexNet.cls");
+            String answer1 =
+                    FileString.getStringFromFile(directory.getPath()
+                            + "/../parsableWsdlAnswers/wwwWebservicexNet_answer.cls");
             assertEquals("Test 8 doesn't match", result1, answer1);
-            String result2 = f.getStringFromFile(directory.getPath() + "/" + "AsyncWwwWebservicexNet.cls");
+            String result2 = FileString.getStringFromFile(directory.getPath() + "/" + "AsyncWwwWebservicexNet.cls");
             fail("testAsyncFalse should not have found the async class");
         } catch (FileNotFoundException e) {
             System.err.println("Unable to generate the file");
-            e.printStackTrace();
             assertTrue("File was not found", true);
         } catch (IOException e) {
             System.err.println("Unable to generate the file");
-            e.printStackTrace();
-            fail("testAsyncFalse unable to generate the file");
+            fail(e.getMessage());
         } catch (CalloutException e) {
             System.err.println("Unable to generate the file");
-            e.printStackTrace();
-            fail("testAsyncFalse unable to generate the file");
+            fail(e.getMessage());
         }
     }
 
@@ -267,7 +290,7 @@ public class Wsdl2ApexTest {
      */
     @Test
     public void testNewClassNames() {
-        String[] parseArgs = new String[] { directory.getPath() + "/../goodWsdls/EOLS_PSAPLookupUS.wsdl" };
+        String[] parseArgs = new String[] { directory.getPath() + "/../parsableWsdls/EOLS_PSAPLookupUS.wsdl" };
         String[] generateArgs = new String[2];
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
@@ -293,23 +316,29 @@ public class Wsdl2ApexTest {
             }
 
             m.generate(generateArgs);
-            FileString f = new FileString();
 
-            String result1 = f.getStringFromFile(directory.getPath() + "/" + "s1.cls");
-            String result2 = f.getStringFromFile(directory.getPath() + "/" + "s2.cls");
-            String result3 = f.getStringFromFile(directory.getPath() + "/" + "s3.cls");
-            String result4 = f.getStringFromFile(directory.getPath() + "/" + "s4.cls");
-            String result5 = f.getStringFromFile(directory.getPath() + "/" + "s5.cls");
-            String result6 = f.getStringFromFile(directory.getPath() + "/" + "AsyncS1.cls");
-            String result7 = f.getStringFromFile(directory.getPath() + "/" + "AsyncS2.cls");
+            String result1 = FileString.getStringFromFile(directory.getPath() + "/" + "s1.cls");
+            String result2 = FileString.getStringFromFile(directory.getPath() + "/" + "s2.cls");
+            String result3 = FileString.getStringFromFile(directory.getPath() + "/" + "s3.cls");
+            String result4 = FileString.getStringFromFile(directory.getPath() + "/" + "s4.cls");
+            String result5 = FileString.getStringFromFile(directory.getPath() + "/" + "s5.cls");
+            String result6 = FileString.getStringFromFile(directory.getPath() + "/" + "AsyncS1.cls");
+            String result7 = FileString.getStringFromFile(directory.getPath() + "/" + "AsyncS2.cls");
 
-            String answer1 = f.getStringFromFile(directory.getPath() + "/../answers/s1_answer.cls");
-            String answer2 = f.getStringFromFile(directory.getPath() + "/../answers/s2_answer.cls");
-            String answer3 = f.getStringFromFile(directory.getPath() + "/../answers/s3_answer.cls");
-            String answer4 = f.getStringFromFile(directory.getPath() + "/../answers/s4_answer.cls");
-            String answer5 = f.getStringFromFile(directory.getPath() + "/../answers/s5_answer.cls");
-            String answer6 = f.getStringFromFile(directory.getPath() + "/../answers/AsyncS1_answer.cls");
-            String answer7 = f.getStringFromFile(directory.getPath() + "/../answers/AsyncS2_answer.cls");
+            String answer1 =
+                    FileString.getStringFromFile(directory.getPath() + "/../parsableWsdlAnswers/s1_answer.cls");
+            String answer2 =
+                    FileString.getStringFromFile(directory.getPath() + "/../parsableWsdlAnswers/s2_answer.cls");
+            String answer3 =
+                    FileString.getStringFromFile(directory.getPath() + "/../parsableWsdlAnswers/s3_answer.cls");
+            String answer4 =
+                    FileString.getStringFromFile(directory.getPath() + "/../parsableWsdlAnswers/s4_answer.cls");
+            String answer5 =
+                    FileString.getStringFromFile(directory.getPath() + "/../parsableWsdlAnswers/s5_answer.cls");
+            String answer6 =
+                    FileString.getStringFromFile(directory.getPath() + "/../parsableWsdlAnswers/AsyncS1_answer.cls");
+            String answer7 =
+                    FileString.getStringFromFile(directory.getPath() + "/../parsableWsdlAnswers/AsyncS2_answer.cls");
             assertEquals("testNewClassNames doesn't match", result1, answer1);
             assertEquals("testNewClassNames doesn't match", result2, answer2);
             assertEquals("testNewClassNames doesn't match", result3, answer3);
@@ -320,21 +349,21 @@ public class Wsdl2ApexTest {
         } catch (FileNotFoundException e) {
             System.err.println("Unable to generate the file");
             e.printStackTrace();
-            fail("testNewClassNames unable to generate the file");
+            fail(e.getMessage());
         } catch (IOException e) {
             System.err.println("Unable to generate the file");
             e.printStackTrace();
-            fail("testNewClassNames unable to generate the file");
+            fail(e.getMessage());
         } catch (CalloutException e) {
             System.err.println("Unable to generate the file");
             e.printStackTrace();
-            fail("testNewClassNames unable to generate the file");
+            fail(e.getMessage());
         }
     }
 
     @Test
     public void testImport() {
-        String[] parseArgs = new String[] { directory.getPath() + "/../badWsdls/AlexaWebSearch.wsdl" };
+        String[] parseArgs = new String[] { directory.getPath() + "/../unparsableWsdls/AlexaWebSearch.wsdl" };
         String[] generateArgs = new String[2];
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
@@ -351,7 +380,7 @@ public class Wsdl2ApexTest {
 
     @Test
     public void testIncldues() {
-        String[] parseArgs = new String[] { directory.getPath() + "/../badWsdls/amazon-s3-orig.wsdl" };
+        String[] parseArgs = new String[] { directory.getPath() + "/../unparsableWsdls/amazon-s3-orig.wsdl" };
         String[] generateArgs = new String[2];
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
@@ -368,7 +397,7 @@ public class Wsdl2ApexTest {
 
     @Test
     public void testSimpleType() {
-        String[] parseArgs = new String[] { directory.getPath() + "/../badWsdls/AWSECommerceService.wsdl" };
+        String[] parseArgs = new String[] { directory.getPath() + "/../unparsableWsdls/AWSECommerceService.wsdl" };
         String[] generateArgs = new String[2];
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
@@ -384,7 +413,7 @@ public class Wsdl2ApexTest {
 
     @Test
     public void testMultipleBinding() {
-        String[] parseArgs = new String[] { directory.getPath() + "/../badWsdls/BLZService.wsdl" };
+        String[] parseArgs = new String[] { directory.getPath() + "/../unparsableWsdls/BLZService.wsdl" };
         String[] generateArgs = new String[2];
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
@@ -400,7 +429,7 @@ public class Wsdl2ApexTest {
 
     @Test
     public void testIncorrectBinding() {
-        String[] parseArgs = new String[] { directory.getPath() + "/../badWsdls/incorrect-binding.wsdl" };
+        String[] parseArgs = new String[] { directory.getPath() + "/../unparsableWsdls/incorrect-binding.wsdl" };
         String[] generateArgs = new String[2];
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
@@ -418,7 +447,7 @@ public class Wsdl2ApexTest {
 
     @Test
     public void testIncorrectMessageName() {
-        String[] parseArgs = new String[] { directory.getPath() + "/../badWsdls/incorrect-messagename.wsdl" };
+        String[] parseArgs = new String[] { directory.getPath() + "/../unparsableWsdls/incorrect-messagename.wsdl" };
         String[] generateArgs = new String[2];
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
@@ -435,7 +464,7 @@ public class Wsdl2ApexTest {
 
     @Test
     public void testIncorrectXsdType() {
-        String[] parseArgs = new String[] { directory.getPath() + "/../badWsdls/incorrect-xsd-type.wsdl" };
+        String[] parseArgs = new String[] { directory.getPath() + "/../unparsableWsdls/incorrect-xsd-type.wsdl" };
         String[] generateArgs = new String[2];
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
@@ -452,7 +481,7 @@ public class Wsdl2ApexTest {
 
     @Test
     public void testMultiplePortType() {
-        String[] parseArgs = new String[] { directory.getPath() + "/../badWsdls/mappoint.wsdl" };
+        String[] parseArgs = new String[] { directory.getPath() + "/../unparsableWsdls/mappoint.wsdl" };
         String[] generateArgs = new String[2];
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
@@ -468,7 +497,7 @@ public class Wsdl2ApexTest {
 
     @Test
     public void testPortAndTypeWithSameName() {
-        String[] parseArgs = new String[] { directory.getPath() + "/../badWsdls/metadata.wsdl" };
+        String[] parseArgs = new String[] { directory.getPath() + "/../unparsableWsdls/metadata.wsdl" };
         String[] generateArgs = new String[2];
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
@@ -486,7 +515,7 @@ public class Wsdl2ApexTest {
 
     @Test
     public void testMissingBinding() {
-        String[] parseArgs = new String[] { directory.getPath() + "/../badWsdls/missing-binding.wsdl" };
+        String[] parseArgs = new String[] { directory.getPath() + "/../unparsableWsdls/missing-binding.wsdl" };
         String[] generateArgs = new String[2];
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
@@ -503,7 +532,7 @@ public class Wsdl2ApexTest {
 
     @Test
     public void testMissingNamespace() {
-        String[] parseArgs = new String[] { directory.getPath() + "/../badWsdls/missing-namespace.wsdl" };
+        String[] parseArgs = new String[] { directory.getPath() + "/../unparsableWsdls/missing-namespace.wsdl" };
         String[] generateArgs = new String[2];
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
@@ -520,7 +549,7 @@ public class Wsdl2ApexTest {
 
     @Test
     public void testMissingPort() {
-        String[] parseArgs = new String[] { directory.getPath() + "/../badWsdls/missing-port.wsdl" };
+        String[] parseArgs = new String[] { directory.getPath() + "/../unparsableWsdls/missing-port.wsdl" };
         String[] generateArgs = new String[2];
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
@@ -536,7 +565,7 @@ public class Wsdl2ApexTest {
 
     @Test
     public void testMissingPortType() {
-        String[] parseArgs = new String[] { directory.getPath() + "/../badWsdls/missing-porttype.wsdl" };
+        String[] parseArgs = new String[] { directory.getPath() + "/../unparsableWsdls/missing-porttype.wsdl" };
         String[] generateArgs = new String[2];
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
@@ -552,7 +581,8 @@ public class Wsdl2ApexTest {
 
     @Test
     public void testMissingSchemaForElement() {
-        String[] parseArgs = new String[] { directory.getPath() + "/../badWsdls/missing-schema-for-element.wsdl" };
+        String[] parseArgs =
+                new String[] { directory.getPath() + "/../unparsableWsdls/missing-schema-for-element.wsdl" };
         String[] generateArgs = new String[2];
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
@@ -568,7 +598,7 @@ public class Wsdl2ApexTest {
 
     @Test
     public void testMissingService() {
-        String[] parseArgs = new String[] { directory.getPath() + "/../badWsdls/missing-service.wsdl" };
+        String[] parseArgs = new String[] { directory.getPath() + "/../unparsableWsdls/missing-service.wsdl" };
         String[] generateArgs = new String[2];
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
@@ -585,7 +615,7 @@ public class Wsdl2ApexTest {
 
     @Test
     public void testMissingTypes() {
-        String[] parseArgs = new String[] { directory.getPath() + "/../badWsdls/missing-types.wsdl" };
+        String[] parseArgs = new String[] { directory.getPath() + "/../unparsableWsdls/missing-types.wsdl" };
         String[] generateArgs = new String[2];
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
@@ -601,7 +631,7 @@ public class Wsdl2ApexTest {
 
     @Test
     public void testNumberOfMessagePartsOutput() {
-        String[] parseArgs = new String[] { directory.getPath() + "/../badWsdls/multiple-parts-in-output.wsdl" };
+        String[] parseArgs = new String[] { directory.getPath() + "/../unparsableWsdls/multiple-parts-in-output.wsdl" };
         String[] generateArgs = new String[2];
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
@@ -618,7 +648,7 @@ public class Wsdl2ApexTest {
 
     @Test
     public void testNumberOfMessagePartsInput() {
-        String[] parseArgs = new String[] { directory.getPath() + "/../badWsdls/multiple-parts-in-input.wsdl" };
+        String[] parseArgs = new String[] { directory.getPath() + "/../unparsableWsdls/multiple-parts-in-input.wsdl" };
         String[] generateArgs = new String[2];
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
@@ -635,7 +665,7 @@ public class Wsdl2ApexTest {
 
     @Test
     public void testNoMessagePartsOutput() {
-        String[] parseArgs = new String[] { directory.getPath() + "/../badWsdls/no-parts-in-output.wsdl" };
+        String[] parseArgs = new String[] { directory.getPath() + "/../unparsableWsdls/no-parts-in-output.wsdl" };
         String[] generateArgs = new String[2];
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
@@ -651,7 +681,7 @@ public class Wsdl2ApexTest {
 
     @Test
     public void testNoMessagePartsInput() {
-        String[] parseArgs = new String[] { directory.getPath() + "/../badWsdls/no-parts-in-input.wsdl" };
+        String[] parseArgs = new String[] { directory.getPath() + "/../unparsableWsdls/no-parts-in-input.wsdl" };
         String[] generateArgs = new String[2];
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
@@ -667,7 +697,7 @@ public class Wsdl2ApexTest {
 
     @Test
     public void testNestedComplexType() {
-        String[] parseArgs = new String[] { directory.getPath() + "/../badWsdls/nested-complex-type.wsdl" };
+        String[] parseArgs = new String[] { directory.getPath() + "/../unparsableWsdls/nested-complex-type.wsdl" };
         String[] generateArgs = new String[2];
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
@@ -683,7 +713,7 @@ public class Wsdl2ApexTest {
 
     @Test
     public void testNoBindingInPort() {
-        String[] parseArgs = new String[] { directory.getPath() + "/../badWsdls/no-binding-in-port.wsdl" };
+        String[] parseArgs = new String[] { directory.getPath() + "/../unparsableWsdls/no-binding-in-port.wsdl" };
         String[] generateArgs = new String[2];
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
@@ -699,7 +729,7 @@ public class Wsdl2ApexTest {
 
     @Test
     public void testNoElementInPort() {
-        String[] parseArgs = new String[] { directory.getPath() + "/../badWsdls/no-element-in-part.wsdl" };
+        String[] parseArgs = new String[] { directory.getPath() + "/../unparsableWsdls/no-element-in-part.wsdl" };
         String[] generateArgs = new String[2];
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
@@ -715,7 +745,7 @@ public class Wsdl2ApexTest {
 
     @Test
     public void testNoTypeForElement() {
-        String[] parseArgs = new String[] { directory.getPath() + "/../badWsdls/no-type-specified.wsdl" };
+        String[] parseArgs = new String[] { directory.getPath() + "/../unparsableWsdls/no-type-specified.wsdl" };
         String[] generateArgs = new String[2];
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
@@ -731,7 +761,7 @@ public class Wsdl2ApexTest {
 
     @Test
     public void testTextFileAsWsdl() {
-        String[] parseArgs = new String[] { directory.getPath() + "/../badWsdls/random.txt" };
+        String[] parseArgs = new String[] { directory.getPath() + "/../unparsableWsdls/random.txt" };
         String[] generateArgs = new String[2];
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
@@ -749,7 +779,7 @@ public class Wsdl2ApexTest {
 
     @Test
     public void testRpcWsdl() {
-        String[] parseArgs = new String[] { directory.getPath() + "/../badWsdls/rpc-service.wsdl" };
+        String[] parseArgs = new String[] { directory.getPath() + "/../unparsableWsdls/rpc-service.wsdl" };
         String[] generateArgs = new String[2];
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
@@ -765,7 +795,8 @@ public class Wsdl2ApexTest {
 
     @Test
     public void testSomeTypesMissing() {
-        String[] parseArgs = new String[] { directory.getPath() + "/../badWsdls/some-types-missing-but-not-all.wsdl" };
+        String[] parseArgs =
+                new String[] { directory.getPath() + "/../unparsableWsdls/some-types-missing-but-not-all.wsdl" };
         String[] generateArgs = new String[2];
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
@@ -782,7 +813,7 @@ public class Wsdl2ApexTest {
 
     @Test
     public void testUndefinedSchemaType() {
-        String[] parseArgs = new String[] { directory.getPath() + "/../badWsdls/undefined-schma-type.wsdl" };
+        String[] parseArgs = new String[] { directory.getPath() + "/../unparsableWsdls/undefined-schma-type.wsdl" };
         String[] generateArgs = new String[2];
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
@@ -800,7 +831,7 @@ public class Wsdl2ApexTest {
 
     @Test
     public void testUnsupportedSchemaType() {
-        String[] parseArgs = new String[] { directory.getPath() + "/../badWsdls/unsupported-schema-type.wsdl" };
+        String[] parseArgs = new String[] { directory.getPath() + "/../unparsableWsdls/unsupported-schema-type.wsdl" };
         String[] generateArgs = new String[2];
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
@@ -817,7 +848,7 @@ public class Wsdl2ApexTest {
 
     @Test
     public void testAmazonGood() {
-        String[] parseArgs = new String[] { directory.getPath() + "/../goodWsdls/amazonS3.wsdl" };
+        String[] parseArgs = new String[] { directory.getPath() + "/../parsableWsdls/amazonS3.wsdl" };
         String[] generateArgs = new String[2];
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
@@ -835,24 +866,24 @@ public class Wsdl2ApexTest {
             }
 
             m.generate(generateArgs);
-            FileString f = new FileString();
 
-            String result1 = f.getStringFromFile(directory.getPath() + "/" + "s3Amazon.cls");
-            String result2 = f.getStringFromFile(directory.getPath() + "/" + "AsyncS3Amazon.cls");
-            String answer1 = f.getStringFromFile(directory.getPath() + "/../answers/s3Amazon.cls");
-            String answer2 = f.getStringFromFile(directory.getPath() + "/../answers/AsyncS3Amazon.cls");
+            String result1 = FileString.getStringFromFile(directory.getPath() + "/" + "s3Amazon.cls");
+            String result2 = FileString.getStringFromFile(directory.getPath() + "/" + "AsyncS3Amazon.cls");
+            String answer1 = FileString.getStringFromFile(directory.getPath() + "/../parsableWsdlAnswers/s3Amazon.cls");
+            String answer2 =
+                    FileString.getStringFromFile(directory.getPath() + "/../parsableWsdlAnswers/AsyncS3Amazon.cls");
             assertEquals("Test testAmazonGood failed", result1, answer1);
             assertEquals("Test testAmazonGood failed", result2, answer2);
         } catch (Exception e) {
             System.err.println("Unable to generate the file");
             e.printStackTrace();
-            fail("Test testAmazonGood failed");
+            fail(e.getMessage());
         }
     }
 
     @Test
     public void testDocSample() {
-        String[] parseArgs = new String[] { directory.getPath() + "/../goodWsdls/elementStartsWithNonLetter.wsdl" };
+        String[] parseArgs = new String[] { directory.getPath() + "/../parsableWsdls/elementStartsWithNonLetter.wsdl" };
         String[] generateArgs = new String[2];
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
@@ -870,24 +901,25 @@ public class Wsdl2ApexTest {
             }
 
             m.generate(generateArgs);
-            FileString f = new FileString();
 
-            String result1 = f.getStringFromFile(directory.getPath() + "/" + "docSample.cls");
-            String result2 = f.getStringFromFile(directory.getPath() + "/" + "AsyncDocSample.cls");
-            String answer1 = f.getStringFromFile(directory.getPath() + "/../answers/docSample.cls");
-            String answer2 = f.getStringFromFile(directory.getPath() + "/../answers/AsyncDocSample.cls");
+            String result1 = FileString.getStringFromFile(directory.getPath() + "/" + "docSample.cls");
+            String result2 = FileString.getStringFromFile(directory.getPath() + "/" + "AsyncDocSample.cls");
+            String answer1 =
+                    FileString.getStringFromFile(directory.getPath() + "/../parsableWsdlAnswers/docSample.cls");
+            String answer2 =
+                    FileString.getStringFromFile(directory.getPath() + "/../parsableWsdlAnswers/AsyncDocSample.cls");
             assertEquals("Test testDocSample failed", result1, answer1);
             assertEquals("Test testDocSample failed", result2, answer2);
         } catch (Exception e) {
             System.err.println("Unable to generate the file");
             e.printStackTrace();
-            fail("Test testDocSample failed");
+            fail(e.getMessage());
         }
     }
 
     @Test
     public void testExchange() {
-        String[] parseArgs = new String[] { directory.getPath() + "/../goodWsdls/ForeignExchangeRate.wsdl" };
+        String[] parseArgs = new String[] { directory.getPath() + "/../parsableWsdls/ForeignExchangeRate.wsdl" };
         String[] generateArgs = new String[2];
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
@@ -908,24 +940,25 @@ public class Wsdl2ApexTest {
             }
 
             m.generate(generateArgs);
-            FileString f = new FileString();
 
-            String result1 = f.getStringFromFile(directory.getPath() + "/" + "strikeiron2.cls");
-            String result2 = f.getStringFromFile(directory.getPath() + "/" + "strikeiron.cls");
-            String answer1 = f.getStringFromFile(directory.getPath() + "/../answers/strikeiron2.cls");
-            String answer2 = f.getStringFromFile(directory.getPath() + "/../answers/strikeiron.cls");
+            String result1 = FileString.getStringFromFile(directory.getPath() + "/" + "strikeiron2.cls");
+            String result2 = FileString.getStringFromFile(directory.getPath() + "/" + "strikeiron.cls");
+            String answer1 =
+                    FileString.getStringFromFile(directory.getPath() + "/../parsableWsdlAnswers/strikeiron2.cls");
+            String answer2 =
+                    FileString.getStringFromFile(directory.getPath() + "/../parsableWsdlAnswers/strikeiron.cls");
             assertEquals("Test testExchange failed", result1, answer1);
             assertEquals("Test testExchange failed", result2, answer2);
         } catch (Exception e) {
             System.err.println("Unable to generate the file");
             e.printStackTrace();
-            fail("Test testExchange failed");
+            fail(e.getMessage());
         }
     }
 
     @Test
     public void testBigFile() {
-        String[] parseArgs = new String[] { directory.getPath() + "/../goodWsdls/max-file-1mb.wsdl" };
+        String[] parseArgs = new String[] { directory.getPath() + "/../parsableWsdls/max-file-1mb.wsdl" };
         String[] generateArgs = new String[2];
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
@@ -943,24 +976,24 @@ public class Wsdl2ApexTest {
             }
 
             m.generate(generateArgs);
-            FileString f = new FileString();
 
-            String result1 = f.getStringFromFile(directory.getPath() + "/" + "bigFile.cls");
-            String result2 = f.getStringFromFile(directory.getPath() + "/" + "AsyncBigFile.cls");
-            String answer1 = f.getStringFromFile(directory.getPath() + "/../answers/bigFile.cls");
-            String answer2 = f.getStringFromFile(directory.getPath() + "/../answers/AsyncBigFile.cls");
+            String result1 = FileString.getStringFromFile(directory.getPath() + "/" + "bigFile.cls");
+            String result2 = FileString.getStringFromFile(directory.getPath() + "/" + "AsyncBigFile.cls");
+            String answer1 = FileString.getStringFromFile(directory.getPath() + "/../parsableWsdlAnswers/bigFile.cls");
+            String answer2 =
+                    FileString.getStringFromFile(directory.getPath() + "/../parsableWsdlAnswers/AsyncBigFile.cls");
             assertEquals("Test testBigFile failed", result1, answer1);
             assertEquals("Test testBigFile failed", result2, answer2);
         } catch (Exception e) {
             System.err.println("Unable to generate the file");
             e.printStackTrace();
-            fail("Test testBigFile failed");
+            fail(e.getMessage());
         }
     }
 
     @Test
     public void testMultipleNamespace() {
-        String[] parseArgs = new String[] { directory.getPath() + "/../goodWsdls/multiple-namespaces.wsdl" };
+        String[] parseArgs = new String[] { directory.getPath() + "/../parsableWsdls/multiple-namespaces.wsdl" };
         String[] generateArgs = new String[2];
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
@@ -980,27 +1013,27 @@ public class Wsdl2ApexTest {
             }
 
             m.generate(generateArgs);
-            FileString f = new FileString();
 
-            String result1 = f.getStringFromFile(directory.getPath() + "/" + "first.cls");
-            String result2 = f.getStringFromFile(directory.getPath() + "/" + "second.cls");
-            String result3 = f.getStringFromFile(directory.getPath() + "/" + "AsyncFirst.cls");
-            String answer1 = f.getStringFromFile(directory.getPath() + "/../answers/first.cls");
-            String answer2 = f.getStringFromFile(directory.getPath() + "/../answers/second.cls");
-            String answer3 = f.getStringFromFile(directory.getPath() + "/../answers/AsyncFirst.cls");
+            String result1 = FileString.getStringFromFile(directory.getPath() + "/" + "first.cls");
+            String result2 = FileString.getStringFromFile(directory.getPath() + "/" + "second.cls");
+            String result3 = FileString.getStringFromFile(directory.getPath() + "/" + "AsyncFirst.cls");
+            String answer1 = FileString.getStringFromFile(directory.getPath() + "/../parsableWsdlAnswers/first.cls");
+            String answer2 = FileString.getStringFromFile(directory.getPath() + "/../parsableWsdlAnswers/second.cls");
+            String answer3 =
+                    FileString.getStringFromFile(directory.getPath() + "/../parsableWsdlAnswers/AsyncFirst.cls");
             assertEquals("Test testMultipleNamespace failed", result1, answer1);
             assertEquals("Test testMultipleNamespace failed", result2, answer2);
             assertEquals("Test testMultipleNamespace failed", result3, answer3);
         } catch (Exception e) {
             System.err.println("Unable to generate the file");
             e.printStackTrace();
-            fail("Test testMultipleNamespace failed");
+            fail(e.getMessage());
         }
     }
 
     @Test
     public void testNameElement() {
-        String[] parseArgs = new String[] { directory.getPath() + "/../goodWsdls/nameElement.wsdl" };
+        String[] parseArgs = new String[] { directory.getPath() + "/../parsableWsdls/nameElement.wsdl" };
         String[] generateArgs = new String[2];
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
@@ -1018,24 +1051,24 @@ public class Wsdl2ApexTest {
             }
 
             m.generate(generateArgs);
-            FileString f = new FileString();
 
-            String result1 = f.getStringFromFile(directory.getPath() + "/" + "dSample.cls");
-            String result2 = f.getStringFromFile(directory.getPath() + "/" + "AsyncDSample.cls");
-            String answer1 = f.getStringFromFile(directory.getPath() + "/../answers/dSample.cls");
-            String answer2 = f.getStringFromFile(directory.getPath() + "/../answers/AsyncDSample.cls");
+            String result1 = FileString.getStringFromFile(directory.getPath() + "/" + "dSample.cls");
+            String result2 = FileString.getStringFromFile(directory.getPath() + "/" + "AsyncDSample.cls");
+            String answer1 = FileString.getStringFromFile(directory.getPath() + "/../parsableWsdlAnswers/dSample.cls");
+            String answer2 =
+                    FileString.getStringFromFile(directory.getPath() + "/../parsableWsdlAnswers/AsyncDSample.cls");
             assertEquals("Test testNameElement failed", result1, answer1);
             assertEquals("Test testNameElement failed", result2, answer2);
         } catch (Exception e) {
             System.err.println("Unable to generate the file");
             e.printStackTrace();
-            fail("Test testNameElement failed");
+            fail(e.getMessage());
         }
     }
 
     @Test
     public void testNamespaceDependencies() {
-        String[] parseArgs = new String[] { directory.getPath() + "/../goodWsdls/namespaceDependencies.wsdl" };
+        String[] parseArgs = new String[] { directory.getPath() + "/../parsableWsdls/namespaceDependencies.wsdl" };
         String[] generateArgs = new String[2];
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
@@ -1055,27 +1088,29 @@ public class Wsdl2ApexTest {
             }
 
             m.generate(generateArgs);
-            FileString f = new FileString();
 
-            String result1 = f.getStringFromFile(directory.getPath() + "/" + "sParnterSoap.cls");
-            String result2 = f.getStringFromFile(directory.getPath() + "/" + "partnerSoap.cls");
-            String result3 = f.getStringFromFile(directory.getPath() + "/" + "AsyncPartnerSoap.cls");
-            String answer1 = f.getStringFromFile(directory.getPath() + "/../answers/sParnterSoap.cls");
-            String answer2 = f.getStringFromFile(directory.getPath() + "/../answers/partnerSoap.cls");
-            String answer3 = f.getStringFromFile(directory.getPath() + "/../answers/AsyncPartnerSoap.cls");
+            String result1 = FileString.getStringFromFile(directory.getPath() + "/" + "sParnterSoap.cls");
+            String result2 = FileString.getStringFromFile(directory.getPath() + "/" + "partnerSoap.cls");
+            String result3 = FileString.getStringFromFile(directory.getPath() + "/" + "AsyncPartnerSoap.cls");
+            String answer1 =
+                    FileString.getStringFromFile(directory.getPath() + "/../parsableWsdlAnswers/sParnterSoap.cls");
+            String answer2 =
+                    FileString.getStringFromFile(directory.getPath() + "/../parsableWsdlAnswers/partnerSoap.cls");
+            String answer3 =
+                    FileString.getStringFromFile(directory.getPath() + "/../parsableWsdlAnswers/AsyncPartnerSoap.cls");
             assertEquals("Test testNamespaceDependencies failed", result1, answer1);
             assertEquals("Test testNamespaceDependencies failed", result2, answer2);
             assertEquals("Test testNamespaceDependencies failed", result3, answer3);
         } catch (Exception e) {
             System.err.println("Unable to generate the file");
             e.printStackTrace();
-            fail("Test testNamespaceDependencies failed");
+            fail(e.getMessage());
         }
     }
 
     @Test
     public void testNoOperation() {
-        String[] parseArgs = new String[] { directory.getPath() + "/../goodWsdls/noOperations.wsdl" };
+        String[] parseArgs = new String[] { directory.getPath() + "/../parsableWsdls/noOperations.wsdl" };
         String[] generateArgs = new String[2];
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
@@ -1093,24 +1128,25 @@ public class Wsdl2ApexTest {
             }
 
             m.generate(generateArgs);
-            FileString f = new FileString();
 
-            String result1 = f.getStringFromFile(directory.getPath() + "/" + "calloutSoap.cls");
-            String result2 = f.getStringFromFile(directory.getPath() + "/" + "AsyncCalloutSoap.cls");
-            String answer1 = f.getStringFromFile(directory.getPath() + "/../answers/calloutSoap.cls");
-            String answer2 = f.getStringFromFile(directory.getPath() + "/../answers/AsyncCalloutSoap.cls");
+            String result1 = FileString.getStringFromFile(directory.getPath() + "/" + "calloutSoap.cls");
+            String result2 = FileString.getStringFromFile(directory.getPath() + "/" + "AsyncCalloutSoap.cls");
+            String answer1 =
+                    FileString.getStringFromFile(directory.getPath() + "/../parsableWsdlAnswers/calloutSoap.cls");
+            String answer2 =
+                    FileString.getStringFromFile(directory.getPath() + "/../parsableWsdlAnswers/AsyncCalloutSoap.cls");
             assertEquals("Test noOperation failed", result1, answer1);
             assertEquals("Test noOperation failed", result2, answer2);
         } catch (Exception e) {
             System.err.println("Unable to generate the file");
             e.printStackTrace();
-            fail("Test noOperation failed");
+            fail(e.getMessage());
         }
     }
 
     @Test
     public void testSqlMutations() {
-        String[] parseArgs = new String[] { directory.getPath() + "/../goodWsdls/sqlMutations.wsdl" };
+        String[] parseArgs = new String[] { directory.getPath() + "/../parsableWsdls/sqlMutations.wsdl" };
         String[] generateArgs = new String[2];
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
@@ -1128,24 +1164,25 @@ public class Wsdl2ApexTest {
             }
 
             m.generate(generateArgs);
-            FileString f = new FileString();
 
-            String result1 = f.getStringFromFile(directory.getPath() + "/" + "sqlMutations.cls");
-            String result2 = f.getStringFromFile(directory.getPath() + "/" + "AsyncSqlMutations.cls");
-            String answer1 = f.getStringFromFile(directory.getPath() + "/../answers/sqlMutations.cls");
-            String answer2 = f.getStringFromFile(directory.getPath() + "/../answers/AsyncSqlMutations.cls");
+            String result1 = FileString.getStringFromFile(directory.getPath() + "/" + "sqlMutations.cls");
+            String result2 = FileString.getStringFromFile(directory.getPath() + "/" + "AsyncSqlMutations.cls");
+            String answer1 =
+                    FileString.getStringFromFile(directory.getPath() + "/../parsableWsdlAnswers/sqlMutations.cls");
+            String answer2 =
+                    FileString.getStringFromFile(directory.getPath() + "/../parsableWsdlAnswers/AsyncSqlMutations.cls");
             assertEquals("Test sqlMutations failed", result1, answer1);
             assertEquals("Test sqlMutations failed", result2, answer2);
         } catch (Exception e) {
             System.err.println("Unable to generate the file");
             e.printStackTrace();
-            fail("Test sqlMutations failed");
+            fail(e.getMessage());
         }
     }
 
     @Test
     public void testTestNameMangle() {
-        String[] parseArgs = new String[] { directory.getPath() + "/../goodWsdls/testNameMangle.wsdl" };
+        String[] parseArgs = new String[] { directory.getPath() + "/../parsableWsdls/testNameMangle.wsdl" };
         String[] generateArgs = new String[2];
         generateArgs[0] = "true";
         generateArgs[1] = directory.getPath();
@@ -1163,18 +1200,20 @@ public class Wsdl2ApexTest {
             }
 
             m.generate(generateArgs);
-            FileString f = new FileString();
 
-            String result1 = f.getStringFromFile(directory.getPath() + "/" + "testNameMangle.cls");
-            String result2 = f.getStringFromFile(directory.getPath() + "/" + "AsyncTestNameMangle.cls");
-            String answer1 = f.getStringFromFile(directory.getPath() + "/../answers/testNameMangle.cls");
-            String answer2 = f.getStringFromFile(directory.getPath() + "/../answers/AsyncTestNameMangle.cls");
+            String result1 = FileString.getStringFromFile(directory.getPath() + "/" + "testNameMangle.cls");
+            String result2 = FileString.getStringFromFile(directory.getPath() + "/" + "AsyncTestNameMangle.cls");
+            String answer1 =
+                    FileString.getStringFromFile(directory.getPath() + "/../parsableWsdlAnswers/testNameMangle.cls");
+            String answer2 =
+                    FileString.getStringFromFile(directory.getPath()
+                            + "/../parsableWsdlAnswers/AsyncTestNameMangle.cls");
             assertEquals("Test testNameMangle failed", result1, answer1);
             assertEquals("Test testNameMangle failed", result2, answer2);
         } catch (Exception e) {
             System.err.println("Unable to generate the file");
             e.printStackTrace();
-            fail("Test testNameMangle failed");
+            fail(e.getMessage());
         }
     }
 
