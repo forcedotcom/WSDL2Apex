@@ -23,7 +23,6 @@ public class Wsdl2ApexTest {
     @Before
     public void setUp() {
         directory = new File("src/test/testFiles/tempTest");
-        System.out.println("THIS IS THE CURRENT DIRECTORY" + System.getProperty("user.dir"));
         directory.mkdir();
     }
 

@@ -18,7 +18,6 @@ import java.util.HashMap;
  * 
  * @author cheenath
  * @version 1.0
- * @since 148 Feb 7, 2007
  */
 public class APackage extends ABase {
 

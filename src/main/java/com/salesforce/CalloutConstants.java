@@ -12,7 +12,6 @@ package com.salesforce.ide.wsdl2apex.core;
  * 
  * @author cheenath
  * @version 1.0
- * @since 148 Feb 26, 2007
  */
 public interface CalloutConstants {
     public static final String TYPE_INFO_PREFIX = "_type_info";

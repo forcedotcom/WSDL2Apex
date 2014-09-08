@@ -24,7 +24,6 @@ import com.sforce.ws.wsdl.*;
  * 
  * @author cheenath
  * @version 1.0
- * @since 148 Feb 7, 2007
  */
 public class Wsdl2Apex {
     private static final String CLIENT_NAME = "Wsdl2Apex";
@@ -395,7 +394,7 @@ public class Wsdl2Apex {
         } else {
             LOGGER.log(
                 Level.SEVERE,
-                "Must contain the following 3 arguements: path to the wsdl file, path to where you want to save the file (with a slash at the end), and whether you want an asynchronous class");
+                "Must contain the  following 3 arguements: path to the wsdl file, path to where you want to save the file (with a slash at the end), and whether you want an asynchronous class");
             throw new RuntimeException();
         }
 

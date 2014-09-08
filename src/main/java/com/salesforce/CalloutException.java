@@ -12,7 +12,6 @@ package com.salesforce.ide.wsdl2apex.core;
  * 
  * @author cheenath
  * @version 1.0
- * @since 146 Feb 7, 2007
  */
 public class CalloutException extends Exception {
 

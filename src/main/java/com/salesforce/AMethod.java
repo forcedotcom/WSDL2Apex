@@ -17,7 +17,6 @@ import com.sforce.ws.wsdl.Definitions;
  * 
  * @author cheenath
  * @version 1.0
- * @since 148 Feb 7, 2007
  */
 abstract class AMethod extends ABase {
 

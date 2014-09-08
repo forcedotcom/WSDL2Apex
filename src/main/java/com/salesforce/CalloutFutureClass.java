@@ -13,7 +13,6 @@ import com.sforce.ws.wsdl.*;
  * The represents a specific callout future class, one of these is generated for each return type specified in the WSDL
  * 
  * @author sfell
- * @since 188
  */
 class CalloutFutureClass extends AClass {
 

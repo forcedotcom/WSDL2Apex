@@ -16,7 +16,6 @@ import com.sforce.ws.wsdl.Definitions;
  * A collection of packages that are going through code-gen
  * 
  * @author sfell
- * @since 188
  */
 public class Packages {
 

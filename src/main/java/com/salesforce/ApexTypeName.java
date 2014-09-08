@@ -11,7 +11,6 @@ package com.salesforce.ide.wsdl2apex.core;
  * Represents the name of an apex type.
  * 
  * @author sfell
- * @since 188
  */
 
 public class ApexTypeName {
