@@ -743,22 +743,6 @@ public class Wsdl2ApexTest {
     }
 
     @Test
-    public void testNoTypeForElement() {
-        String[] parseArgs = new String[] { directory.getPath() + "/../unparsableWsdls/no-type-specified.wsdl" };
-        String[] generateArgs = new String[2];
-        generateArgs[0] = "true";
-        generateArgs[1] = directory.getPath();
-
-        Wsdl2Apex m = new Wsdl2Apex();
-        try {
-            m.parse(parseArgs);
-            m.generate(generateArgs);
-        } catch (Exception e) {
-            assertThat(e.getMessage(), containsString("No type specified for element anyType"));
-        }
-    }
-
-    @Test
     public void testTextFileAsWsdl() {
         String[] parseArgs = new String[] { directory.getPath() + "/../unparsableWsdls/random.txt" };
         String[] generateArgs = new String[2];
