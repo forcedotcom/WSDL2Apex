@@ -50,7 +50,7 @@
             <manifest>
               <addClasspath>true</addClasspath>
               <classpathPrefix>lib/</classpathPrefix>
-              <mainClass>com/salesforce/ide/wsdl2apex/core/Wsdl2ApexGenerator</mainClass>
+              <mainClass>com/salesforce/ide/wsdl2apex/core/WSDL2ApexGenerator</mainClass>
             </manifest>
           </archive>
         </configuration>
@@ -87,7 +87,7 @@
               <createDependencyReducedPom>false</createDependencyReducedPom>
               <transformers>
                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                  <mainClass>com/salesforce/ide/wsdl2apex/core/Wsdl2ApexGenerator</mainClass>
+                  <mainClass>com/salesforce/ide/wsdl2apex/core/WSDL2ApexGenerator</mainClass>
                 </transformer>
               </transformers>
             </configuration>
