@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
-Test set: com.salesforce.ide.wsdl2apex.core.Wsdl2ApexTest
+Test set: com.salesforce.ide.wsdl2apex.core.WSDL2ApexTest
 -------------------------------------------------------------------------------
-Tests run: 48, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.609 sec
+Tests run: 47, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.825 sec
