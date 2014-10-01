@@ -50,6 +50,7 @@ public class ApexTypeMapper {
         s.add("autonomous");
         s.add("begin");
         s.add("bigdecimal");
+        s.add("boolean");
         s.add("bulk");
         s.add("byte");
         s.add("case");
@@ -70,6 +71,7 @@ public class ApexTypeMapper {
         s.add("having");
         s.add("hint");
         s.add("int");
+        s.add("integer");
         s.add("into");
         s.add("inner");
         s.add("import");
