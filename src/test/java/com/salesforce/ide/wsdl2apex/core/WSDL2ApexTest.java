@@ -55,8 +55,8 @@ public class WSDL2ApexTest {
             String answer2 =
                     FileString.getStringFromFile(directory.getPath()
                             + "/../parsableWsdlAnswers/AsyncWwwWebservicexNet_answer.cls");
-            assertEquals("testSimple doesn't match", result1, answer1);
-            assertEquals("testSimple async doesn't match", result2, answer2);
+            assertEquals("testSimple doesn't match", answer1, result1);
+            assertEquals("testSimple async doesn't match", answer2, result2);
         } catch (FileNotFoundException e) {
             System.err.println("Unable to generate the file");
             e.printStackTrace();
@@ -118,10 +118,10 @@ public class WSDL2ApexTest {
             String answer4 =
                     FileString.getStringFromFile(directory.getPath()
                             + "/../parsableWsdlAnswers/exampleComStockquoteXsd_answer.cls");
-            assertEquals("testTwoNamespaces a doesn't match, Async class", result1, answer1);
-            assertEquals("testTwoNamespaces b doesn't match, Async class", result2, answer2);
-            assertEquals("testTwoNamespaces c doesn't match", result3, answer3);
-            assertEquals("testTwoNamespaces d doesn't match", result4, answer4);
+            assertEquals("testTwoNamespaces a doesn't match, Async class", answer1, result1);
+            assertEquals("testTwoNamespaces b doesn't match, Async class", answer2, result2);
+            assertEquals("testTwoNamespaces c doesn't match", answer3, result3);
+            assertEquals("testTwoNamespaces d doesn't match", answer4, result4);
         } catch (FileNotFoundException e) {
             System.err.println("Unable to find the file");
             e.printStackTrace();
@@ -180,13 +180,13 @@ public class WSDL2ApexTest {
             String answer7 =
                     FileString.getStringFromFile(directory.getPath()
                             + "/../parsableWsdlAnswers/AsyncWwwPbComSpectrumServicesEolsPsaplo_answer.cls");
-            assertEquals("testLargeFile a doesn't match", result1, answer1);
-            assertEquals("testLargeFile b doesn't match", result2, answer2);
-            assertEquals("testLargeFile c doesn't match", result3, answer3);
-            assertEquals("testLargeFile d doesn't match", result4, answer4);
-            assertEquals("testLargeFile e doesn't match", result5, answer5);
-            assertEquals("testLargeFile f doesn't match, Async class", result6, answer6);
-            assertEquals("testLargeFile g doesn't match, Async class", result7, answer7);
+            assertEquals("testLargeFile a doesn't match", answer1, result1);
+            assertEquals("testLargeFile b doesn't match", answer2, result2);
+            assertEquals("testLargeFile c doesn't match", answer3, result3);
+            assertEquals("testLargeFile d doesn't match", answer4, result4);
+            assertEquals("testLargeFile e doesn't match", answer5, result5);
+            assertEquals("testLargeFile f doesn't match, Async class", answer6, result6);
+            assertEquals("testLargeFile g doesn't match, Async class", answer7, result7);
         } catch (FileNotFoundException e) {
             System.err.println("Unable to find the file");
             e.printStackTrace();
@@ -269,7 +269,7 @@ public class WSDL2ApexTest {
             String answer1 =
                     FileString.getStringFromFile(directory.getPath()
                             + "/../parsableWsdlAnswers/wwwWebservicexNet_answer.cls");
-            assertEquals("Test 8 doesn't match", result1, answer1);
+            assertEquals("Test 8 doesn't match", answer1, result1);
             String result2 = FileString.getStringFromFile(directory.getPath() + "/" + "AsyncWwwWebservicexNet.cls");
             fail("testAsyncFalse should not have found the async class");
         } catch (FileNotFoundException e) {
@@ -338,13 +338,13 @@ public class WSDL2ApexTest {
                     FileString.getStringFromFile(directory.getPath() + "/../parsableWsdlAnswers/AsyncS1_answer.cls");
             String answer7 =
                     FileString.getStringFromFile(directory.getPath() + "/../parsableWsdlAnswers/AsyncS2_answer.cls");
-            assertEquals("testNewClassNames doesn't match", result1, answer1);
-            assertEquals("testNewClassNames doesn't match", result2, answer2);
-            assertEquals("testNewClassNames doesn't match", result3, answer3);
-            assertEquals("testNewClassNames doesn't match", result4, answer4);
-            assertEquals("testNewClassNames doesn't match", result5, answer5);
-            assertEquals("testNewClassNames doesn't match", result6, answer6);
-            assertEquals("testNewClassNames doesn't match", result7, answer7);
+            assertEquals("testNewClassNames doesn't match", answer1, result1);
+            assertEquals("testNewClassNames doesn't match", answer2, result2);
+            assertEquals("testNewClassNames doesn't match", answer3, result3);
+            assertEquals("testNewClassNames doesn't match", answer4, result4);
+            assertEquals("testNewClassNames doesn't match", answer5, result5);
+            assertEquals("testNewClassNames doesn't match", answer6, result6);
+            assertEquals("testNewClassNames doesn't match", answer7, result7);
         } catch (FileNotFoundException e) {
             System.err.println("Unable to generate the file");
             e.printStackTrace();
@@ -855,8 +855,8 @@ public class WSDL2ApexTest {
             String answer1 = FileString.getStringFromFile(directory.getPath() + "/../parsableWsdlAnswers/s3Amazon.cls");
             String answer2 =
                     FileString.getStringFromFile(directory.getPath() + "/../parsableWsdlAnswers/AsyncS3Amazon.cls");
-            assertEquals("Test testAmazonGood failed", result1, answer1);
-            assertEquals("Test testAmazonGood failed", result2, answer2);
+            assertEquals("Test testAmazonGood failed", answer1, result1);
+            assertEquals("Test testAmazonGood failed", answer2, result2);
         } catch (Exception e) {
             System.err.println("Unable to generate the file");
             e.printStackTrace();
@@ -891,8 +891,8 @@ public class WSDL2ApexTest {
                     FileString.getStringFromFile(directory.getPath() + "/../parsableWsdlAnswers/docSample.cls");
             String answer2 =
                     FileString.getStringFromFile(directory.getPath() + "/../parsableWsdlAnswers/AsyncDocSample.cls");
-            assertEquals("Test testDocSample failed", result1, answer1);
-            assertEquals("Test testDocSample failed", result2, answer2);
+            assertEquals("Test testDocSample failed", answer1, result1);
+            assertEquals("Test testDocSample failed", answer2, result2);
         } catch (Exception e) {
             System.err.println("Unable to generate the file");
             e.printStackTrace();
@@ -930,8 +930,8 @@ public class WSDL2ApexTest {
                     FileString.getStringFromFile(directory.getPath() + "/../parsableWsdlAnswers/strikeiron2.cls");
             String answer2 =
                     FileString.getStringFromFile(directory.getPath() + "/../parsableWsdlAnswers/strikeiron.cls");
-            assertEquals("Test testExchange failed", result1, answer1);
-            assertEquals("Test testExchange failed", result2, answer2);
+            assertEquals("Test testExchange failed", answer1, result1);
+            assertEquals("Test testExchange failed", answer2, result2);
         } catch (Exception e) {
             System.err.println("Unable to generate the file");
             e.printStackTrace();
@@ -965,8 +965,8 @@ public class WSDL2ApexTest {
             String answer1 = FileString.getStringFromFile(directory.getPath() + "/../parsableWsdlAnswers/bigFile.cls");
             String answer2 =
                     FileString.getStringFromFile(directory.getPath() + "/../parsableWsdlAnswers/AsyncBigFile.cls");
-            assertEquals("Test testBigFile failed", result1, answer1);
-            assertEquals("Test testBigFile failed", result2, answer2);
+            assertEquals("Test testBigFile failed", answer1, result1);
+            assertEquals("Test testBigFile failed", answer2, result2);
         } catch (Exception e) {
             System.err.println("Unable to generate the file");
             e.printStackTrace();
@@ -1004,9 +1004,9 @@ public class WSDL2ApexTest {
             String answer2 = FileString.getStringFromFile(directory.getPath() + "/../parsableWsdlAnswers/second.cls");
             String answer3 =
                     FileString.getStringFromFile(directory.getPath() + "/../parsableWsdlAnswers/AsyncFirst.cls");
-            assertEquals("Test testMultipleNamespace failed", result1, answer1);
-            assertEquals("Test testMultipleNamespace failed", result2, answer2);
-            assertEquals("Test testMultipleNamespace failed", result3, answer3);
+            assertEquals("Test testMultipleNamespace failed", answer1, result1);
+            assertEquals("Test testMultipleNamespace failed", answer2, result2);
+            assertEquals("Test testMultipleNamespace failed", answer3, result3);
         } catch (Exception e) {
             System.err.println("Unable to generate the file");
             e.printStackTrace();
@@ -1040,8 +1040,8 @@ public class WSDL2ApexTest {
             String answer1 = FileString.getStringFromFile(directory.getPath() + "/../parsableWsdlAnswers/dSample.cls");
             String answer2 =
                     FileString.getStringFromFile(directory.getPath() + "/../parsableWsdlAnswers/AsyncDSample.cls");
-            assertEquals("Test testNameElement failed", result1, answer1);
-            assertEquals("Test testNameElement failed", result2, answer2);
+            assertEquals("Test testNameElement failed", answer1, result1);
+            assertEquals("Test testNameElement failed", answer2, result2);
         } catch (Exception e) {
             System.err.println("Unable to generate the file");
             e.printStackTrace();
@@ -1081,9 +1081,9 @@ public class WSDL2ApexTest {
                     FileString.getStringFromFile(directory.getPath() + "/../parsableWsdlAnswers/partnerSoap.cls");
             String answer3 =
                     FileString.getStringFromFile(directory.getPath() + "/../parsableWsdlAnswers/AsyncPartnerSoap.cls");
-            assertEquals("Test testNamespaceDependencies failed", result1, answer1);
-            assertEquals("Test testNamespaceDependencies failed", result2, answer2);
-            assertEquals("Test testNamespaceDependencies failed", result3, answer3);
+            assertEquals("Test testNamespaceDependencies failed", answer1, result1);
+            assertEquals("Test testNamespaceDependencies failed", answer2, result2);
+            assertEquals("Test testNamespaceDependencies failed", answer3, result3);
         } catch (Exception e) {
             System.err.println("Unable to generate the file");
             e.printStackTrace();
@@ -1118,8 +1118,8 @@ public class WSDL2ApexTest {
                     FileString.getStringFromFile(directory.getPath() + "/../parsableWsdlAnswers/calloutSoap.cls");
             String answer2 =
                     FileString.getStringFromFile(directory.getPath() + "/../parsableWsdlAnswers/AsyncCalloutSoap.cls");
-            assertEquals("Test noOperation failed", result1, answer1);
-            assertEquals("Test noOperation failed", result2, answer2);
+            assertEquals("Test noOperation failed", answer1, result1);
+            assertEquals("Test noOperation failed", answer2, result2);
         } catch (Exception e) {
             System.err.println("Unable to generate the file");
             e.printStackTrace();
@@ -1154,8 +1154,8 @@ public class WSDL2ApexTest {
                     FileString.getStringFromFile(directory.getPath() + "/../parsableWsdlAnswers/sqlMutations.cls");
             String answer2 =
                     FileString.getStringFromFile(directory.getPath() + "/../parsableWsdlAnswers/AsyncSqlMutations.cls");
-            assertEquals("Test sqlMutations failed", result1, answer1);
-            assertEquals("Test sqlMutations failed", result2, answer2);
+            assertEquals("Test sqlMutations failed", answer1, result1);
+            assertEquals("Test sqlMutations failed", answer2, result2);
         } catch (Exception e) {
             System.err.println("Unable to generate the file");
             e.printStackTrace();
@@ -1191,8 +1191,8 @@ public class WSDL2ApexTest {
             String answer2 =
                     FileString.getStringFromFile(directory.getPath()
                             + "/../parsableWsdlAnswers/AsyncTestNameMangle.cls");
-            assertEquals("Test testNameMangle failed", result1, answer1);
-            assertEquals("Test testNameMangle failed", result2, answer2);
+            assertEquals("Test testNameMangle failed", answer1, result1);
+            assertEquals("Test testNameMangle failed", answer2, result2);
         } catch (Exception e) {
             System.err.println("Unable to generate the file");
             e.printStackTrace();
