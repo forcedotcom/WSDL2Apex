@@ -14,6 +14,8 @@ How to Use
 
 To run the test, use the command `mvn test` in the base directory 
 
+If you are having issues when using comment `mvn install package` then try `mvn install packagw -D skipTests=true`
+
 Note
 ====
 
